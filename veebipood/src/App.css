@@ -1,0 +1,30 @@
+.pilt{
+  width: 100px;
+  max-height: 150px;
+}
+
+.pilt:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.pilt:active{
+  border-radius: 50%;
+}
+
+.nupp{
+  /* width: 100px; */
+  font-weight: bold;
+  background-color: gainsboro;
+  color: darkblue;
+}
+
+.nupp:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  border: dotted;
+}
+
+.nupp:active{
+  border-radius: 50%;
+}
