@@ -1,0 +1,56 @@
+.nupp{
+  /* width: 100px; */
+  font-weight: bold;
+  background-color: green;
+  color: lightgray;
+}
+
+.nupp:hover {
+  height: 100px;
+  
+}
+
+.nupp:active{
+  cursor: grab;
+}
+
+.sininetekst {
+  color: blue;
+  font-style: italic;
+}
+
+.sininetekst:hover {
+  font-size: 24px;
+}
+
+.rohelinetekst {
+  color: green;
+  font-weight:bold;
+  border-width: 2px;
+  border-color: red;
+  border-style: solid;
+  
+}
+
+.rohelinetekst:hover {
+  border-color: brown;
+}
+
+.pilt {
+  height: 200px;
+  width: 200px;
+  float: right;
+}
+
+.pilt:hover {
+  border-radius: 30%;
+  /* opacity: 0.7; <- või siia? */ 
+
+}
+
+.pilt:active{
+  opacity: 0.7;
+}
+
+
+
