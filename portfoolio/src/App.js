@@ -11,15 +11,15 @@ function App() {
       <div className='rectangle'></div>
 
       <div className='navigation-pictures'>
-        <Link className='main-link' to="webpages">
+        <Link className='main-link' to="/webpages">
           <img src="https://www.fromdreamstolifestyle.com/wp-content/uploads/2012/08/Website-Blog-1024x683.jpg" alt=""/>
           <p>Veebilehed</p>
         </Link>
-        <Link className='main-link' to="designs">
+        <Link className='main-link' to="/designs">
           <img src="https://inifdjaipur.in/blog/wp-content/uploads/2019/06/sketching-1024x585.jpg" alt=""/>
           <p>Disainid</p>     
        </Link>
-        <Link className='main-link' to="photography">
+        <Link className='main-link' to="/photography">
           <img src="https://yourfreecareertest.com/wp-content/uploads/2016/07/photographer-300x200.jpg" alt=""/>
           <p>Fotograafia</p>
         </Link>
