@@ -28,3 +28,18 @@
 .nupp:active{
   border-radius: 50%;
 }
+
+.hele{
+  background-color: aliceblue;
+  min-height: 100vh;
+}
+
+.tume {
+  background-color: black;
+  color: antiquewhite;
+  min-height: 100vh;
+}
+
+.kuldne {
+  color: goldenrod;
+}

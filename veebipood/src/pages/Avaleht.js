@@ -36,7 +36,7 @@ function vahenda() {
       <br />
 
       <button disabled = {kogus===0} onClick={vahenda}>-</button>
-      {kogus}
+      <span className={kogus >= 10 ? "kuldne" : undefined}>{kogus}</span>
       <button onClick={suurenda}>+</button>
     </div>
   );
