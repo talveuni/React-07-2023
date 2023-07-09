@@ -2,26 +2,24 @@ import React, { useRef, useState } from 'react'
 
 function LisaTegelane() {
   const [sonum, uuendaSonum] = useState('');
-  const inputiLuger = useRef();
+  const nimiRef = useRef();
 
-  const lisa = () => {
-    if (inputiLuger.current.value === "") {
+  const lisaUusTegelane = () => {
+    if (nimiRef.current.value === "") {
       uuendaSonum ("Tühja nimega ei saa lisada")
 
     } else {
-      uuendaSonum("Tegelane lisatud: " + inputiLuger.current.value);
+      uuendaSonum("Tegelane lisatud: " + nimiRef.current.value);
     }
   }
 
 
   return (
     <div>
-      {sonum}
-      <br />
-      <br />
-      <label>Tegelase nimi</label> <br />
-      <input ref = {inputiLuger} type="text" /> <br />
-      <button onClick={lisa}>Lisa uus</button> <br />
+      <div>{sonum}</div> <br />
+      <label>Tegelase nimi:</label> <br />
+      <input ref = {nimiRef} type="text" /> <br />
+      <button onClick={lisaUusTegelane}>Lisa uus</button> <br /> <br />
 
     </div>
   )
