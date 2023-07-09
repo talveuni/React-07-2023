@@ -1,4 +1,4 @@
-.nupp{
+.nupp {
   /* width: 100px; */
   font-weight: bold;
   background-color: green;
@@ -10,7 +10,7 @@
   
 }
 
-.nupp:active{
+.nupp:active {
   cursor: grab;
 }
 
@@ -52,5 +52,10 @@
   opacity: 0.7;
 }
 
+.keskel {
+  margin: auto;
+  width: 50%;
+  text-align: center;
+}
 
 
