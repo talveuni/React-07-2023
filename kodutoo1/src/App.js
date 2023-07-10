@@ -5,6 +5,8 @@ import Avaleht from "./pages/Avaleht";
 import Meist from "./pages/Meist";
 import Seaded from "./pages/Seaded";
 import Kontakt from "./pages/Kontakt";
+import Leht from "./pages/Leht";
+import Loader from "./pages/Loader";
 
 function App() {
   const [sisselogitud, muudaSisselogitud] = useState("ei");
@@ -50,6 +52,9 @@ function App() {
       <Link to="/kontakt"> <button>Kontakt</button> </Link>
       <Link to="/meist"> <button>Meist</button> </Link>
       <Link to="/seaded"> <button>Seaded</button> </Link>
+      <Link to="/leht"> <button>Leht</button> </Link>
+      <Link to="/loader"> <button>Loader</button> </Link>
+
       </div>
       
       <Routes>
@@ -57,6 +62,9 @@ function App() {
         <Route path="/kontakt" element={<Kontakt />} />
         <Route path="/meist" element={<Meist />} />
         <Route path="/seaded" element={<Seaded />} />
+        <Route path="/leht" element={<Leht />} />
+        <Route path="/loader" element={<Loader />} />
+
       </Routes>
     </div>
   );
