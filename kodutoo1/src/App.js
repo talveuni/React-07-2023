@@ -8,6 +8,7 @@ import Kontakt from "./pages/Kontakt";
 import Leht from "./pages/Leht";
 import Loader from "./pages/Loader";
 import Books from "./pages/Books";
+import Numbrid from "./pages/Numbrid";
 
 function App() {
   const [sisselogitud, muudaSisselogitud] = useState("ei");
@@ -56,6 +57,7 @@ function App() {
       <Link to="/leht"> <button>Leht</button> </Link>
       <Link to="/loader"> <button>Loader</button> </Link>
       <Link to="/books"> <button>Books</button> </Link>
+      <Link to="/numbrid"> <button>Numbrid </button> </Link>
 
       </div>
       
@@ -67,6 +69,7 @@ function App() {
         <Route path="/leht" element={<Leht />} />
         <Route path="/loader" element={<Loader />} />
         <Route path="/books" element={<Books />} />
+        <Route path="/numbrid" element={<Numbrid />} />
 
       </Routes>
     </div>
