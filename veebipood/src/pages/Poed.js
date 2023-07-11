@@ -7,7 +7,7 @@ function Poed() {
     uuendaPoed(poedFailist)
   }
   const sorteeriAZ = () => {
-    //poed.sort(); <-- default toimib ka siin
+    //poed.sort(); <-- default variant toimib siin
     poed.sort((a,b) => a.localeCompare(b, 'fi'))
     uuendaPoed(poed.slice());
     
