@@ -11,6 +11,7 @@ function Haldajooke() {
 
   return (
     <div>
+        Joogid:
       {joogid.map((jook, index) => (
         <div key={index}>
           {jook + " "}
