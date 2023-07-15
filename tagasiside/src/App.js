@@ -3,6 +3,7 @@ import './App.css';
 import Avaleht from './pages/Avaleht';
 import Tagasiside from './pages/Tagasiside';
 import TagasisideAndjad from './pages/TagasisideAndjad';
+import YksikTagasisideAndja from './pages/YksikTagasisideAndja';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Avaleht/>}/>
         <Route path="/tagasiside" element={<Tagasiside/>}/>
         <Route path="/tagasiside-andjad" element={<TagasisideAndjad/>}/>
+        <Route path="/tagasiside-andjad/:index" element={<YksikTagasisideAndja/>}/>
         
       </Routes>
 
