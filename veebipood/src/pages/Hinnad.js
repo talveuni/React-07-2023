@@ -10,7 +10,6 @@ const hinnadKasvavalt = () => {
 hinnad.sort((a, b) => a - b);
 uuendaHinnad(hinnad.slice());
 //uuendaHinnad([...hinnad]); <-- alternatiivne variant chatGPT 
-
 }
 
 const hinnadKahanevalt = () => {
@@ -27,13 +26,11 @@ const arvutaKokku = () => {
 const filtreeriSuuremadKui20 = () => {
     const filtreeritudHinnad = hinnad.filter(hind => hind > 20);
     uuendaHinnad(filtreeritudHinnad);
-
 }
 
 const filtreeriVaiksemadKui50 = () => {
     const filtreeritudHinnad = hinnad.filter(hind => hind < 50);
     uuendaHinnad(filtreeritudHinnad);
-
 }
 
 

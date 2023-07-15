@@ -30,6 +30,7 @@ function LisaToode() {
       <label>Toote nimi</label> <br />
       <input ref={inputiLuger} type="text" /> <br />
       <button onClick = {lisa}>Lisa</button> <br />
+      
       <ToastContainer
         position='bottom-right'
         autoClose={4000}
