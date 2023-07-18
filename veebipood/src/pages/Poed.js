@@ -9,56 +9,56 @@ function Poed() {
   }
   const sorteeriAZ = () => {
     //poed.sort(); <-- default variant toimib siin
-    poed.sort((a,b) => a.localeCompare(b, 'fi'))
+    poed.sort((a,b) => a.nimi.localeCompare(b.nimi, 'fi'))
     uuendaPoed(poed.slice());
     
   }
   const sorteeriZA = () => {
-    poed.sort((a,b) => b.localeCompare(a), 'fi')
+    poed.sort((a,b) => b.nimi.localeCompare(a.nimi), 'fi')
     uuendaPoed(poed.slice());
   }
   const sorteeriTahedKasv = () => {
-    poed.sort((a,b) => a.length - b.length)
+    poed.sort((a,b) => a.nimi.length - b.nimi.length)
     uuendaPoed(poed.slice());
   }
   const sorteeriTahedKah = () => {
-    poed.sort((a,b) => b.length - a.length)
+    poed.sort((a,b) => b.nimi.length - a.nimi.length)
     uuendaPoed(poed.slice());
   }
 
   const sorteeriKolmasTaht = () => {
-    poed.sort((a,b) => a[2].localeCompare(b[2], 'fi'))
+    poed.sort((a,b) => a.nimi[2].localeCompare(b.nimi[2], 'fi'))
     uuendaPoed(poed.slice());
   }
 
   const filtreeriEgaLoppevad = () => {
-    const filtreeritudPoed = poed.filter(pood => pood.endsWith('e'));
+    const filtreeritudPoed = poed.filter(pood => pood.nimi.endsWith('e'));
     uuendaPoed(filtreeritudPoed);
   }
 
   const filtreeriSisaldabLyhendit = () => {
-    const filtreeritudPoed = poed.filter(pood => pood.includes('is'));
+    const filtreeritudPoed = poed.filter(pood => pood.nimi.includes('is'));
     uuendaPoed(filtreeritudPoed);
   }
 
   const filtreeriPikkus9 = () => {
-    const filtreeritudPoed = poed.filter(pood => pood.length === 9);
+    const filtreeritudPoed = poed.filter(pood => pood.nimi.length === 9);
     uuendaPoed(filtreeritudPoed);
   }
 
   const filtreeriVahemalt7Tahte = () => {
-    const filtreeritudPoed = poed.filter(pood => pood.length >= 7);
+    const filtreeritudPoed = poed.filter(pood => pood.nimi.length >= 7);
     uuendaPoed(filtreeritudPoed);
   }
 
   const filtreeriKolmasTahtI = () => {
-    const filtreeritudPoed = poed.filter(pood => pood[2] === 'i');
+    const filtreeritudPoed = poed.filter(pood => pood.nimi[2] === 'i');
     uuendaPoed(filtreeritudPoed);
   }
 
   const arvutaT2hedKokku = () => {
      let summa = 0;
-     poed.forEach(yksPood => summa = summa + yksPood.length);
+     poed.forEach(yksPood => summa = summa + yksPood.nimi.length);
     // poed.forEach(yksPood => summa += yksPood.length);
      return summa;
   }
@@ -86,9 +86,9 @@ function Poed() {
 
 
         {poed.map((yksPood) => 
-          <div key = {yksPood}>
-            {yksPood + " "} 
-            <Link to={"/poed/" + yksPood}>
+          <div key = {yksPood.nimi}>
+            {yksPood.nimi + " "} 
+            <Link to={"/poed/" + yksPood.nimi.toLocaleLowerCase().replaceAll(" ","-").replaceAll("ü","u")}>
               <button>Vaata detailsemalt</button>
             </Link>
           </div>)}

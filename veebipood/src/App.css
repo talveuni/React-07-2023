@@ -22,7 +22,7 @@
 .nupp:hover {
   cursor: pointer;
   text-decoration: underline;
-  border: dotted;
+  /* border: dotted; */
 }
 
 .nupp:active{

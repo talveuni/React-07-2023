@@ -1,1 +1,26 @@
-["Nobe", "Tesla", "BMW", "Volvo"]
+[
+    {
+        "nimi": "Nobe",
+        "hind": 25000,
+        "aktiivne": true,
+        "pilt": "https://assets.whichcar.com.au/image/private/s--cHe9BrkZ--/c_fill,f_auto,q_auto:good/c_scale,w_768/v1/news/Nobe-N600-van.jpg"
+    },
+    {
+        "nimi": "Tesla",
+        "hind": 85000,
+        "aktiivne": true,
+        "pilt": "https://twiistedmedia.com/wp-content/uploads/2021/01/Tesla-Modle-3-matte-blue-vinylwrap25.jpg"
+    },
+    {
+        "nimi": "BMW",
+        "hind": 55000,
+        "aktiivne": false,
+        "pilt": "https://www.wrapstyle.com/content/img_cache/1920x/1595508902-1269-BMW-3-Blue-Gloss-wrap.jpg"
+    },
+    {
+        "nimi": "Volvo",
+        "hind": 65000,
+        "aktiivne": true,
+        "pilt": "https://s3-prod.autonews.com/s3fs-public/styles/767xauto/public/Volvo%20XC40%20900_0.jpg"
+    }
+]

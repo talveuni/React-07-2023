@@ -6,11 +6,19 @@ function YksikToode() {
   const {index} = useParams(); //Reacti hookid: useState, useRef, useParams
   const leitud = tootedFailist[index]; // leitakse arrayst 1 toode
 
-
+  // { } tahavad ühte elementi, vajadusel saab mitme divi ümber panna tühja tagi <> </>
+  
   return (
     <div>
-        <div>Toote järjekorranumber: {index}</div>
-        <div>Toote nimi: {leitud} </div>
+      
+      
+        { leitud !== undefined && 
+        <>
+          <div>Toote järjekorranumber: {index}</div>
+          <div>Toote nimi: {leitud} </div>
+        </> }
+             
+        {leitud === undefined && <div>Toodet ei leitud!</div>} 
 
     </div>
   )

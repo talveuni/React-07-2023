@@ -12,6 +12,7 @@ import HaldaTooteid from "./pages/HaldaTooteid";
 import MuudaToode from "./pages/MuudaToode";
 import YksikToode from "./pages/YksikToode";
 import YksikPood from "./pages/YksikPood";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const [teema, uuendaTeema] = useState(
@@ -66,6 +67,7 @@ function App() {
         <Route path="/muuda/:index" element={<MuudaToode />} />
         <Route path="/toode/:index" element={<YksikToode />} />
         <Route path="/poed/:yksPood" element={<YksikPood />} />
+        <Route path="*" element={<NotFound />} />
       
       </Routes>
     </div>
