@@ -15,8 +15,11 @@ const kustuta = (index) => {
   return (
     <div>
         {tooted.map((toode, index) =>
-         <div key={index}>
-            {toode}
+         <div>
+            <div>{toode.nimi}</div>
+            <div>{toode.hind}</div>
+            <div>{toode.pilt}</div>
+            <div><img className ="pilt" src={toode.pilt} alt="" /></div>
             <button onClick={()=>kustuta(index)}>Kustuta</button>
             <Link to= {"/muuda/" + index}>
                 <button>Muuda</button>

@@ -15,7 +15,10 @@ function YksikToode() {
         { leitud !== undefined && 
         <>
           <div>Toote järjekorranumber: {index}</div>
-          <div>Toote nimi: {leitud} </div>
+          <div>Toote nimi: {leitud.nimi} </div>
+          <div>Toote hind: {leitud.hind} €</div>
+          <div><img className ="pilt" src={leitud.pilt} alt="" /></div>
+
         </> }
              
         {leitud === undefined && <div>Toodet ei leitud!</div>} 
