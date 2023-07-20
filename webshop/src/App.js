@@ -32,6 +32,11 @@ function App() {
 
   }
 
+  const changeLangEs = () => {
+    i18n.changeLanguage("es")
+    localStorage.setItem("language", "es")
+
+  }
 
 
   return (
@@ -39,7 +44,7 @@ function App() {
     
       <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
         <Container>
-          <Navbar.Brand as={Link} to="/">Triin's webshop</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">{t("webshop-triin")}</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
@@ -52,6 +57,7 @@ function App() {
               <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
               <img className="lang" src= "/english.png" alt="" onClick={changeLangEn}></img>
               <img className="lang" src= "/estonian.png" alt="" onClick={changeLangEe}></img>
+              <img className="lang" src= "/spanish.png" alt="" onClick={changeLangEs}></img>
             </Nav>
           </Navbar.Collapse>
         </Container>
