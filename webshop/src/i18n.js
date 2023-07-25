@@ -27,6 +27,7 @@ const resources = {
         "delete" : "Delete",
         "remove-all": "Remove all",
         "total-sum": "Total sum",
+        "edit": "Edit"
     }
   },
   ee: {
@@ -51,6 +52,7 @@ const resources = {
         "delete" : "Kustuta",
         "remove-all": "Tühenda ostukorv",
         "total-sum": "Summa kokku",
+        "edit": "Muuda"
     }
   },
 
@@ -76,6 +78,7 @@ const resources = {
         "delete" : "Eliminar",
         "remove-all": "Eliminar todo",
         "total-sum": "Suma total",
+        "edit": "Editar"
     }
   }
 };

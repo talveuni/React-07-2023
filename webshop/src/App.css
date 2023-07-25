@@ -12,3 +12,13 @@
 .lang:active {
     padding: 1px;
 }
+
+
+.btn1 {
+    margin: 5px;
+    padding: 5px;
+}
+
+* {
+    padding: 1px;
+}

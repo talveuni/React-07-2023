@@ -3,13 +3,14 @@ import productsFromFile from "../../data/products.json";
 import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
 
 function MaintainProducts() {
   const [products, setProducts] = useState(productsFromFile);
   const {t} = useTranslation();
 
   const deleteProduct = (product) => {
-    const index = productsFromFile.map((p) => p.id === product.id);
+    const index = productsFromFile.findIndex((p) => p.id === product.id);
     productsFromFile.splice(index, 1);
     setProducts(productsFromFile.slice());
     const toastMessage = t("deleted-from-products", { productName: product.name });
@@ -18,16 +19,19 @@ function MaintainProducts() {
 
   return (
     <div>
-      {products.map((product, id) => (
-        <div key ={id}>
+      {products.map((product, index) => (
+        <div key ={product.id}>
           <img src={product.image} alt="" />
-          <div>{product.id}</div>
-          <div>{product.name}</div>
-          <div>{product.price}</div>
-          <div>{product.category}</div>
-          <div>{product.description}</div>
+          <div>ID: {product.id}</div>
+          <div>Name: {product.name}</div>
+          <div>Price: {product.price} €</div>
+          <div>Category: {product.category}</div>
+          <div>Decription: {product.description}</div>
           <div>{product.active}</div>
-          <Button onClick={() => deleteProduct(product)}>{t("delete")}</Button>
+          <Button onClick={() => deleteProduct(product)}>{t("delete")}</Button> 
+          <span></span>
+          <Button as={Link} to= {"/admin/edit-product/"+ product.id}>{t("edit")}</Button>
+          <br /><br />
         </div>
       ))}
 

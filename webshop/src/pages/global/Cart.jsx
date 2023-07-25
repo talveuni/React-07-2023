@@ -3,22 +3,22 @@ import cartFromFile from "../../data/cart.json"
 import { useTranslation } from 'react-i18next';
 
 function Cart() {
-  const [cart, updateCart] = useState(cartFromFile);
+  const [cart, setCart] = useState(cartFromFile);
   const {t} = useTranslation();
 
   const emptyCart = () => {
     cart.splice(0);
-    updateCart(cart.slice());
+    setCart(cart.slice());
   }
 
   const removeItem = (id) => {
     cart.splice(id, 1);
-    updateCart(cart.slice());
+    setCart(cart.slice());
   }
 
   const addItem = (product) => {
     cart.push(product);
-    updateCart(cart.slice());
+    setCart(cart.slice());
 
   }
 
@@ -33,8 +33,8 @@ function Cart() {
       {cart.map((product, id) =>
       <div key={id}> 
         {product.name} - {product.price} €
-        <button onClick={()=> removeItem(id)}>x</button>
-        <button onClick={()=> addItem(product)}>+</button>
+        <button className="btn1" onClick={()=> removeItem(id)}>x</button>
+        <button className="btn1" onClick={()=> addItem(product)}>+</button>
       </div>
       )}
       
