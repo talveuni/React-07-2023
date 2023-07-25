@@ -19,7 +19,9 @@ export const ContactUs = () => {
   };
 
   return (
+    
     <form ref={form} onSubmit={sendEmail}>
+      <br />
       <label>{t("sender-name")}:</label><br />
       <input type="text" name="from_name" /><br /> <br />
       <label>{t("email")}:</label><br />

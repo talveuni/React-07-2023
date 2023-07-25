@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import cartFromFile from "../../data/cart.json"
 import { useTranslation } from 'react-i18next';
+import { Button } from 'react-bootstrap';
 
 function Cart() {
   const [cart, setCart] = useState(cartFromFile);
@@ -30,18 +31,23 @@ function Cart() {
 
   return (
     <div>
+      <br />
       {cart.map((product, id) =>
       <div key={id}> 
-        {product.name} - {product.price} €
-        <button className="btn1" onClick={()=> removeItem(id)}>x</button>
-        <button className="btn1" onClick={()=> addItem(product)}>+</button>
+        {product.name} - {product.price} € <span></span>
+        <Button onClick={()=> removeItem(id)} variant="danger">x</Button> <span></span>
+        <Button onClick={()=> addItem(product)} variant="success">+</Button>
       </div>
       )}
-      
-      {cart.length > 0 && <button onClick={emptyCart}>{t("remove-all")}</button>} 
-      <br /> <br />
-      <div>{t("total-sum")}: {calcSum()} €</div>
+      <br />
 
+      {cart.length > 0 && 
+      <div>
+        <div>{t("total-sum")}: {calcSum()} €</div> <br />
+        <Button onClick={emptyCart} variant="secondary">{t("remove-all")}</Button>
+      </div>} 
+
+       {cart.length === 0 && <div>{t("empty-cart")}</div>}
 
     </div>
   )

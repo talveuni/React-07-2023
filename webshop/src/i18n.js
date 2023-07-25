@@ -44,6 +44,9 @@ const resources = {
         "email-message": "Message",
         "send": "Send",
         "product-not-found": "Product was not found :(",
+        "product-added": "Product added successfully!",
+        "product-not-added": "Product adding failed: missing values",
+        "empty-cart" : "Shopping cart is empty",
 
     }
   },
@@ -86,6 +89,9 @@ const resources = {
         "email-message": "Sõnum",
         "send": "Saada",
         "product-not-found": "Toodet ei leitud :(",
+        "product-added": "Toode lisatud!",
+        "product-not-added": "Tühjade väärtustega toodet ei saa lisada",
+        "empty-cart" : "Ostukorv on tühi",
 
 
     }
@@ -130,6 +136,9 @@ const resources = {
         "email-message": "Mensaje",
         "send": "Enviar",
         "product-not-found": "No se encontró el producto :(",
+        "product-added": "Producto añadido con éxito",
+        "product-not-added": "No se pudo agregar el producto: faltan valores",
+        "empty-cart" : "El carro de compras está vacío",
 
 
 

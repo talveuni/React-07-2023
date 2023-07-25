@@ -2,11 +2,13 @@
     height: 30px;
     width: 30px;
     margin: 3px;
+    align-self: center;
 }
 
 .product-img {
     max-width: 200px;
     max-height: 200px;
+    
 }
 
 .lang:hover {
@@ -18,12 +20,7 @@
     padding: 1px;
 }
 
-
-.btn1 {
-    margin: 5px;
-    padding: 5px;
-}
-
-* {
-    padding: 1px;
-}
+.App {
+    text-align: center;
+    
+  }

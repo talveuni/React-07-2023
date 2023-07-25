@@ -16,10 +16,14 @@ function AddProduct() {
   const descriptionRef = useRef();
   const activeRef = useRef();
   const {t} = useTranslation();
+  const toastMessageSuccess = t("product-added");
+  const toastMessageFail = t("product-not-added");
+
+  
 
   const addNew = () => {
     if (nameRef.current.value === "" || priceRef.current.value < 0) {
-      toast.error("Tühja väärtusega toodet ei saa lisada");
+      toast.error(toastMessageFail);
     } else {
       productsFromFile.push({
         id: Number(idRef.current.value),
@@ -30,13 +34,14 @@ function AddProduct() {
         category: categoryRef.current.value,
         active: activeRef.current.checked,
       });
-      toast.success("jess");
-      console.log (nameRef.current.value)
+      toast.success(toastMessageSuccess);
+      
     }
   };
 
   return (
     <div>
+      <br />
       <label>{t("id")}</label> <br />
       <input ref={idRef} type="number" /> <br /> <br />
       <label>{t("name")}</label> <br />

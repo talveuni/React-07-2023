@@ -19,6 +19,7 @@ function MaintainProducts() {
 
   return (
     <div>
+      <br />
       {products.map((product, index) => (
         <div key ={product.id}>
           <img src={product.image} alt="" />
@@ -28,8 +29,7 @@ function MaintainProducts() {
           <div>Category: {product.category}</div>
           <div>Decription: {product.description}</div>
           <div>{product.active}</div>
-          <Button as={Link} to= {"/admin/edit-product/"+ product.id} variant = "warning" >{t("edit")}</Button>
-          <span></span>
+          <Button as={Link} to= {"/admin/edit-product/"+ product.id} variant = "warning" >{t("edit")}</Button> <span></span>
           <Button onClick={() => deleteProduct(product)} variant="danger">{t("delete")}</Button> 
          
          

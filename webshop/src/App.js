@@ -42,9 +42,9 @@ function App() {
   return (
     <div className="App">
     
-      <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary">
+      <Navbar collapseOnSelect expand="lg" className="bg-body-secondary">
         <Container>
-          <Navbar.Brand as={Link} to="/">{t("webshop-triin")}</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/"><h2>{t("webshop-triin")}</h2></Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">

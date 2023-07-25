@@ -39,17 +39,19 @@ function HomePage() {
 
   return (
     <div>
-      <button className="btn1" onClick={sortAZ}>{t("sort-AZ")}</button> <span></span>
-      <button className="btn1" onClick={sortZA}>{t("sort-ZA")}</button> <span></span>
-      <button className="btn1" onClick={sortPriceAsc}>{t("sort-price-asc")}</button> <span></span>
-      <button className="btn1" onClick={sortPriceDesc}>{t("sort-price-desc")}</button> <span></span>
+      <br />
+      <Button onClick={sortAZ} variant ="secondary">{t("sort-AZ")}</Button> <span></span>
+      <Button onClick={sortZA} variant ="secondary">{t("sort-ZA")}</Button> <span></span>
+      <Button onClick={sortPriceAsc} variant ="secondary">{t("sort-price-asc")}</Button> <span></span>
+      <Button onClick={sortPriceDesc} variant ="secondary">{t("sort-price-desc")}</Button> <br /><br />
+     
       {products.map((product, id) => (
         <div key = {id}>
           <img className="product-img" src={product.image} alt="" />
           <div>{t("name")}: {product.name}</div>
           <div>{t("price")}: {product.price} €</div>
-          <Button onClick={()=>addToCart(product)}>{t("add-to-cart")}</Button> <span></span>
-          <Button as={Link} to= {"/product/"+ product.id} variant="secondary">{t("details")}</Button> 
+          <Button onClick={()=>addToCart(product)} variant="success">{t("add-to-cart")}</Button> <span></span>
+          <Button as={Link} to= {"/product/"+ product.id} variant="info">{t("details")}</Button> 
          <br /><br /><br />
         </div>
       ))}

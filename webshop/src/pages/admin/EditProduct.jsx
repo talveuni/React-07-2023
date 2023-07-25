@@ -40,7 +40,7 @@ function EditProduct() {
 
   return (
     <div>
-     
+     <br />
           <img src={found.image} alt="" /> <br/>
           <label>{t("id")}: </label> <br />
           <input defaultValue={found.id} ref={idRef} type = "number"/> <br />
