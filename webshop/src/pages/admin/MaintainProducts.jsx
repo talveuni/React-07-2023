@@ -28,9 +28,11 @@ function MaintainProducts() {
           <div>Category: {product.category}</div>
           <div>Decription: {product.description}</div>
           <div>{product.active}</div>
-          <Button onClick={() => deleteProduct(product)}>{t("delete")}</Button> 
+          <Button as={Link} to= {"/admin/edit-product/"+ product.id} variant = "warning" >{t("edit")}</Button>
           <span></span>
-          <Button as={Link} to= {"/admin/edit-product/"+ product.id}>{t("edit")}</Button>
+          <Button onClick={() => deleteProduct(product)} variant="danger">{t("delete")}</Button> 
+         
+         
           <br /><br />
         </div>
       ))}

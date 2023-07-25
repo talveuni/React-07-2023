@@ -1,6 +1,9 @@
 import React, { useRef } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import productsFromFile from "../../data/products.json";
+import { useTranslation } from "react-i18next";
+import { Button } from 'react-bootstrap';
+
 
 
 function EditProduct() {
@@ -14,6 +17,7 @@ function EditProduct() {
   const descriptionRef = useRef();
   const activeRef = useRef();
   const navigate = useNavigate();
+  const {t} = useTranslation();
 
   const edit = () => {
     const index = productsFromFile.findIndex(product => product.id === Number(productId))
@@ -31,28 +35,28 @@ function EditProduct() {
   }
 
   if(found === undefined) {
-    return <div>Toodet ei leitud</div>
+    return <div>{t("product-not-found")}</div>
   }
 
   return (
     <div>
      
           <img src={found.image} alt="" /> <br/>
-          <label>ID</label>
+          <label>{t("id")}: </label> <br />
           <input defaultValue={found.id} ref={idRef} type = "number"/> <br />
-          <label>Name</label>
+          <label>{t("name")}: </label><br />
           <input defaultValue={found.name} ref={nameRef} type = "text"/> <br />
-          <label>Price</label>
+          <label>{t("price")}: </label><br />
           <input defaultValue={found.price} ref={priceRef} type = "number"/> <br />
-          <label>Image</label>
+          <label>{t("image")}: </label><br />
           <input defaultValue={found.image} ref={imageRef} type = "text"/> <br />
-          <label>Category</label>
+          <label>{t("category")}: </label><br />
           <input defaultValue={found.category} ref={categoryRef} type = "text"/> <br />
-          <label>Description</label>
+          <label>{t("description")}: </label><br />
           <input defaultValue={found.description} ref={descriptionRef} type = "text"/> <br />
-          <label>Active</label>
-          <input defaultChecked={found.active} ref={activeRef} type = "checkbox"/> <br />
-          <button onClick={edit}>Muuda</button>
+          <label>{t("active")}: </label><span></span>
+          <input defaultChecked={found.active} ref={activeRef} type = "checkbox"/> <br /> <br />
+          <Button onClick={edit} variant="success">{t("save")}</Button>
           
 
 

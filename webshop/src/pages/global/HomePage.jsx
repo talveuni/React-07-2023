@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import cartFromFile from "../../data/cart.json"
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
 
 function HomePage() {
   const [products, setProducts] = useState(productsFromFile);
@@ -38,16 +39,18 @@ function HomePage() {
 
   return (
     <div>
-      <button onClick={sortAZ}>{t("sort-AZ")}</button>
-      <button onClick={sortZA}>{t("sort-ZA")}</button>
-      <button onClick={sortPriceAsc}>{t("sort-price-asc")}</button>
-      <button onClick={sortPriceDesc}>{t("sort-price-desc")}</button>
+      <button className="btn1" onClick={sortAZ}>{t("sort-AZ")}</button> <span></span>
+      <button className="btn1" onClick={sortZA}>{t("sort-ZA")}</button> <span></span>
+      <button className="btn1" onClick={sortPriceAsc}>{t("sort-price-asc")}</button> <span></span>
+      <button className="btn1" onClick={sortPriceDesc}>{t("sort-price-desc")}</button> <span></span>
       {products.map((product, id) => (
         <div key = {id}>
-          <img src={product.image} alt="" />
-          <div>{product.name}</div>
-          <div>{product.price}</div>
-          <Button onClick={()=>addToCart(product)}>{t("add-to-cart")}</Button>
+          <img className="product-img" src={product.image} alt="" />
+          <div>{t("name")}: {product.name}</div>
+          <div>{t("price")}: {product.price} €</div>
+          <Button onClick={()=>addToCart(product)}>{t("add-to-cart")}</Button> <span></span>
+          <Button as={Link} to= {"/product/"+ product.id} variant="secondary">{t("details")}</Button> 
+         <br /><br /><br />
         </div>
       ))}
 

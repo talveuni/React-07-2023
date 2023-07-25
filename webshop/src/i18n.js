@@ -27,7 +27,24 @@ const resources = {
         "delete" : "Delete",
         "remove-all": "Remove all",
         "total-sum": "Total sum",
-        "edit": "Edit"
+        "edit": "Edit",
+        "details": "Details",
+        "back": "Go back",
+        "id": "ID",
+        "name": "Product name",
+        "price": "Price",
+        "category":"Category",
+        "description":"Description",
+        "image":"Image",
+        "active":"Active",
+        "add": "Add",
+        "save": "Save",
+        "sender-name": "Name",
+        "email": "E-mail",
+        "email-message": "Message",
+        "send": "Send",
+        "product-not-found": "Product was not found :(",
+
     }
   },
   ee: {
@@ -52,7 +69,25 @@ const resources = {
         "delete" : "Kustuta",
         "remove-all": "Tühenda ostukorv",
         "total-sum": "Summa kokku",
-        "edit": "Muuda"
+        "edit": "Muuda",
+        "details": "Toote üksikasjad",
+        "back": "Tagasi",
+        "id": "ID",
+        "name": "Toote nimi",
+        "price": "Hind",
+        "category":"Kategooria",
+        "description":"Kirjeldus",
+        "image":"Pilt",
+        "active":"Aktiivsus",
+        "add":"Lisa",
+        "save": "Salvesta",
+        "sender-name": "Nimi",
+        "email": "E-mail",
+        "email-message": "Sõnum",
+        "send": "Saada",
+        "product-not-found": "Toodet ei leitud :(",
+
+
     }
   },
 
@@ -78,7 +113,26 @@ const resources = {
         "delete" : "Eliminar",
         "remove-all": "Eliminar todo",
         "total-sum": "Suma total",
-        "edit": "Editar"
+        "edit": "Editar",
+        "details": "Detalles",
+        "back": "Volver atrás",
+        "id": "ID",
+        "name": "Nombre del producto",
+        "price": "Precio",
+        "category":"Categoría",
+        "description":"Descripción",
+        "image":"Imagen",
+        "active":"Activo",
+        "add":"Añadir",
+        "save": "Quardar",
+        "sender-name": "Nombre",
+        "email": "Correo electrónico",
+        "email-message": "Mensaje",
+        "send": "Enviar",
+        "product-not-found": "No se encontró el producto :(",
+
+
+
     }
   }
 };
