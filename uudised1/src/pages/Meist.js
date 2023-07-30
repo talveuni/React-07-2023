@@ -44,8 +44,8 @@ function Meist() {
       <div>Valitud: {valitud}</div>
 
       <div>
-        {tootajad.map((tootaja) => (
-          <div className={tootaja.nimi === valitud ? "valitud" : undefined}>
+        {tootajad.map((tootaja, index) => (
+          <div key={index} className={tootaja.nimi === valitud ? "valitud" : undefined}>
             <div>Nimi: {tootaja.nimi}</div>
             <div>Ala: {tootaja.ala}</div>
             <button onClick={() => votaYhendust(tootaja)}>Võta ühendust</button>
