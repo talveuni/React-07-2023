@@ -21,21 +21,10 @@ import { useTranslation } from 'react-i18next';
 
 function App() {
   const { t, i18n } = useTranslation();
-  const changeLangEn = () => {
-    i18n.changeLanguage("en");
-    localStorage.setItem("language", "en")
-
-  }
-  const changeLangEe = () => {
-    i18n.changeLanguage("ee")
-    localStorage.setItem("language", "ee")
-
-  }
-
-  const changeLangEs = () => {
-    i18n.changeLanguage("es")
-    localStorage.setItem("language", "es")
-
+ 
+  const changeLang = (newLanguage) => {
+    i18n.changeLanguage(newLanguage)
+    localStorage.setItem("language", newLanguage)
   }
 
 
@@ -55,9 +44,9 @@ function App() {
             <Nav>
               <Nav.Link as={Link} to="/login">{t("login")}</Nav.Link>
               <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
-              <img className="lang" src= "/english.png" alt="" onClick={changeLangEn}></img>
-              <img className="lang" src= "/estonian.png" alt="" onClick={changeLangEe}></img>
-              <img className="lang" src= "/spanish.png" alt="" onClick={changeLangEs}></img>
+              <img className="lang" src= "/english.png" alt="" onClick={()=>changeLang("en")}></img>
+              <img className="lang" src= "/estonian.png" alt="" onClick={()=>changeLang("ee")}></img>
+              <img className="lang" src= "/spanish.png" alt="" onClick={()=>changeLang("es")}></img>
             </Nav>
           </Navbar.Collapse>
         </Container>

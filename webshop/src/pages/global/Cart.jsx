@@ -1,25 +1,29 @@
 import React, { useState } from 'react'
-import cartFromFile from "../../data/cart.json"
+//import cartFromFile from "../../data/cart.json"
 import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
 
 function Cart() {
-  const [cart, setCart] = useState(cartFromFile);
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
   const {t} = useTranslation();
 
   const emptyCart = () => {
     cart.splice(0);
     setCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart));
+
   }
 
   const removeItem = (id) => {
     cart.splice(id, 1);
     setCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 
   const addItem = (product) => {
     cart.push(product);
     setCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart))
 
   }
 
@@ -46,9 +50,8 @@ function Cart() {
         <div>{t("total-sum")}: {calcSum()} €</div> <br />
         <Button onClick={emptyCart} variant="secondary">{t("remove-all")}</Button>
       </div>} 
-
+      
        {cart.length === 0 && <div>{t("empty-cart")}</div>}
-
     </div>
   )
 }

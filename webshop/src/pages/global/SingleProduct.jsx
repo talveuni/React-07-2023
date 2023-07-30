@@ -5,12 +5,10 @@ import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-
 function SingleProduct() {
   const {productId} = useParams();
   const found = productsFromFile.find(product => product.id === Number(productId));
   const {t} = useTranslation();
-
 
   if(found === undefined) {
     return <div>{t("product-not-found")}</div>
@@ -18,8 +16,7 @@ function SingleProduct() {
 
   return (
     <div>
-     
-        <div key ={found.id}>
+       <div key ={found.id}>
           <img src={found.image} alt="" />
           <div>{t("id")}: {found.id}</div>
           <div>{t("name")}: {found.name}</div>
@@ -28,10 +25,8 @@ function SingleProduct() {
           <div>{t("description")}: {found.description}</div>
           <div>{found.active}</div>
         </div> 
-       
         <br />
         <Button as={Link} to= "/">{t("back")}</Button>
-
     </div> 
   )
 }

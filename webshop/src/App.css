@@ -22,5 +22,10 @@
 
 .App {
     text-align: center;
-    
-  }
+}
+
+.map {
+    height: 300px;
+    margin: 3%;
+    border-radius: 10px;
+}

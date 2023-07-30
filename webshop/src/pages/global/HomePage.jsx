@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import productsFromFile from "../../data/products.json";
 import { Button } from "react-bootstrap";
-import cartFromFile from "../../data/cart.json"
+//import cartFromFile from "../../data/cart.json"
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
@@ -31,10 +31,11 @@ function HomePage() {
   };
 
   const addToCart = (product) => {
-    cartFromFile.push(product);
-    const toastMessage = t("added-to-cart", { productName: product.name });
-    toast.success(toastMessage);
-
+   // cartFromFile.push(product);
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart))
+    toast.success(t("added-to-cart", { productName: product.name }));
   }
 
   return (

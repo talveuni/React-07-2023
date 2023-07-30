@@ -3,10 +3,8 @@ import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-
 function AdminHome() {
   const {t} = useTranslation();
-
 
   return (
     <div>

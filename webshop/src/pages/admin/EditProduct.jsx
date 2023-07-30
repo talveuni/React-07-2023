@@ -1,10 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import productsFromFile from "../../data/products.json";
 import { useTranslation } from "react-i18next";
 import { Button } from 'react-bootstrap';
-
-
 
 function EditProduct() {
   const {productId} = useParams();
@@ -18,6 +16,7 @@ function EditProduct() {
   const activeRef = useRef();
   const navigate = useNavigate();
   const {t} = useTranslation();
+  const [idUnique, setIdUnique] = useState();
 
   const edit = () => {
     const index = productsFromFile.findIndex(product => product.id === Number(productId))
@@ -31,7 +30,19 @@ function EditProduct() {
       "active": activeRef.current.checked
     }
     navigate("/admin/maintain-products");
+  }
 
+  const checkIdUniqueness = () => {
+    if (idRef.current.value === productId) {
+      idUnique(true);
+      return;
+    }
+    const result = productsFromFile.filter(product => product.id === Number(idRef.current.value));
+    if (result.length === 0) {
+      setIdUnique(true);
+    } else {
+      setIdUnique(false);
+    }
   }
 
   if(found === undefined) {
@@ -40,10 +51,11 @@ function EditProduct() {
 
   return (
     <div>
-     <br />
+          <br />
+          {idUnique === false &&  <div>{t("id-not-unique")}</div>} <br />
           <img src={found.image} alt="" /> <br/>
           <label>{t("id")}: </label> <br />
-          <input defaultValue={found.id} ref={idRef} type = "number"/> <br />
+          <input onChange={checkIdUniqueness}  defaultValue={found.id} ref={idRef} type = "number"/> <br />
           <label>{t("name")}: </label><br />
           <input defaultValue={found.name} ref={nameRef} type = "text"/> <br />
           <label>{t("price")}: </label><br />
@@ -56,12 +68,8 @@ function EditProduct() {
           <input defaultValue={found.description} ref={descriptionRef} type = "text"/> <br />
           <label>{t("active")}: </label><span></span>
           <input defaultChecked={found.active} ref={activeRef} type = "checkbox"/> <br /> <br />
-          <Button onClick={edit} variant="success">{t("save")}</Button>
+          <Button disabled={idUnique===false} onClick={edit} variant="success">{t("save")}</Button>
           
-
-
-
-
 
     </div>
   )
