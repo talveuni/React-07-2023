@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import productsFromFile from "../../data/products.json";
 import { Button } from "react-bootstrap";
-//import cartFromFile from "../../data/cart.json"
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
@@ -30,12 +29,18 @@ function HomePage() {
     setProducts(products.slice());
   };
 
-  const addToCart = (product) => {
-   // cartFromFile.push(product);
+  const addToCart = (productClicked) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    cart.push(product);
+    const index = cart.findIndex(cartProduct => cartProduct.product.id === productClicked.id); 
+    
+    if (index >= 0) {
+      cart[index].quantity++;
+    } else {
+      cart.push({"quantity":1, "product": productClicked});
+    }
+
     localStorage.setItem("cart", JSON.stringify(cart))
-    toast.success(t("added-to-cart", { productName: product.name }));
+    toast.success(t("added-to-cart", { productName: productClicked.name }));
   }
 
   return (
@@ -50,7 +55,7 @@ function HomePage() {
         <div key = {id}>
           <img className="product-img" src={product.image} alt="" />
           <div>{t("name")}: {product.name}</div>
-          <div>{t("price")}: {product.price} €</div>
+          <div>{t("price")}: {(product.price).toFixed(2)} €</div>
           <Button onClick={()=>addToCart(product)} variant="success">{t("add-to-cart")}</Button> <span></span>
           <Button as={Link} to= {"/product/"+ product.id} variant="info">{t("details")}</Button> 
          <br /><br /><br />

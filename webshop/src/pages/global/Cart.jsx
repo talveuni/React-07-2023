@@ -1,17 +1,23 @@
-import React, { useState } from 'react'
-//import cartFromFile from "../../data/cart.json"
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
+import '../../css/Cart.css'
 
 function Cart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
   const {t} = useTranslation();
+  const [parcelMachines, setParcelmachines] = useState([]);
+  
+  useEffect(()=> { //kohe lehele tulles tehakse API päring
+    fetch('https://www.omniva.ee/locations.json')
+      .then(response => response.json()) // päringu staatus ja metaandmed
+      .then(json => setParcelmachines(json)) // json kujul veebilehe sisu
+  }, []);
 
   const emptyCart = () => {
     cart.splice(0);
     setCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
-
   }
 
   const removeItem = (id) => {
@@ -20,30 +26,49 @@ function Cart() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
-  const addItem = (product) => {
-    cart.push(product);
-    setCart(cart.slice());
-    localStorage.setItem("cart", JSON.stringify(cart))
-
-  }
-
   const calcSum = () => {
     let sum = 0;
-    cart.forEach(product => sum += product.price);
-    return sum;
+    cart.forEach(cartProduct => sum += cartProduct.product.price * cartProduct.quantity);
+    return sum.toFixed(2);
+  }
+
+  const increaseQuantity = (index) => {
+    cart[index].quantity++;
+    setCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart))
+  }
+  const decreaseQuantity = (index) => {
+    cart[index].quantity--;
+    if  (cart[index].quantity === 0) {      //  --> eemaldab, kui kogus läheb 0
+      cart.splice(index, 1);
+      setCart(cart.slice());
+    } 
+
+    setCart(cart.slice());
+    localStorage.setItem("cart", JSON.stringify(cart))
   }
 
   return (
     <div>
       <br />
-      {cart.map((product, id) =>
-      <div key={id}> 
-        {product.name} - {product.price} € <span></span>
-        <Button onClick={()=> removeItem(id)} variant="danger">x</Button> <span></span>
-        <Button onClick={()=> addItem(product)} variant="success">+</Button>
+      {cart.map((cartProduct, index) =>
+      <div className='product' key={index}> 
+        <img className='image' src={cartProduct.product.image} alt="" />
+        <div className='name'>{cartProduct.product.name}</div>
+        <div className='price'>{(cartProduct.product.price.toFixed(2))} € </div>
+        <div className='quantity'>
+          <img src="/minus.png" className='button' onClick={()=> decreaseQuantity(index)} alt="" />
+          <span>{cartProduct.quantity} {t("pc")} </span>
+          <img src="/add.png" className='button' onClick={()=> increaseQuantity(index)} alt="" />
+        </div>
+        <span className='sum'>{(cartProduct.product.price * cartProduct.quantity).toFixed(2)} €</span>
+        <img src="/delete.png" className='button' onClick={()=> removeItem(index)} alt="" />
+       
       </div>
       )}
       <br />
+      <select>{parcelMachines.filter(pm=> pm.A0_NAME === "EE").map((pm, index) => <option key={index}>{pm.NAME}</option>)}</select>
+
 
       {cart.length > 0 && 
       <div>
