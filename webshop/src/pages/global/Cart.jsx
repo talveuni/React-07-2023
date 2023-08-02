@@ -20,8 +20,8 @@ function Cart() {
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
-  const removeItem = (id) => {
-    cart.splice(id, 1);
+  const removeItem = (index) => {
+    cart.splice(index, 1);
     setCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
   }
