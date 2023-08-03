@@ -49,11 +49,13 @@ const resources = {
         "empty-cart" : "Shopping cart is empty",
         "total" : "Total",
         "pc" : "pc",
-        "stick-vacuum" : "Stick vacuum",
-        "robot-vacuum" : "Robot vacuum",
+        "stick vacuum" : "Stick vacuum",
+        "robot vacuum" : "Robot vacuum",
         "camping" : "Camping",
         "tent": "Tent", 
-        "id-not-unique" : "This ID is already in use"
+        "id-not-unique" : "This ID is already in use",
+        "category-name" : "Category name",
+        "search": "Search",
     }
   },
   ee: {
@@ -100,14 +102,13 @@ const resources = {
         "empty-cart" : "Ostukorv on tühi",
         "total" : "Kokku",
         "pc" : "tk",
-        "stick-vacuum" : "Varstolmuimeja",
-        "robot-vacuum" : "Robot tolmuimeja",
+        "stick vacuum" : "Varstolmuimeja",
+        "robot vacuum" : "Robottolmuimeja",
         "camping" : "Matkamine",
         "tent": "Telk", 
         "id-not-unique" : "Selline ID on juba kasutusel",
-
-
-
+        "category-name" : "Kategooria nimi",
+        "search": "Otsi",
     }
   },
 
@@ -155,12 +156,13 @@ const resources = {
         "empty-cart" : "El carro de compras está vacío",
         "total" : "Total",
         "pc" : "ud", 
-        "stick-vacuum" : "Palo de vacío",
-        "robot-vacuum" : "Robot aspirador",
+        "stick vacuum" : "Palo de vacío",
+        "robot vacuum" : "Robot aspirador",
         "camping" : "Cámping",
         "tent": "Carpa", 
         "id-not-unique" : "Este ID ya está en uso",
-
+        "category-name" : "Nombre de la categoría",
+        "search": "Buscar",
 
     }
   }

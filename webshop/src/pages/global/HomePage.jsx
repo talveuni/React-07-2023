@@ -1,13 +1,30 @@
-import React, { useState } from "react";
-import productsFromFile from "../../data/products.json";
+import React, { useEffect, useState } from "react";
+//import productsFromFile from "../../data/products.json";
 import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
+import config from "../../data/config.json"
+
 
 function HomePage() {
-  const [products, setProducts] = useState(productsFromFile);
+  const [products, setProducts] = useState([]);
+  const [dbProducts, setDbProducts] = useState([]);
   const {t} = useTranslation();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch(config.categoryUrl)
+      .then(res=>res.json())
+      .then(data=>setCategories(data || []))
+
+    fetch(config.productsUrl)
+      .then(res=>res.json())
+      .then(data=>{
+        setProducts(data || []);
+        setDbProducts(data || [])
+      })
+  }, []);
 
   const sortAZ = () => {
     products.sort((a, b) => a.name.localeCompare(b.name));
@@ -43,6 +60,11 @@ function HomePage() {
     toast.success(t("added-to-cart", { productName: productClicked.name }));
   }
 
+  const filterByCategory = (categoryClicked) => {
+    const result = dbProducts.filter(product => product.category === categoryClicked);
+    setProducts(result);
+  }
+
   return (
     <div>
       <br />
@@ -50,6 +72,13 @@ function HomePage() {
       <Button onClick={sortZA} variant ="secondary">{t("sort-ZA")}</Button> <span></span>
       <Button onClick={sortPriceAsc} variant ="secondary">{t("sort-price-asc")}</Button> <span></span>
       <Button onClick={sortPriceDesc} variant ="secondary">{t("sort-price-desc")}</Button> <br /><br />
+      <div> {t("total")}: {products.length} {t("pc")}</div> <br />
+
+      {categories.map((category, index)=>
+        <button key={index} onClick={() => filterByCategory(category.name)}>
+          {t(category.name)}
+        </button>
+      )}
      
       {products.map((product, id) => (
         <div key = {id}>

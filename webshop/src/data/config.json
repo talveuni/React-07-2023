@@ -1,0 +1,7 @@
+{
+    "categoryUrl": "https://webshop-triin-default-rtdb.europe-west1.firebasedatabase.app/categories.json",
+    "shopsUrl": "https://webshop-triin-default-rtdb.europe-west1.firebasedatabase.app/shops.json",
+    "productsUrl": "https://webshop-triin-default-rtdb.europe-west1.firebasedatabase.app/products.json"
+
+    
+}

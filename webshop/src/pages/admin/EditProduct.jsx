@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import productsFromFile from "../../data/products.json";
 import { useTranslation } from "react-i18next";
 import { Button } from 'react-bootstrap';
+import config from "../../data/config.json"
 
 function EditProduct() {
   const {productId} = useParams();
@@ -17,6 +18,14 @@ function EditProduct() {
   const navigate = useNavigate();
   const {t} = useTranslation();
   const [idUnique, setIdUnique] = useState();
+
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch(config.categoryUrl)
+      .then(res => res.json())
+      .then(data => setCategories(data || [])) // null || []
+  }, []);
 
   const edit = () => {
     const index = productsFromFile.findIndex(product => product.id === Number(productId))
@@ -49,6 +58,10 @@ function EditProduct() {
     return <div>{t("product-not-found")}</div>
   }
 
+  if(categories.length === 0) {
+    return <div>Loading...</div>
+  }
+
   return (
     <div>
           <br />
@@ -62,8 +75,13 @@ function EditProduct() {
           <input defaultValue={found.price} ref={priceRef} type = "number"/> <br />
           <label>{t("image")}: </label><br />
           <input defaultValue={found.image} ref={imageRef} type = "text"/> <br />
-          <label>{t("category")}: </label><br />
-          <input defaultValue={found.category} ref={categoryRef} type = "text"/> <br />
+          <label>{t("category")}</label> <br />
+          <select defaultValue= {found.category} ref={categoryRef}> {categories.map((category, index) => 
+            <option key={index}>
+             {t(category.name)} 
+            </option>)}
+          </select> <br /> 
+          {/* <input defaultValue={found.category} ref={categoryRef} type = "text"/> <br /> */}
           <label>{t("description")}: </label><br />
           <input defaultValue={found.description} ref={descriptionRef} type = "text"/> <br />
           <label>{t("active")}: </label><span></span>

@@ -1,8 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import productsFromFile from "../../data/products.json";
 import { ToastContainer, toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
+import config from "../../data/config.json"
 
 function AddProduct() {
   const idRef = useRef();
@@ -14,6 +15,13 @@ function AddProduct() {
   const activeRef = useRef();
   const {t} = useTranslation();
   const [idUnique, setIdUnique] = useState();
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    fetch(config.categoryUrl)
+      .then(res => res.json())
+      .then(data => setCategories(data || [])) // null || []
+  }, []);
 
   const addNew = () => {
     if (nameRef.current.value === "" || priceRef.current.value < 0) {
@@ -54,7 +62,11 @@ function AddProduct() {
       <label>{t("image")}</label> <br />
       <input ref={imageRef} type="text" /> <br /><br />
       <label>{t("category")}</label> <br />
-      <input ref={categoryRef} type="text" /> <br /> <br />
+      <select ref={categoryRef}> {categories.map((category, index) => 
+        <option key={index}>
+          {t(category.name)} 
+        </option>)}
+      </select> <br /> <br />
       <label>{t("description")}</label> <br />
       <input ref={descriptionRef} type="text" /> <br /><br />
       <label>{t("active")}</label> 
