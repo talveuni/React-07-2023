@@ -56,6 +56,15 @@ const resources = {
         "id-not-unique" : "This ID is already in use",
         "category-name" : "Category name",
         "search": "Search",
+        "shop-name": "Shop name",
+        "longitude" : "Longitude",
+        "latitude": "Latitude",
+        "open-time": "Open time",
+        "coordinates": "Coordinates",
+        "open": "Open",
+        "all-shops": "All shops",
+        "all-tln-shops": "All Tallinn shops",
+
     }
   },
   ee: {
@@ -109,6 +118,14 @@ const resources = {
         "id-not-unique" : "Selline ID on juba kasutusel",
         "category-name" : "Kategooria nimi",
         "search": "Otsi",
+        "shop-name": "Poe nimi",
+        "longitude" : "Pikkuskraad",
+        "latitude": "Laiuskraad",
+        "open-time": "Lahtiolekuaeg",
+        "coordinates": "Koordinaadid",
+        "open": "Avatud",
+        "all-shops": "Kõik poed",
+        "all-tln-shops": "Kõik Tallinna poed",
     }
   },
 
@@ -163,6 +180,14 @@ const resources = {
         "id-not-unique" : "Este ID ya está en uso",
         "category-name" : "Nombre de la categoría",
         "search": "Buscar",
+        "shop-name": "Nombre de tienda",
+        "longitude" : "Longitud",
+        "latitude": "Latitud",
+        "open-time": "Horario de apertura",
+        "coordinates": "Coordenadas",
+        "open": "Abierto",
+        "all-shops": "Todas las tiendas",
+        "all-tln-shops": "Todas las tiendas en Tallinn",
 
     }
   }

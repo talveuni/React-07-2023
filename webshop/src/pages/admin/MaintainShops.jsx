@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import config from "../../data/config.json"
 
-
-
 function MaintainShops() {
   const [shops, setShops] = useState([]);
   const longitudeRef = useRef();
@@ -25,7 +23,6 @@ function MaintainShops() {
       "latitude": Number(latitudeRef.current.value),
       "openTime": openTimeRef.current.value,
     });
-
     setShops(shops.slice());
     fetch(config.shopsUrl, {
       method: "PUT", //asendamine
@@ -54,21 +51,18 @@ function MaintainShops() {
       <label>{t("open-time")}</label> <br />
       <input ref= {openTimeRef} type="text" /> <br />
       <button onClick={addShop}>{t("add")}</button> <br /><br />
-      {shops.map ((shop, index)=>
-      <div>
-        {shops.map((shop, index) => 
-        <div key={index}>
-          {t(shop.name)} <br />
-          {t(shop.longitude)} <br />
-          {t(shop.latitude)} <br />
-          {t(shop.openTime)} <br />
 
-          <button onClick={()=>deleteShop(index)}>{t("delete")}</button>
+      <h4>Poed:</h4>
+
+      {shops.map((shop, index) => 
+        <div key={index}>
+          <div>{t(shop.name)} </div>
+          <div>{t("coordinates")}: {t(shop.longitude)}, {t(shop.latitude)}</div> 
+          <div>{t("open")}: {t(shop.openTime)}</div>
+          <button onClick={()=>deleteShop(index)}>{t("delete")}</button> <br /><br />
         </div>)}
-     
-      </div> 
-      )}
-    </div>
+     </div> 
+   
   )
 }
 

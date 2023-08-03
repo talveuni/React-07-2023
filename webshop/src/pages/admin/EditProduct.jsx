@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import config from "../../data/config.json"
 
 function EditProduct() {
+  
   const {productId} = useParams();
   const found = productsFromFile.find(product => product.id === Number(productId));
   const idRef = useRef();
@@ -18,15 +19,14 @@ function EditProduct() {
   const navigate = useNavigate();
   const {t} = useTranslation();
   const [idUnique, setIdUnique] = useState();
-
   const [categories, setCategories] = useState([]);
-
+ 
   useEffect(() => {
     fetch(config.categoryUrl)
       .then(res => res.json())
       .then(data => setCategories(data || [])) // null || []
   }, []);
-
+  
   const edit = () => {
     const index = productsFromFile.findIndex(product => product.id === Number(productId))
     productsFromFile[index] = {
@@ -36,7 +36,7 @@ function EditProduct() {
       "price": Number(priceRef.current.value),
       "description": descriptionRef.current.value,
       "category": categoryRef.current.value,
-      "active": activeRef.current.checked
+      "active": activeRef.current.checked    
     }
     navigate("/admin/maintain-products");
   }
@@ -62,6 +62,10 @@ function EditProduct() {
     return <div>Loading...</div>
   }
 
+  console.log("Found category:", found.category);
+  console.log("Category names in categories array:", categories.map(category => category.name));
+
+
   return (
     <div>
           <br />
@@ -75,13 +79,15 @@ function EditProduct() {
           <input defaultValue={found.price} ref={priceRef} type = "number"/> <br />
           <label>{t("image")}: </label><br />
           <input defaultValue={found.image} ref={imageRef} type = "text"/> <br />
+          
           <label>{t("category")}</label> <br />
-          <select defaultValue= {found.category} ref={categoryRef}> {categories.map((category, index) => 
-            <option key={index}>
-             {t(category.name)} 
+          <select ref={categoryRef} defaultValue= {found.category}> 
+            {categories.map(category => 
+            <option key={category.name} value={category.name}>
+              {t(category.name)} 
             </option>)}
           </select> <br /> 
-          {/* <input defaultValue={found.category} ref={categoryRef} type = "text"/> <br /> */}
+
           <label>{t("description")}: </label><br />
           <input defaultValue={found.description} ref={descriptionRef} type = "text"/> <br />
           <label>{t("active")}: </label><span></span>
