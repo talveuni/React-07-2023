@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 function Avaleht() {
   const [posts, setPosts] = useState([]);
 
+
   useEffect(()=> { //kohe lehele tulles tehakse API päring
     fetch('https://jsonplaceholder.typicode.com/posts')
       .then(response => response.json()) // päringu staatus ja metaandmed
@@ -23,6 +24,9 @@ function Avaleht() {
         <div>Body: {post.body}</div> 
         <Link to={"/kasutaja-postitus/" + post.userId}>
           <button>Kasutaja postitused</button>
+        </Link>
+        <Link to={"/vaata-postitust/" + post.id}>
+          <button>Vaata postitust</button>
         </Link>
         <br /><br />
       </div>

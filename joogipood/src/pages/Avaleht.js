@@ -1,13 +1,23 @@
-import React, { useState } from "react";
-import joogidFailist from "../joogid.json";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import config from "../data/config.json" 
 
 function Avaleht() {
-  const [joogid, uuendaJoogid] = useState(joogidFailist);
+  const [joogid, uuendaJoogid] = useState([]);
+
+  useEffect(() => {
+    fetch(config.joogidDbUrl)
+      .then(res => res.json())
+      .then(data => uuendaJoogid(data || [])) // null || []
+  }, []);
 
   const kustuta = (index) => {
-    joogidFailist.splice(index, 1);
-    uuendaJoogid(joogidFailist.slice());
+    joogid.splice(index, 1);
+    uuendaJoogid(joogid.slice());
+    fetch(config.joogidDbUrl, {
+      method: "PUT", 
+      body: JSON.stringify(joogid)
+    })
   };
 
   return (
@@ -16,7 +26,7 @@ function Avaleht() {
         {joogid.map((jook, index) => (
           <div>
             <Link to = {"/jook/" + index}>
-                <span> {jook + " "}</span>                
+               {jook.nimi}<span></span>          
             </Link>
             <button onClick={() => kustuta(index)}>x</button>
           </div>

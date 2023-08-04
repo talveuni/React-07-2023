@@ -10,12 +10,11 @@ function KasutajaPostitus() {
       .then(json => setPosts(json)) // json kujul veebilehe sisu
   }, []);
 
-  const {id} = useParams();
-
+  const {userId} = useParams();
   
   return (
     <div>
-      {posts.filter(post=> post.userId === Number(id)).map((post, index) =>
+      {posts.filter(post=> post.userId === Number(userId)).map((post, index) =>
       <div key={index}> 
         <div><i>User ID: {post.userId}</i></div> 
         <div><u>Post ID: {post.id}</u></div> 
@@ -23,7 +22,6 @@ function KasutajaPostitus() {
         <div>Body: {post.body}</div> 
         <br />
       </div>
-        
       )}
     </div>
   )

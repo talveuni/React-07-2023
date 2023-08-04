@@ -1,12 +1,26 @@
-import React, { useRef } from "react";
-import joogidFailist from "../joogid.json";
+import React, { useEffect, useRef, useState } from "react";
+import config from "../data/config.json" 
 
 function LisaJook() {
   const jookRef = useRef();
+  const [joogid, uuendaJoogid] = useState([])
+
+  useEffect(() => {
+    fetch(config.joogidDbUrl)
+      .then(res => res.json())
+      .then(data => uuendaJoogid(data || [])) // null || []
+  }, []);
 
   const lisaUus = () => {
-    joogidFailist.push(jookRef.current.value);
+    joogid.push({"nimi": jookRef.current.value});
+    uuendaJoogid(joogid.slice());
+    fetch(config.joogidDbUrl, {
+      method: "PUT", //asendamine
+      body: JSON.stringify(joogid)
+    })
+    jookRef.current.value="";
   };
+
   return (
     <div>
       <label>Uus jook</label>
