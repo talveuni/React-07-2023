@@ -64,6 +64,8 @@ const resources = {
         "open": "Open",
         "all-shops": "All shops",
         "all-tln-shops": "All Tallinn shops",
+        "loading": "Loading",
+        "show-all": "Show all",
 
     }
   },
@@ -126,6 +128,9 @@ const resources = {
         "open": "Avatud",
         "all-shops": "Kõik poed",
         "all-tln-shops": "Kõik Tallinna poed",
+        "loading": "Laadib",
+        "show-all": "Näita kõiki",
+
     }
   },
 
@@ -188,6 +193,8 @@ const resources = {
         "open": "Abierto",
         "all-shops": "Todas las tiendas",
         "all-tln-shops": "Todas las tiendas en Tallinn",
+        "loading": "Cargando",
+        "show-all": "Mostrar todo",
 
     }
   }

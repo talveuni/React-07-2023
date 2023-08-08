@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import config from "../../data/config.json"
 
 
+
 function MaintainProducts() {
   const [products, setProducts] = useState([]);
   const [dbproducts, setDbProducts] = useState([]);
@@ -25,13 +26,16 @@ function MaintainProducts() {
   const deleteProduct = (product) => {
     const index = dbproducts.findIndex((p) => p.id === product.id);
     dbproducts.splice(index, 1);
-    setDbProducts(dbproducts.slice());
+    //setDbProducts(dbproducts.slice());
+    searchFromProducts();
     toast.success(t("deleted-from-products", { productName: product.name }));
   };
 
   const searchFromProducts = () => {
     const result = dbproducts.filter(product => 
-      product.name.toLowerCase().includes(searchRef.current.value.toLowerCase()));
+      product.name.toLowerCase().includes(searchRef.current.value.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchRef.current.value.toLowerCase()) ||
+      product.id.toString().includes(searchRef.current.value))
     setProducts(result);
   }
 
@@ -42,7 +46,7 @@ function MaintainProducts() {
       <input ref={searchRef} onChange={searchFromProducts} type= "text" /> <br /><br />
       <div> {t("total")}: {products.length} {t("pc")}</div> <br />
      
-      {products.map((product, index) => (
+      {products.map((product) => (
         <div key ={product.id}>
           <img src={product.image} alt="" />
           <div>{t("id")}: {product.id}</div>

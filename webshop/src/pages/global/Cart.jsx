@@ -1,18 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import { Button } from 'react-bootstrap';
 import '../../css/Cart.css'
+import ParcelMachines from '../../components/ParcelMachines';
+import Payment from '../../components/Payment';
 
 function Cart() {
   const [cart, setCart] = useState(JSON.parse(localStorage.getItem("cart") || "[]"));
   const {t} = useTranslation();
-  const [parcelMachines, setParcelmachines] = useState([]);
   
-  useEffect(()=> { //kohe lehele tulles tehakse API päring
-    fetch('https://www.omniva.ee/locations.json')
-      .then(response => response.json()) // päringu staatus ja metaandmed
-      .then(json => setParcelmachines(json)) // json kujul veebilehe sisu
-  }, []);
 
   const emptyCart = () => {
     cart.splice(0);
@@ -24,12 +20,6 @@ function Cart() {
     cart.splice(index, 1);
     setCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart));
-  }
-
-  const calcSum = () => {
-    let sum = 0;
-    cart.forEach(cartProduct => sum += cartProduct.product.price * cartProduct.quantity);
-    return sum.toFixed(2);
   }
 
   const increaseQuantity = (index) => {
@@ -47,6 +37,13 @@ function Cart() {
     setCart(cart.slice());
     localStorage.setItem("cart", JSON.stringify(cart))
   }
+
+  const cartSum = () => {
+        let sum = 0;
+        cart.forEach(cartProduct => sum += cartProduct.product.price * cartProduct.quantity);
+        return sum.toFixed(2);
+      }
+  
 
   return (
     <div>
@@ -67,13 +64,14 @@ function Cart() {
       </div>
       )}
       <br />
-      <select>{parcelMachines.filter(pm=> pm.A0_NAME === "EE").map((pm, index) => <option key={index}>{pm.NAME}</option>)}</select>
-
+     
 
       {cart.length > 0 && 
       <div>
-        <div>{t("total-sum")}: {calcSum()} €</div> <br />
-        <Button onClick={emptyCart} variant="secondary">{t("remove-all")}</Button>
+        <div>{t("total-sum")}: {cartSum()} €</div> <br />
+        <ParcelMachines/>
+        <Payment sum = {cartSum()}/>
+        <Button onClick={emptyCart} variant="secondary">{t("remove-all")}</Button> <br />
       </div>} 
       
        {cart.length === 0 && <div>{t("empty-cart")}</div>}

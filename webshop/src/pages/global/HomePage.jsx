@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-//import productsFromFile from "../../data/products.json";
 import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import config from "../../data/config.json"
-
+import SortButtons from "../../components/SortButtons";
+import FilterButtons from "../../components/FilterButtons";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -26,26 +26,6 @@ function HomePage() {
       })
   }, []);
 
-  const sortAZ = () => {
-    products.sort((a, b) => a.name.localeCompare(b.name));
-    setProducts(products.slice());
-  };
-
-  const sortZA = () => {
-    products.sort((a, b) => b.name.localeCompare(a.name));
-    setProducts(products.slice());
-  };
-
-  const sortPriceAsc = () => {
-    products.sort((a, b) => a.price - b.price);
-    setProducts(products.slice());
-  };
-
-  const sortPriceDesc = () => {
-    products.sort((a, b) => b.price - a.price);
-    setProducts(products.slice());
-  };
-
   const addToCart = (productClicked) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     const index = cart.findIndex(cartProduct => cartProduct.product.id === productClicked.id); 
@@ -60,25 +40,22 @@ function HomePage() {
     toast.success(t("added-to-cart", { productName: productClicked.name }));
   }
 
-  const filterByCategory = (categoryClicked) => {
-    const result = dbProducts.filter(product => product.category === categoryClicked);
-    setProducts(result);
-  }
-
   return (
     <div>
       <br />
-      <Button onClick={sortAZ} variant ="secondary">{t("sort-AZ")}</Button> <span></span>
-      <Button onClick={sortZA} variant ="secondary">{t("sort-ZA")}</Button> <span></span>
-      <Button onClick={sortPriceAsc} variant ="secondary">{t("sort-price-asc")}</Button> <span></span>
-      <Button onClick={sortPriceDesc} variant ="secondary">{t("sort-price-desc")}</Button> <br /><br />
-      <div> {t("total")}: {products.length} {t("pc")}</div> <br />
+      <SortButtons 
+        products= {products}
+        setProducts = {setProducts}
+      />
 
-      {categories.map((category, index)=>
-        <button key={index} onClick={() => filterByCategory(category.name)}>
-          {t(category.name)}
-        </button>
-      )}
+      <FilterButtons
+        categories = {categories}
+        dbProducts = {dbProducts}
+        setProducts = {setProducts}
+      />
+      <br />
+
+      <div> {t("total")}: {products.length} {t("pc")}</div> <br />
      
       {products.map((product, id) => (
         <div key = {id}>
@@ -99,5 +76,4 @@ function HomePage() {
     </div>
   );
 }
-
 export default HomePage;

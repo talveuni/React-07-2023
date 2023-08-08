@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import productsFromFile from "../../data/products.json";
+//import productsFromFile from "../../data/products.json";
 import { useTranslation } from "react-i18next";
 import { Button } from 'react-bootstrap';
 import config from "../../data/config.json"
@@ -8,7 +8,6 @@ import config from "../../data/config.json"
 function EditProduct() {
   
   const {productId} = useParams();
-  const found = productsFromFile.find(product => product.id === Number(productId));
   const idRef = useRef();
   const nameRef = useRef();
   const priceRef = useRef();
@@ -20,16 +19,25 @@ function EditProduct() {
   const {t} = useTranslation();
   const [idUnique, setIdUnique] = useState();
   const [categories, setCategories] = useState([]);
- 
+  const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(true)
+  const found = products.find(product => product.id === Number(productId));
+
   useEffect(() => {
     fetch(config.categoryUrl)
       .then(res => res.json())
       .then(data => setCategories(data || [])) // null || []
+
+    fetch(config.productsUrl)
+      .then(res => res.json())
+      .then(data =>{ 
+        setProducts(data || []); 
+        setLoading(false)})
   }, []);
   
   const edit = () => {
-    const index = productsFromFile.findIndex(product => product.id === Number(productId))
-    productsFromFile[index] = {
+    const index = products.findIndex(product => product.id === Number(productId))
+    products[index] = {
       "id": Number(idRef.current.value),
       "image": imageRef.current.value,
       "name": nameRef.current.value,
@@ -38,7 +46,8 @@ function EditProduct() {
       "category": categoryRef.current.value,
       "active": activeRef.current.checked    
     }
-    navigate("/admin/maintain-products");
+    fetch(config.productsUrl, {method: "PUT", body: JSON.stringify(products)})
+      .then(() => navigate("/admin/maintain-products")); //alles siis liigub edasi, kui saab vastuse
   }
 
   const checkIdUniqueness = () => {
@@ -46,7 +55,7 @@ function EditProduct() {
       idUnique(true);
       return;
     }
-    const result = productsFromFile.filter(product => product.id === Number(idRef.current.value));
+    const result = products.filter(product => product.id === Number(idRef.current.value));
     if (result.length === 0) {
       setIdUnique(true);
     } else {
@@ -54,17 +63,13 @@ function EditProduct() {
     }
   }
 
+  if(isLoading === true) { // if(isLoading) on sama
+    return <div>{t("loading")}...</div>
+  }
+
   if(found === undefined) {
     return <div>{t("product-not-found")}</div>
   }
-
-  if(categories.length === 0) {
-    return <div>Loading...</div>
-  }
-
-  console.log("Found category:", found.category);
-  console.log("Category names in categories array:", categories.map(category => category.name));
-
 
   return (
     <div>

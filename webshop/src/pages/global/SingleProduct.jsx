@@ -1,14 +1,29 @@
-import React from 'react'
-import productsFromFile from "../../data/products.json";
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { useTranslation } from "react-i18next";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import config from "../../data/config.json"
 
 function SingleProduct() {
   const {productId} = useParams();
-  const found = productsFromFile.find(product => product.id === Number(productId));
   const {t} = useTranslation();
+  const [products, setProducts] = useState([]);
+  const [isLoading, setLoading] = useState(true)
+  const found = products.find(product => product.id === Number(productId));
+
+  useEffect(() => {
+    fetch(config.productsUrl)
+      .then(res => res.json())
+      .then(data =>{ 
+        setProducts(data || []); 
+        setLoading(false)})
+  }, []);
+
+  if(isLoading === true) { 
+    return <Spinner variant ="success"/>
+   // return <div>{t("loading")}...</div>
+  }
 
   if(found === undefined) {
     return <div>{t("product-not-found")}</div>
@@ -17,7 +32,7 @@ function SingleProduct() {
   return (
     <div>
        <div key ={found.id}>
-          <img src={found.image} alt="" />
+          <img className="single-product-img" src={found.image} alt="" />
           <div>{t("id")}: {found.id}</div>
           <div>{t("name")}: {found.name}</div>
           <div>{t("price")}: {found.price} €</div>
