@@ -5,6 +5,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import config from "../../data/config.json"
+import "../../css/MaintainProducts.css"
 
 
 
@@ -26,7 +27,6 @@ function MaintainProducts() {
   const deleteProduct = (product) => {
     const index = dbproducts.findIndex((p) => p.id === product.id);
     dbproducts.splice(index, 1);
-    //setDbProducts(dbproducts.slice());
     searchFromProducts();
     toast.success(t("deleted-from-products", { productName: product.name }));
   };
@@ -47,14 +47,14 @@ function MaintainProducts() {
       <div> {t("total")}: {products.length} {t("pc")}</div> <br />
      
       {products.map((product) => (
-        <div key ={product.id}>
+        <div className={product.active === true ? "active": "inactive"} key ={product.id}>
           <img src={product.image} alt="" />
           <div>{t("id")}: {product.id}</div>
           <div>{t("name")}: {product.name}</div>
           <div>{t("price")}: {product.price} €</div>
           <div>{t("category")}: {product.category}</div>
           <div>{t("description")}: {product.description}</div>
-          <div>{product.active}</div>
+          {/* <div>{product.active}</div> */}
           <Button as={Link} to= {"/admin/edit-product/"+ product.id} variant = "warning" >{t("edit")}</Button> <span></span>
           <Button onClick={() => deleteProduct(product)} variant="danger">{t("delete")}</Button> 
           <br /><br />

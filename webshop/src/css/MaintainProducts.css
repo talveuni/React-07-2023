@@ -1,0 +1,14 @@
+.active {
+    background-color: rgb(199, 216, 173);
+    border: 1px solid green;
+}
+
+.inactive {
+    background-color: rgb(243, 213, 217);
+    border: 1px solid red;
+
+}
+
+.active, inactive {
+
+}

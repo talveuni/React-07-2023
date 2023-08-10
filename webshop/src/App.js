@@ -1,8 +1,5 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
+
 import "./App.css";
-import { Routes, Route, Link } from "react-router-dom";
 import AddProduct from "./pages/admin/AddProduct";
 import AdminHome from "./pages/admin/AdminHome";
 import EditProduct from "./pages/admin/EditProduct";
@@ -17,40 +14,17 @@ import Cart from "./pages/global/Cart";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import NotFound from "./pages/global/NotFound";
-import { useTranslation } from 'react-i18next';
+import NavigationBar from "./components/NavigationBar";
+import { Routes, Route,} from "react-router-dom";
+
+
 
 function App() {
-  const { t, i18n } = useTranslation();
  
-  const changeLang = (newLanguage) => {
-    i18n.changeLanguage(newLanguage)
-    localStorage.setItem("language", newLanguage)
-  }
-
-
   return (
     <div className="App">
     
-      <Navbar collapseOnSelect expand="lg" className="bg-body-secondary">
-        <Container>
-          <Navbar.Brand as={Link} to="/"><h2>{t("webshop-triin")}</h2></Navbar.Brand>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/admin">{t("admin")}</Nav.Link>
-              <Nav.Link as={Link} to="shops">{t("shops")}</Nav.Link>
-              <Nav.Link as={Link} to="/contact">{t("contact")}</Nav.Link>
-            </Nav>
-            <Nav>
-              <Nav.Link as={Link} to="/login">{t("login")}</Nav.Link>
-              <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
-              <img className="lang" src= "/english.png" alt="" onClick={()=>changeLang("en")}></img>
-              <img className="lang" src= "/estonian.png" alt="" onClick={()=>changeLang("ee")}></img>
-              <img className="lang" src= "/spanish.png" alt="" onClick={()=>changeLang("es")}></img>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      <NavigationBar/>
 
       <Routes>
         <Route path="/" element={<HomePage />} />

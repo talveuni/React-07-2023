@@ -6,12 +6,18 @@ import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'leaflet/dist/leaflet.css';
 import "./index.css"; //can make my own changes, since it's below the Bootstrap import
+import { CartSumContextProvider } from "./store/CartSumContect";
+import { AuthContextProvider } from "./store/AuthContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <CartSumContextProvider>
+        <AuthContextProvider>
+          <App />
+        </AuthContextProvider>
+      </CartSumContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

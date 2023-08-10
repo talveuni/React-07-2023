@@ -4,9 +4,10 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useTranslation } from "react-i18next";
 import { Button } from 'react-bootstrap';
 import config from "../../data/config.json"
+import { ToastContainer, toast } from "react-toastify";
+
 
 function EditProduct() {
-  
   const {productId} = useParams();
   const idRef = useRef();
   const nameRef = useRef();
@@ -37,6 +38,21 @@ function EditProduct() {
   
   const edit = () => {
     const index = products.findIndex(product => product.id === Number(productId))
+    if (nameRef.current.value === "") {
+      toast.error(t("product-not-added")); // TO-DO tõlked
+      return;
+    } 
+
+    if (priceRef.current.value < 0) {
+      toast.error(t("Hind ei saa 0 olla")); // TO-DO tõlked
+      return;
+    } 
+
+    if (imageRef.current.value.includes(" ")) {
+      toast.error(t("Pildi URLis ei tohi tühikut olla")); // TO-DO tõlked
+      return;
+    } 
+
     products[index] = {
       "id": Number(idRef.current.value),
       "image": imageRef.current.value,
@@ -98,6 +114,7 @@ function EditProduct() {
           <label>{t("active")}: </label><span></span>
           <input defaultChecked={found.active} ref={activeRef} type = "checkbox"/> <br /> <br />
           <Button disabled={idUnique===false} onClick={edit} variant="success">{t("save")}</Button>
+          <ToastContainer position="bottom-right" autoClose={4000} theme="dark" />
           
 
     </div>

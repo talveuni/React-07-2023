@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import ChangeView from './ChangeView';
-import config from "../data/config.json"
+import config from "../../data/config.json"
 import { useEffect, useState } from 'react';
 import { useTranslation } from "react-i18next";
 

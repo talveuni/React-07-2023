@@ -29,9 +29,21 @@ function AddProduct() {
   }, []);
 
   const addNew = () => {
-    if (nameRef.current.value === "" || priceRef.current.value < 0) {
-      toast.error(t("product-not-added"));
-    } else {
+    if (nameRef.current.value === "") {
+      toast.error(t("product-not-added")); // TO-DO tõlked
+      return;
+    } 
+
+    if (priceRef.current.value < 0) {
+      toast.error(t("Hind ei saa 0 olla")); // TO-DO tõlked
+      return;
+    } 
+
+    if (imageRef.current.value.includes(" ")) {
+      toast.error(t("Pildi URLis ei tohi tühikut olla")); // TO-DO tõlked
+      return;
+    } 
+
       products.push({
         id: Number(idRef.current.value),
         image: imageRef.current.value,
@@ -42,7 +54,7 @@ function AddProduct() {
         active: activeRef.current.checked,
       });
        
-    }
+    
     fetch(config.productsUrl, {method: "PUT", body: JSON.stringify(products)})
       .then(() => toast.success(t("product-added")));
   };

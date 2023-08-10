@@ -15,8 +15,8 @@ function FilterButtons(props) {
 
 return (
     <div>
-        {props.categories.map((category, index)=>
-        <button key={index} onClick={() => filterByCategory(category.name)}>
+        {props.categories.map((category)=>
+        <button key={category.name} onClick={() => filterByCategory(category.name)}>
           {t(category.name)}
         </button>
       )}

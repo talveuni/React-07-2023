@@ -66,6 +66,10 @@ const resources = {
         "all-tln-shops": "All Tallinn shops",
         "loading": "Loading",
         "show-all": "Show all",
+        "logout" : "Log out",
+        "password": "Password",
+        "password-is-incorrect": "Password is incorrect",
+
 
     }
   },
@@ -130,6 +134,11 @@ const resources = {
         "all-tln-shops": "Kõik Tallinna poed",
         "loading": "Laadib",
         "show-all": "Näita kõiki",
+        "logout" : "Logi välja",
+        "password": "Parool",
+        "password-is-incorrect": "Parool ei ole korrektne",
+
+
 
     }
   },
@@ -195,6 +204,10 @@ const resources = {
         "all-tln-shops": "Todas las tiendas en Tallinn",
         "loading": "Cargando",
         "show-all": "Mostrar todo",
+        "logout" : "Cerrar sesión",
+        "password": "Contraseña",
+        "password-is-incorrect": "La contraseña es incorrecta",
+
 
     }
   }
