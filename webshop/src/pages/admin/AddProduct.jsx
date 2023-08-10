@@ -27,12 +27,18 @@ function AddProduct() {
   }, []);
 
   const addNew = () => {
-    if (nameRef.current.value === "") {
+    if (idRef.current.value === "") {
+      toast.error(t("id-empty")); 
+      return;
+    } 
+
+     if (nameRef.current.value === "") {
       toast.error(t("product-name-empty")); 
       return;
     } 
 
-    if (priceRef.current.value < 0) {
+    const priceValue = parseFloat(priceRef.current.value);
+    if (isNaN(priceValue) || priceValue <= 0) {
       toast.error(t("product-price-zero")); 
       return;
     } 
@@ -41,7 +47,7 @@ function AddProduct() {
       toast.error(t("space-in-img-url")); 
       return;
     } 
-
+    
       products.push({
         id: Number(idRef.current.value),
         image: imageRef.current.value,
@@ -51,7 +57,7 @@ function AddProduct() {
         category: categoryRef.current.value,
         active: activeRef.current.checked,
       });
-    
+      console.log(priceRef.current.value)
     fetch(config.productsUrl, {method: "PUT", body: JSON.stringify(products)})
       .then(() => toast.success(t("product-added")));
   };

@@ -42,8 +42,9 @@ function EditProduct() {
       return;
     } 
 
-    if (priceRef.current.value < 0) {
-      toast.error(t("product-price-zero"));
+    const priceValue = parseFloat(priceRef.current.value);
+    if (isNaN(priceValue) || priceValue <= 0) {
+      toast.error(t("product-price-zero")); 
       return;
     } 
 
