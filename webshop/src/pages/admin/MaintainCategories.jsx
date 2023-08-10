@@ -30,7 +30,7 @@ function MaintainCategories() {
     categories.splice(index, 1);
     setCategories(categories.slice());
     fetch(config.categoryUrl, {
-      method: "PUT", //asendamine
+      method: "PUT", 
       body: JSON.stringify(categories)
     })
   }
@@ -45,7 +45,6 @@ function MaintainCategories() {
           {t(category.name)} <span></span>
           <button onClick={()=>deleteCategory(index)}>{t("delete")}</button>
         </div>)}
-     
     </div>
   )
 }

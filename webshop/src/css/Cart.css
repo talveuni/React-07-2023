@@ -8,7 +8,7 @@
 
 .image {
   height: 100px;
-  max-width: 100px;
+  max-width: 100px;  
 }
 
 .name {
@@ -46,3 +46,5 @@
 .button:active {
   padding: 1px;
 }
+
+

@@ -11,7 +11,6 @@ function Cart() {
   const {t} = useTranslation();
   const {setCartSum} = useContext(CartSumContext);
   
-
   const emptyCart = () => {
     cart.splice(0);
     setCart(cart.slice());
@@ -50,7 +49,6 @@ function Cart() {
         return sum.toFixed(2);
       }
   
-
   return (
     <div>
       <br />
@@ -66,12 +64,12 @@ function Cart() {
         </div>
         <span className='sum'>{(cartProduct.product.price * cartProduct.quantity).toFixed(2)} €</span>
         <img src="/delete.png" className='button' onClick={()=> removeItem(index)} alt="" />
+        
        
       </div>
       )}
       <br />
      
-
       {cart.length > 0 && 
       <div>
         <div>{t("total-sum")}: {cartSum()} €</div> <br />

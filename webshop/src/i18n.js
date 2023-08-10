@@ -69,8 +69,9 @@ const resources = {
         "logout" : "Log out",
         "password": "Password",
         "password-is-incorrect": "Password is incorrect",
-
-
+        "product-name-empty" : "Product name cannot be empty",
+        "product-price-zero" : "Product price must be greater than 0",
+        "space-in-img-url" : "Image URL cannot contain spaces",
     }
   },
   ee: {
@@ -137,7 +138,9 @@ const resources = {
         "logout" : "Logi välja",
         "password": "Parool",
         "password-is-incorrect": "Parool ei ole korrektne",
-
+        "product-name-empty" : "Toote nimi ei saa olla tühi",
+        "product-price-zero" : "Toote hind peab olema suurem kui 0",
+        "space-in-img-url" : "Toote pildi URL ei tohi sisaldada tühikuid",
 
 
     }
@@ -207,8 +210,9 @@ const resources = {
         "logout" : "Cerrar sesión",
         "password": "Contraseña",
         "password-is-incorrect": "La contraseña es incorrecta",
-
-
+        "product-name-empty" : "Toote nimi ei saa olla tühi",
+        "product-price-zero" : "Toote hind peab olema suurem kui 0",
+        "space-in-img-url" : "Toote pildi URL ei tohi sisaldada tühikuid",
     }
   }
 };

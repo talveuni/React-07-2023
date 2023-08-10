@@ -4,6 +4,7 @@ import config from "../../data/config.json"
 import SortButtons from "../../components/home/SortButtons";
 import FilterButtons from "../../components/home/FilterButtons";
 import Product from "../../components/home/Product";
+import { ToastContainer } from "react-toastify";
 
 function HomePage() {
   const [products, setProducts] = useState([]);
@@ -43,8 +44,14 @@ function HomePage() {
       <div> {t("total")}: {products.length} {t("pc")}</div> <br />
      
       {products.map((product) => (
-        <Product product = {product} key = {product.id}/>
+        <Product product={product} key={product.id}/>
       ))}
+
+        <ToastContainer
+        position='bottom-right'
+        autoClose={4000}
+        theme= 'dark'
+        />
 
     </div>
   );

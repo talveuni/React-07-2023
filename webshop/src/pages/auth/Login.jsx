@@ -3,7 +3,6 @@ import { AuthContext } from '../../store/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-
 function Login() {
   const { setLoggedIn } = useContext(AuthContext);
   const emailRef = useRef();
@@ -11,14 +10,13 @@ function Login() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const {t} = useTranslation();
-
   
   const login = () => {
     if(passwordRef.current.value === "123") {
       setLoggedIn(true);
       navigate("/admin")
     } else {
-      setMessage("password-is-incorrect");
+      setMessage(t("password-is-incorrect"));
     }
   }
 

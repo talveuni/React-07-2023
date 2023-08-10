@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { CartSumContext } from '../../store/CartSumContect';
 
@@ -17,14 +17,14 @@ function Product({product}) {
           cart[index].quantity++;
         } else {
           cart.push({"quantity":1, "product": productClicked});
-        }
-    
+        }      
         localStorage.setItem("cart", JSON.stringify(cart))
         let sum = 0;
         cart.forEach(cartProduct => sum += cartProduct.product.price * cartProduct.quantity);
         setCartSum(sum.toFixed(2));
-        toast.success(t("added-to-cart", { productName: productClicked.name }));
-      }
+        toast.success(t("added-to-cart", { productName: productClicked.name })); 
+    }
+
   return (
     <div>
         <div>
@@ -32,15 +32,9 @@ function Product({product}) {
           <div>{t("name")}: {product.name}</div>
           <div>{t("price")}: {(product.price).toFixed(2)} €</div>
           <Button onClick={()=>addToCart(product)} variant="success">{t("add-to-cart")}</Button> <span></span>
-          <Button as={Link} to= {"/product/"+ product.id} variant="info">{t("details")}</Button> 
+          <Button as={Link} to= {"/product/"+ product.id} variant="info">{t("details")} </Button> 
          <br /><br /><br />
         </div>
-
-        <ToastContainer
-        position='bottom-right'
-        autoClose={4000}
-        theme= 'dark'
-    />
     </div>
   )
 }

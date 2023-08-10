@@ -36,15 +36,14 @@ function NavigationBar() {
               <Nav.Link as={Link} to="/contact">{t("contact")}</Nav.Link>
             </Nav>
             <Nav>
-              {loggedIn === true &&<button onClick={logout}>{t("logout")}</button>}
-              <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
-              {loggedIn === false && <Nav.Link as={Link} to="/login">{t("login")}</Nav.Link>}
-
-
-              <div>{cartSum} €</div>
               <img className="lang" src= "/english.png" alt="" onClick={()=>changeLang("en")}></img>
               <img className="lang" src= "/estonian.png" alt="" onClick={()=>changeLang("ee")}></img>
               <img className="lang" src= "/spanish.png" alt="" onClick={()=>changeLang("es")}></img>
+              {loggedIn === true &&<button onClick={logout}>{t("logout")}</button>}
+              {loggedIn === false && <Nav.Link as={Link} to="/login">{t("login")}</Nav.Link>}
+              <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
+              <div className='center'>{cartSum} €</div>
+              
             </Nav>
           </Navbar.Collapse>
         </Container>

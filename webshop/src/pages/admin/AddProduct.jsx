@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-//import productsFromFile from "../../data/products.json";
 import { ToastContainer, toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import { Button } from "react-bootstrap";
@@ -18,7 +17,6 @@ function AddProduct() {
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
 
-
   useEffect(() => {
     fetch(config.categoryUrl)
       .then(res => res.json())
@@ -30,17 +28,17 @@ function AddProduct() {
 
   const addNew = () => {
     if (nameRef.current.value === "") {
-      toast.error(t("product-not-added")); // TO-DO tõlked
+      toast.error(t("product-name-empty")); 
       return;
     } 
 
     if (priceRef.current.value < 0) {
-      toast.error(t("Hind ei saa 0 olla")); // TO-DO tõlked
+      toast.error(t("product-price-zero")); 
       return;
     } 
 
     if (imageRef.current.value.includes(" ")) {
-      toast.error(t("Pildi URLis ei tohi tühikut olla")); // TO-DO tõlked
+      toast.error(t("space-in-img-url")); 
       return;
     } 
 
@@ -53,7 +51,6 @@ function AddProduct() {
         category: categoryRef.current.value,
         active: activeRef.current.checked,
       });
-       
     
     fetch(config.productsUrl, {method: "PUT", body: JSON.stringify(products)})
       .then(() => toast.success(t("product-added")));

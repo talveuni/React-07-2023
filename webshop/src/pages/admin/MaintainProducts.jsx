@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-//import productsFromFile from "../../data/products.json";
 import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import config from "../../data/config.json"
 import "../../css/MaintainProducts.css"
-
-
 
 function MaintainProducts() {
   const [products, setProducts] = useState([]);
@@ -54,7 +51,6 @@ function MaintainProducts() {
           <div>{t("price")}: {product.price} €</div>
           <div>{t("category")}: {product.category}</div>
           <div>{t("description")}: {product.description}</div>
-          {/* <div>{product.active}</div> */}
           <Button as={Link} to= {"/admin/edit-product/"+ product.id} variant = "warning" >{t("edit")}</Button> <span></span>
           <Button onClick={() => deleteProduct(product)} variant="danger">{t("delete")}</Button> 
           <br /><br />

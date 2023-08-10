@@ -41,7 +41,6 @@ function MaintainShops() {
 
   return (
     <div>
-
       <label>{t("shop-name")}</label> <br />
       <input ref= {nameRef} type="text" /> <br />
       <label>{t("longitude")}</label> <br />
@@ -53,7 +52,6 @@ function MaintainShops() {
       <button onClick={addShop}>{t("add")}</button> <br /><br />
 
       <h4>Poed:</h4>
-
       {shops.map((shop, index) => 
         <div key={index}>
           <div>{t(shop.name)} </div>
@@ -62,7 +60,6 @@ function MaintainShops() {
           <button onClick={()=>deleteShop(index)}>{t("delete")}</button> <br /><br />
         </div>)}
      </div> 
-   
   )
 }
 

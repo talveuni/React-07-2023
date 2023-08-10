@@ -1,7 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 
-
 function FilterButtons(props) {
     const filterByCategory = (categoryClicked) => {
         const result = props.dbProducts.filter(product => product.category === categoryClicked);

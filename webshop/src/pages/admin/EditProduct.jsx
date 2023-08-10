@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-//import productsFromFile from "../../data/products.json";
 import { useTranslation } from "react-i18next";
 import { Button } from 'react-bootstrap';
 import config from "../../data/config.json"
@@ -39,17 +38,17 @@ function EditProduct() {
   const edit = () => {
     const index = products.findIndex(product => product.id === Number(productId))
     if (nameRef.current.value === "") {
-      toast.error(t("product-not-added")); // TO-DO tõlked
+      toast.error(t("product-name-empty")); 
       return;
     } 
 
     if (priceRef.current.value < 0) {
-      toast.error(t("Hind ei saa 0 olla")); // TO-DO tõlked
+      toast.error(t("product-price-zero"));
       return;
     } 
 
     if (imageRef.current.value.includes(" ")) {
-      toast.error(t("Pildi URLis ei tohi tühikut olla")); // TO-DO tõlked
+      toast.error(t("space-in-img-url"));
       return;
     } 
 

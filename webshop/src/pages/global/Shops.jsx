@@ -18,7 +18,7 @@ function Shops() {
     <button onClick={() => setCoordinates({lngLat: [58.9388, 25.6052], zoom: 7})}>{t("all-shops")}</button>
     <button onClick={() => setCoordinates({lngLat: [59.4378, 24.7574], zoom: 11})}>{t("all-tln-shops")}</button>
     {shops.map((shop, index)=>
-    <button onClick={() => setCoordinates({lngLat: [shop.longitude, shop.latitude], zoom: 13})}>{shop.name}</button>
+    <button key={index} onClick={() => setCoordinates({lngLat: [shop.longitude, shop.latitude], zoom: 13})}>{shop.name}</button>
     )}
     <Map mapCoordinaates={coordinaates}  />
   </div>)
