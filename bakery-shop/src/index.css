@@ -15,4 +15,9 @@ a {
   font-weight: bold;
 }
 
+.avatar {
+  max-height: 120px;
+  max-width: 120px;
+}
+
 /*TODO: Set the font weight of the first table column to bold*/
