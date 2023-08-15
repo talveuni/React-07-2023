@@ -21,6 +21,8 @@ function NavigationBar() {
     const logout = () => {
       setLoggedIn(false);
       navigate("/");  
+      sessionStorage.removeItem("id_token");
+      sessionStorage.removeItem("refresh_token");
     }
 
   return (
@@ -41,6 +43,7 @@ function NavigationBar() {
               <img className="lang" src= "/spanish.png" alt="" onClick={()=>changeLang("es")}></img>
               {loggedIn === true &&<button onClick={logout}>{t("logout")}</button>}
               {loggedIn === false && <Nav.Link as={Link} to="/login">{t("login")}</Nav.Link>}
+              {loggedIn === false && <Nav.Link as={Link} to="/signup">{t("signup")}</Nav.Link>}
               <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>
               <div className='center'>{cartSum} €</div>
               

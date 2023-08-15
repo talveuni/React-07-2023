@@ -15,11 +15,14 @@ import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import NotFound from "./pages/global/NotFound";
 import NavigationBar from "./components/NavigationBar";
-import { Routes, Route,} from "react-router-dom";
+import { Routes, Route, Navigate,} from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "./store/AuthContext";
 
 
 
 function App() {
+  const {loggedIn} = useContext(AuthContext);
  
   return (
     <div className="App">
@@ -34,12 +37,17 @@ function App() {
         <Route path="/product/:productId" element={<SingleProduct />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        {loggedIn && <>
         <Route path="/admin" element={<AdminHome />} />
         <Route path="/admin/add-product" element={<AddProduct />} />
         <Route path="/admin/edit-product/:productId" element={<EditProduct />} />
         <Route path="/admin/maintain-products" element={<MaintainProducts />} />
         <Route path="/admin/maintain-categories" element={<MaintainCategories />} />
         <Route path="/admin/maintain-shops" element={<MaintainShops />} />
+        </>}
+        {
+          loggedIn === false && <Route path="/admin/*" element={<Navigate to="/login"/>} />
+        }
         <Route path="*" element={<NotFound />} />
 
       </Routes>

@@ -43,19 +43,36 @@ function MaintainProducts() {
       <input ref={searchRef} onChange={searchFromProducts} type= "text" /> <br /><br />
       <div> {t("total")}: {products.length} {t("pc")}</div> <br />
      
-      {products.map((product) => (
-        <div className={product.active === true ? "active": "inactive"} key ={product.id}>
-          <img src={product.image} alt="" />
-          <div>{t("id")}: {product.id}</div>
-          <div>{t("name")}: {product.name}</div>
-          <div>{t("price")}: {product.price} €</div>
-          <div>{t("category")}: {product.category}</div>
-          <div>{t("description")}: {product.description}</div>
+      <table>
+        <thead>
+          <th>{t("product-picture")}</th>
+          <th>{t("id")}</th>
+          <th>{t("name")}</th>
+          <th>{t("price")}</th>
+          <th>{t("category")}</th>
+          <th>{t("description")}</th>
+        </thead>
+        <tbody>
+        {products.map((product) => (
+        <tr className={product.active === true ? "active": "inactive"} key ={product.id}>
+          <td><img src={product.image} alt="" /></td>
+          <td>{t("id")}: {product.id}</td>
+          <td>{t("name")}: {product.name}</td>
+          <td>{t("price")}: {product.price} €</td>
+          <td>{t("category")}: {product.category}</td>
+          <td>{t("description")}: {product.description}</td>
+          <td>
           <Button as={Link} to= {"/admin/edit-product/"+ product.id} variant = "warning" >{t("edit")}</Button> <span></span>
           <Button onClick={() => deleteProduct(product)} variant="danger">{t("delete")}</Button> 
+          </td>
           <br /><br />
-        </div>
+        </tr>
       ))}
+
+        </tbody>
+
+      </table>
+      
 
       <ToastContainer
         position='bottom-right'
