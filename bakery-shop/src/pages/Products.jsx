@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
-
 function Products() {
   const nameRef = useRef();
   const priceRef = useRef();
@@ -48,8 +47,7 @@ function Products() {
             <tr key={product.name + product.price}>
               <td className="first">{product.name}</td>
               <td>{product.price}</td>
-              {product.quantity < 3 && <td className="red">{product.quantity}</td>}
-              {product.quantity >= 3 && <td>{product.quantity}</td>}
+              <td>{product.quantity < 3 ? <span style={{ color: "red" }}>{product.quantity}</span> : product.quantity}</td>
               <td>{product.store}</td>
             </tr>
           )}
