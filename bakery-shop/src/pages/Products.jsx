@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
+
 function Products() {
   const nameRef = useRef();
   const priceRef = useRef();
@@ -43,13 +44,12 @@ function Products() {
         </tr>
         </thead>
         <tbody>
-        {/* TODO: Order the products by price */}
-        {products.map(product => 
+        {products.sort(((a, b) => a.price - b.price)).map(product => 
             <tr key={product.name + product.price}>
-              <td>{product.name}</td>
+              <td className="first">{product.name}</td>
               <td>{product.price}</td>
-              {/*  TODO: Display the quantity in red if it is lower than 3 */}
-              <td>{product.quantity}</td> 
+              {product.quantity < 3 && <td className="red">{product.quantity}</td>}
+              {product.quantity >= 3 && <td>{product.quantity}</td>}
               <td>{product.store}</td>
             </tr>
           )}

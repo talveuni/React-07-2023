@@ -63,7 +63,6 @@ function Employees() {
     localStorage.setItem("employees", JSON.stringify(allEmployees))
     setAllEmployees(allEmployees.slice());
     setMessage(firstNameRef.current.value + " " + lastNameRef.current.value + " added!")
-    console.log(allEmployees)
   }
 
   const deleteEmployee = (index) => {
@@ -79,6 +78,12 @@ function Employees() {
     } else {
       setIdUnique(false);
     }
+  }
+
+  const getDbEmployees = () => {
+    setAllEmployees(dbEmployees.slice());
+    console.log(dbEmployees)
+    localStorage.setItem("employees", JSON.stringify(allEmployees))
   }
 
   return (<div>
@@ -118,6 +123,7 @@ function Employees() {
         </tbody>
       </Table>
       <div>{message}</div> <br />
+      <button onClick={getDbEmployees}>Reset employees</button>
     </div>
 
   </div>)

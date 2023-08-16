@@ -20,4 +20,12 @@ a {
   max-width: 120px;
 }
 
+.red {
+  font-weight: bold;
+  color: red;
+}
+
+
+
+
 /*TODO: Set the font weight of the first table column to bold*/
