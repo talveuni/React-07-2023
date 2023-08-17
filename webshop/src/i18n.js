@@ -1,8 +1,8 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 import enLang from "./i18n/en.json"
-import eeLang from "./i18n/en.json"
-import esLang from "./i18n/en.json"
+import eeLang from "./i18n/ee.json"
+import esLang from "./i18n/es.json"
 
 // the translations
 // (tip move them in a JSON file and import them,

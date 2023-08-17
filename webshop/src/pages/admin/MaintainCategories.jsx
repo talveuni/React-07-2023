@@ -1,6 +1,7 @@
 import React, {useEffect, useRef, useState} from 'react'
 import { useTranslation } from 'react-i18next';
 import config from "../../data/config.json"
+import { Button } from 'react-bootstrap';
 
 function MaintainCategories() {
   const [categories, setCategories] = useState([]);
@@ -39,11 +40,11 @@ function MaintainCategories() {
     <div>
       <label>{t("category-name")}</label> <br />
       <input onKeyUp={addCategory} ref= {categoryRef} type="text" /> <span></span>
-      <button onClick={addCategory}>{t("add")}</button> <br /><br />
+      <Button variant='success' onClick={addCategory}>{t("add")}</Button> <br /><br />
       {categories.map((category, index) => 
         <div key={index}>
           {t(category.name)} <span></span>
-          <button onClick={()=>deleteCategory(index)}>{t("delete")}</button>
+          <Button variant='outline-danger' onClick={()=>deleteCategory(index)}>{t("delete")}</Button>
         </div>)}
     </div>
   )

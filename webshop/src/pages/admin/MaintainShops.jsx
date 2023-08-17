@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next';
 import config from "../../data/config.json"
+import { Button } from 'react-bootstrap';
 
 function MaintainShops() {
   const [shops, setShops] = useState([]);
@@ -49,15 +50,15 @@ function MaintainShops() {
       <input ref= {latitudeRef} type="text" /> <br />
       <label>{t("open-time")}</label> <br />
       <input ref= {openTimeRef} type="text" /> <br />
-      <button onClick={addShop}>{t("add")}</button> <br /><br />
+      <Button variant='success' onClick={addShop}>{t("add")}</Button> <br /><br />
 
-      <h4>Poed:</h4>
+      <h4>{t("shops")}:</h4>
       {shops.map((shop, index) => 
         <div key={index}>
           <div>{t(shop.name)} </div>
           <div>{t("coordinates")}: {t(shop.longitude)}, {t(shop.latitude)}</div> 
           <div>{t("open")}: {t(shop.openTime)}</div>
-          <button onClick={()=>deleteShop(index)}>{t("delete")}</button> <br /><br />
+          <Button variant='outline-danger' onClick={()=>deleteShop(index)}>{t("delete")}</Button> <br /><br />
         </div>)}
      </div> 
   )

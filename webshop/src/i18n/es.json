@@ -64,11 +64,13 @@
     "product-name-empty" : "Toote nimi ei saa olla tühi",
     "product-price-zero" : "Toote hind peab olema suurem kui 0",
     "space-in-img-url" : "Toote pildi URL ei tohi sisaldada tühikuid",
-    "signup" : "...",
+    "signup" : "Inscribirse",
+    "repeat-password" : "Repita la contraseña",
 
-    "INVALID_EMAIL" : "E-mail is invalid",
-    "MISSING_PASSWORD" : "Password is missing",
-    "INVALID_PASSWORD" : "Password is invalid",
-    "EMAIL_NOT_FOUND" : "Can't find a user with this email"
+
+    "INVALID_EMAIL" : "El correo electrónico es invalido",
+    "MISSING_PASSWORD" : "Falta la contraseña",
+    "INVALID_PASSWORD" : "La contraseña no es válida",
+    "EMAIL_NOT_FOUND" : "No se puede encontrar un usuario con este correo electrónico."
 
 }

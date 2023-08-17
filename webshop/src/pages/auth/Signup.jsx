@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import { AuthContext } from '../../store/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Button } from 'react-bootstrap';
 
 function Signup() {
   const { setLoggedIn } = useContext(AuthContext);
@@ -51,8 +52,8 @@ function Signup() {
       <label>{t("password")}</label> <br />
       <input ref={passwordRef} type="password" /> <br />
       <label>{t("repeat-password")}</label><br />
-      <input ref={passwordRepeatRef} type="password" /> <br />
-      <button onClick={signup}>{t("signup")}</button>
+      <input ref={passwordRepeatRef} type="password" /> <br /> <br />
+      <Button variant='outline-success' onClick={signup}>{t("signup")}</Button>
     </div>
   )
 }

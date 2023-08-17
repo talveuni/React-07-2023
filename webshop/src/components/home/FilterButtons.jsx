@@ -1,5 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
+import { Button } from '@mui/material';
+
 
 function FilterButtons(props) {
     const filterByCategory = (categoryClicked) => {
@@ -15,11 +17,11 @@ function FilterButtons(props) {
 return (
     <div>
         {props.categories.map((category)=>
-        <button key={category.name} onClick={() => filterByCategory(category.name)}>
+        <Button key={category.name} variant='outlined' onClick={() => filterByCategory(category.name)}>
           {t(category.name)}
-        </button>
+        </Button>
       )}
-      <button onClick={showAll}>{t("show-all")}</button>
+      <Button onClick={showAll}>{t("show-all")}</Button>
     </div>
   )
 }

@@ -65,9 +65,11 @@
     "product-price-zero" : "Toote hind peab olema suurem kui 0",
     "space-in-img-url" : "Toote pildi URL ei tohi sisaldada tühikuid",
     "signup" : "Registreeri",
+    "repeat-password" : "Korda parooli",
+
 
     "INVALID_EMAIL" : "E-mail ei ole korrektne",
-    "MISSING_PASSWORD" : "Password is missing",
-    "INVALID_PASSWORD" : "Password is invalid",
-    "EMAIL_NOT_FOUND" : "Can't find a user with this email"
+    "MISSING_PASSWORD" : "Parool puudub",
+    "INVALID_PASSWORD" : "Vale parool",
+    "EMAIL_NOT_FOUND" : "Sellise e-mailiga kasutajat ei leitud"
 }

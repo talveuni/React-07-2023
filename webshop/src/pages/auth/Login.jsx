@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from 'react'
 import { AuthContext } from '../../store/AuthContext'
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Button } from 'react-bootstrap';
 
 function Login() {
   const { setLoggedIn } = useContext(AuthContext);
@@ -45,8 +46,8 @@ function Login() {
       <label>{t("email")}</label> <br />
       <input ref={emailRef} type="text" /> <br />
       <label>{t("password")}</label> <br />
-      <input ref={passwordRef} type="password" /> <br />
-      <button onClick={login}>{t("login")}</button>
+      <input ref={passwordRef} type="password" /> <br /><br />
+      <Button variant='outline-success' onClick={login}>{t("login")}</Button>
     </div>
   )
 }
