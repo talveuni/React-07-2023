@@ -47,7 +47,8 @@ function Products() {
             <tr key={product.name + product.price}>
               <td className="first">{product.name}</td>
               <td>{product.price}</td>
-              <td>{product.quantity < 3 ? <span style={{ color: "red" }}>{product.quantity}</span> : product.quantity}</td>
+              {/* <td>{product.quantity < 3 ? <span style={{ color: "red" }}>{product.quantity}</span> : product.quantity}</td> */}
+              {product.quantity < 3 ? <td className="red">{product.quantity}</td> : <td>{product.quantity}</td>}
               <td>{product.store}</td>
             </tr>
           )}

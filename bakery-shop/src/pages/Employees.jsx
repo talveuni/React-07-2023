@@ -6,7 +6,7 @@ function Employees() {
   const [dbEmployees, setDbEmployees] = useState([]) 
   const [allEmployees, setAllEmployees] = useState(JSON.parse(localStorage.getItem("employees") || "[]"));
   const [message, setMessage] = useState("")
-  const [idUnique, setIdUnique] = useState();
+  const [idUnique, setIdUnique] = useState(false);
   const idRef=useRef();
   const firstNameRef = useRef();
   const lastNameRef = useRef();
@@ -66,7 +66,7 @@ function Employees() {
   }
 
   const deleteEmployee = (index) => {
-    setAllEmployees(allEmployees.splice(index, 1));
+    allEmployees.splice(index, 1);
     localStorage.setItem("employees", JSON.stringify(allEmployees))
     setAllEmployees(allEmployees.slice());
   }
