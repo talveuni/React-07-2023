@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import Square from '../components/Square'
-import O from '../components/O';
-import X from '../components/X';
+
 
 function GameBoard() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
-    const [player, setPlayer] = useState("X")
-    const [result, setResult] = useState({winner: "none", state: "none"});
-    const patterns = [
+    const [player, setPlayer] = useState("")
+    // const [result, setResult] = useState({winner: "none", state: "none"});
+    const [winningPlayer, setWinningPlayer] = useState("");
+    const [finalMessage, setFinalMessage] = useState("");
+    const [message, setMessage] = useState("");
+    const winningPatterns = [
         [0, 1, 2],
         [3, 4, 5],
         [6, 7, 8],
@@ -21,25 +23,37 @@ function GameBoard() {
      useEffect(() => {
             checkWin();
             checkTie();
-        }, []);
+            
+            if (player === "X") {
+                setPlayer("O")
+                setMessage("O's turn")
+              
+            } else {
+                setPlayer("X")
+                setMessage("X's turn")
+            }           
+        }, [cells]);
 
     const checkWin = () => {
-        patterns.forEach((currentPattern) =>{
-            const firstPlayer = cells[currentPattern[0]];
+        winningPatterns.forEach((currentPattern) =>{
+            const currentPlayer = cells[currentPattern[0]];
 
-            if (firstPlayer === "") {
+            if (currentPlayer === "") {
                 return;
             }
 
             let foundWinningPattern = true;
             currentPattern.forEach((index)=>{
-                if (cells[index]!== firstPlayer) {
+                if (cells[index]!== currentPlayer) {
                     foundWinningPattern = false;
                 }
             });
+
             if (foundWinningPattern){
-                setResult({winner: player, state: "won"})
-                console.log("win", player)
+                setWinningPlayer(player);
+                console.log(player)
+                setFinalMessage(player + " wins!")
+
             }
 
         })
@@ -54,27 +68,30 @@ function GameBoard() {
         })
 
         if (filled) {
-            setResult({winner: "nobody", state: "tie"});
-            console.log("tie!")
+            // setResult({winner: "nobody", state: "tie"});
+            // console.log("tie!")
+
+            setFinalMessage("it's a tie!")
         }
 
     }
+
     
-    const chooseSquare = (index) => {
+    const chooseSquare = (index) => {    
+
+        if (finalMessage !== "") {
+            return
+        }
+            
         setCells(cells.map((val, id) => {
+            
             if (id===index && val ===""){
                 console.log(cells)
-                checkWin();
-                checkTie();
                 return player;     
             }
             return val;
         })) 
-        if (player === "X") {
-            setPlayer("O")
-        } else {
-            setPlayer("X")
-    }
+        
 }
 
   return (
@@ -86,6 +103,7 @@ function GameBoard() {
             </div> 
             )}
         </div>
+        <h3>{finalMessage || message}</h3>
     </div>
   )
 }
