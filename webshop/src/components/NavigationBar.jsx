@@ -35,14 +35,14 @@ function NavigationBar() {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               {loggedIn===true && <Nav.Link as={Link} to="/admin">{t("admin")}</Nav.Link>}
-              <Nav.Link as={Link} to="shops">{t("shops")}</Nav.Link>
+              <Nav.Link as={Link} to="/shops">{t("shops")}</Nav.Link>
               <Nav.Link as={Link} to="/contact">{t("contact")}</Nav.Link>
             </Nav>
             <Nav>
               <img className="lang" src= "/english.png" alt="" onClick={()=>changeLang("en")}></img>
               <img className="lang" src= "/estonian.png" alt="" onClick={()=>changeLang("ee")}></img>
               <img className="lang" src= "/spanish.png" alt="" onClick={()=>changeLang("es")}></img>
-              {loggedIn === true &&<Button variant='secondary' onClick={logout}>{t("logout")}</Button>}
+              {loggedIn === true &&<Button variant='outline-secondary' onClick={logout}>{t("logout")}</Button>}
               {loggedIn === false && <Nav.Link as={Link} to="/login">{t("login")}</Nav.Link>}
               {loggedIn === false && <Nav.Link as={Link} to="/signup">{t("signup")}</Nav.Link>}
               <Nav.Link as={Link} to="/cart">{t("cart")}</Nav.Link>

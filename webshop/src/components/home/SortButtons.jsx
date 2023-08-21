@@ -27,10 +27,10 @@ function SortButtons(props) {
 
   return (
     <div>
-        <Button onClick={sortAZ} variant ="secondary">{t("sort-AZ")}</Button> <span></span>
-        <Button onClick={sortZA} variant ="secondary">{t("sort-ZA")}</Button> <span></span>
-        <Button onClick={sortPriceAsc} variant ="secondary">{t("sort-price-asc")}</Button> <span></span>
-        <Button onClick={sortPriceDesc} variant ="secondary">{t("sort-price-desc")}</Button> <br /><br />
+        <Button onClick={sortAZ} variant ="outline-dark">{t("sort-AZ")}</Button> <span></span>
+        <Button onClick={sortZA} variant ="outline-dark">{t("sort-ZA")}</Button> <span></span>
+        <Button onClick={sortPriceAsc} variant ="outline-dark">{t("sort-price-asc")}</Button> <span></span>
+        <Button onClick={sortPriceDesc} variant ="outline-dark">{t("sort-price-desc")}</Button> <br /><br />
     </div>
   )
 }
