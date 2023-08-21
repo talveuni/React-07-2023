@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Square from '../components/Square'
 
 
-function GameBoard() {
+function GameBoard2() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
     const [player, setPlayer] = useState("")
     // const [result, setResult] = useState({winner: "none", state: "none"});
@@ -19,14 +19,11 @@ function GameBoard() {
         [0, 4, 8],
         [2, 4, 6],
     ];
+    const squaresClicked = [];
 
      useEffect(() => {
             checkWin();
             checkTie();
-
-            setMessage(player === "X" ? "O's turn" : "X's turn");
-            setPlayer(player === "X" ? "O" : "X");
-          
          
             // if (player === "X") {
             //     setPlayer("O")
@@ -78,13 +75,15 @@ function GameBoard() {
         }
     }
     
-    const chooseSquare = (index) => {
-      
+    const chooseSquare = (index) => {   
+        
         if (finalMessage !== "") {
             return
         }
             
-        setCells(cells.map((val, id) => {         
+        setCells(cells.map((val, id) => {
+            
+           
             if (id===index && val ===""){
                 // console.log(cells)
                 // console.log(player)
@@ -92,6 +91,14 @@ function GameBoard() {
             }
             return val;
         })) 
+        if(squaresClicked.includes(index)) {
+            return; 
+        } else {
+            setMessage(player === "X" ? "O's turn" : "X's turn");
+            setPlayer(player === "X" ? "O" : "X");
+        }
+        squaresClicked.push(index); 
+        console.log(squaresClicked)
 }
 
 const newGame = () => {
@@ -114,4 +121,4 @@ const newGame = () => {
   )
 }
 
-export default GameBoard
+export default GameBoard2
