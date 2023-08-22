@@ -2,11 +2,12 @@ import React, {useEffect, useRef, useState} from 'react'
 import { useTranslation } from 'react-i18next';
 import config from "../../data/config.json"
 import { Button } from 'react-bootstrap';
+import { Category } from '../../models/Category';
 
 function MaintainCategories() {
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const {t} = useTranslation();
-  const categoryRef = useRef();
+  const categoryRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch(config.categoryUrl)
@@ -14,7 +15,11 @@ function MaintainCategories() {
       .then(data => setCategories(data || [])) // null || []
   }, []);
 
-  const addCategory = (event) => {
+  const addCategory = (event: any) => {
+    if (!categoryRef.current){
+      return;
+    }
+    
     if (event.code !== "Enter" && event.type !=="click") { 
       return;
     }
@@ -27,7 +32,7 @@ function MaintainCategories() {
     categoryRef.current.value="";
   }
 
-  const deleteCategory = (index) => {
+  const deleteCategory = (index : number) => {
     categories.splice(index, 1);
     setCategories(categories.slice());
     fetch(config.categoryUrl, {

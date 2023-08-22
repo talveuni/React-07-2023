@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { CartSumContext } from '../../store/CartSumContect';
+import styles from '../../css/HomePage.module.css'
+
 
 function Product({product}) {
     const {t} = useTranslation();
@@ -26,14 +28,14 @@ function Product({product}) {
     }
 
   return (
-    <div>
+    <div className={styles.product}>
         <div>
           <img className="product-img" src={product.image} alt="" />
           <div>{t("name")}: {product.name}</div>
           <div>{t("price")}: {(product.price).toFixed(2)} €</div>
           <Button onClick={()=>addToCart(product)} variant="success">{t("add-to-cart")}</Button> <span></span>
           <Button as={Link} to= {"/product/"+ product.id} variant="info">{t("details")} </Button> 
-         <br /><br /><br />
+         <br />
         </div>
     </div>
   )

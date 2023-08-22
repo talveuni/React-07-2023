@@ -6,15 +6,20 @@ import { Button } from 'react-bootstrap';
 
 function Signup() {
   const { setLoggedIn } = useContext(AuthContext);
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordRepeatRef = useRef();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const passwordRepeatRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const {t} = useTranslation();
   const url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBUqTsIJ3SvpwWnXqx8kg5wjargBscDXY8";
   
   const signup = () => {
+    if(!(passwordRef.current && emailRef.current && passwordRepeatRef.current)) {
+      return;
+    }
+
+
     if(passwordRef.current.value === passwordRepeatRef.current.value) {
       const payload = {
         email: emailRef.current.value,

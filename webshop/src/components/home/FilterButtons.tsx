@@ -1,10 +1,18 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next';
 import { Button } from '@mui/material';
+import { Category } from '../../models/Category';
+import { Product } from '../../models/Product';
+
+interface FilterButtonsInterface{
+  dbProducts: Product[],
+  setProducts: (value: Product[]) => void,
+  categories: Category[]
+}
 
 
-function FilterButtons(props) {
-    const filterByCategory = (categoryClicked) => {
+function FilterButtons(props: FilterButtonsInterface) {
+    const filterByCategory = (categoryClicked: string) => {
         const result = props.dbProducts.filter(product => product.category === categoryClicked);
         props.setProducts(result);
       }

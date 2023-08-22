@@ -4,12 +4,13 @@ import { useTranslation } from "react-i18next";
 import { Button, Spinner } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import config from "../../data/config.json"
+import { Product } from '../../models/Product';
 
 function SingleProduct() {
   const {productId} = useParams();
   const {t} = useTranslation();
-  const [products, setProducts] = useState([]);
-  const [isLoading, setLoading] = useState(true)
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setLoading] = useState<boolean>(true)
   const found = products.find(product => product.id === Number(productId));
 
   useEffect(() => {
@@ -41,7 +42,7 @@ function SingleProduct() {
           <div>{found.active}</div>
         </div> 
         <br />
-        <Button as={Link} to= "/">{t("back")}</Button>
+        <Button as={Link as any} to= "/">{t("back")}</Button>
     </div> 
   )
 }

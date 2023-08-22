@@ -9,8 +9,9 @@ import "./index.css"; //can make my own changes, since it's below the Bootstrap 
 import { CartSumContextProvider } from "./store/CartSumContect";
 import { AuthContextProvider } from "./store/AuthContext";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+const rootElement = document.getElementById("root");
+if (rootElement === null) throw new Error("Failed to find the root element")
+const root = ReactDOM.createRoot(rootElement);root.render(
   <React.StrictMode>
     <BrowserRouter>
       <CartSumContextProvider>

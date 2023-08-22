@@ -1,25 +1,26 @@
-import React, { useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { useTranslation } from 'react-i18next';
 import { Button, TextField } from '@mui/material';
 
 export const ContactUs = () => {
-  const form = useRef();
+  const form = useRef<HTMLFormElement>(null);
   const {t} = useTranslation();
 
-  const sendEmail = (e) => {
+  const sendEmail = (e: FormEvent) => {
     e.preventDefault();
 
-    emailjs.sendForm('service_fuue2wo', 'template_arclvov', form.current, 'zRohGthUJMzT8kQMX')
+    if (form.current) { //kui on htmli sees olemas, siis tee
+      emailjs.sendForm('service_fuue2wo', 'template_arclvov', form.current, 'zRohGthUJMzT8kQMX')
       .then((result) => {
           console.log(result.text);
       }, (error) => {
           console.log(error.text);
       });
+    }
   };
 
   return (
-    
    <form ref={form} onSubmit={sendEmail}>
     <br /><br />  
       <div>

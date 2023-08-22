@@ -6,8 +6,8 @@ import { Button } from 'react-bootstrap';
 
 function Login() {
   const { setLoggedIn } = useContext(AuthContext);
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const {t} = useTranslation();
@@ -15,6 +15,10 @@ function Login() {
 
   
   const login = () => {
+
+    if(!(passwordRef.current && emailRef.current)) {
+      return;
+    }
    
       const payload = {
         email: emailRef.current.value,

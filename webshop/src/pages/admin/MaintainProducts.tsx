@@ -4,16 +4,18 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
 import config from "../../data/config.json"
-import "../../css/MaintainProducts.css"
+import styles from "../../css/MaintainProducts.module.css"
 import SortButtons from "../../components/home/SortButtons";
 import FilterButtons from "../../components/home/FilterButtons";
+import { Product } from "../../models/Product";
+import { Category } from "../../models/Category";
 
 function MaintainProducts() {
-  const [products, setProducts] = useState([]);
-  const [dbProducts, setDbProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [dbProducts, setDbProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const {t} = useTranslation();
-  const searchRef = useRef();
+  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch(config.categoryUrl)
@@ -27,7 +29,7 @@ function MaintainProducts() {
       })
   }, []);
 
-  const deleteProduct = (product) => {
+  const deleteProduct = (product: Product) => {
     const index = dbProducts.findIndex((p) => p.id === product.id);
     dbProducts.splice(index, 1);
     setProducts(dbProducts.slice())
@@ -40,10 +42,15 @@ function MaintainProducts() {
   };
 
   const searchFromProducts = () => {
+    const searchedInput = searchRef.current;
+    if(!searchedInput) {
+      return;
+    }
+
     const result = dbProducts.filter(product => 
-      product.name.toLowerCase().includes(searchRef.current.value.toLowerCase()) ||
-      product.description.toLowerCase().includes(searchRef.current.value.toLowerCase()) ||
-      product.id.toString().includes(searchRef.current.value))
+      product.name.toLowerCase().includes(searchedInput.value.toLowerCase()) ||
+      product.description.toLowerCase().includes(searchedInput.value.toLowerCase()) ||
+      product.id.toString().includes(searchedInput.value))
     setProducts(result);
   }
 
@@ -77,7 +84,7 @@ function MaintainProducts() {
         </thead>
         <tbody>
         {products.map((product) => (
-        <tr className={product.active === true ? "active": "inactive"} key ={product.id}>
+        <tr className={product.active === true ? styles.active: styles.inactive} key ={product.id}>
           <td><img src={product.image} alt="" /></td>
           <td>{t("id")}: {product.id}</td>
           <td>{t("name")}: {product.name}</td>
@@ -85,15 +92,13 @@ function MaintainProducts() {
           <td>{t("category")}: {product.category}</td>
           <td>{t("description")}: {product.description}</td>
           <td>
-          <Button as={Link} to= {"/admin/edit-product/"+ product.id} variant = "secondary" >{t("edit")}</Button> <span></span>
+          <Button as={Link as any} to= {"/admin/edit-product/"+ product.id} variant = "secondary" >{t("edit")}</Button> <span></span>
           <Button onClick={() => deleteProduct(product)} variant="outline-danger">{t("delete")}</Button> 
           </td>
           <br /><br />
         </tr>
       ))}
-
         </tbody>
-
       </table>
       
 
