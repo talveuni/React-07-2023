@@ -2,20 +2,22 @@ import { Link, Route, Routes } from 'react-router-dom';
 import './App.css';
 import ScoreBoard from './pages/ScoreBoard';
 import GameBoard from './pages/GameBoard';
-import GameBoard2 from './pages/GameBoard2';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <Link to="/"><button>Scoreboard</button></Link>
-      <Link to="/game"><button>Game</button></Link>
+      <h1>Tic tac toe game</h1>
+      <Link to="/scores"><button>Scoreboard</button></Link> 
+      <Link to="/"><button>New players</button></Link> 
+
       <br />
 
       
       <Routes>
-        <Route path="/" element={<ScoreBoard />} />
+        <Route path="/" element={<HomePage />} />
+        <Route path="/scores" element={<ScoreBoard />} />
         <Route path="/game" element={<GameBoard />} />
-        <Route path="/game-test" element={<GameBoard2 />} />
 
       </Routes>
     </div>

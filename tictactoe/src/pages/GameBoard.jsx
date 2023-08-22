@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Square from '../components/Square'
+import { CurrentPlayersContext } from '../store/CurrentPlayersContext';
 
 
 function GameBoard() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
-    const [player, setPlayer] = useState("")
-    // const [result, setResult] = useState({winner: "none", state: "none"});
-    const [winningPlayer, setWinningPlayer] = useState("");
+    const { playerO, playerX } = useContext(CurrentPlayersContext);
+    // const [winningPlayer, setWinningPlayer] = useState(playerO);
+    const [player, setPlayer] = useState(playerO);
     const [finalMessage, setFinalMessage] = useState("");
     const [message, setMessage] = useState("");
+ 
     const winningPatterns = [
         [0, 1, 2],
         [3, 4, 5],
@@ -21,22 +23,19 @@ function GameBoard() {
     ];
 
      useEffect(() => {
-            checkWin();
-            checkTie();
+        checkWin();
+        checkTie();
+        
+        // setMessage(player + "'s turn");
+        // setPlayer(player === playerX ? playerO : playerX);
 
-            setMessage(player === "X" ? "O's turn" : "X's turn");
-            setPlayer(player === "X" ? "O" : "X");
-          
-         
-            // if (player === "X") {
-            //     setPlayer("O")
-            //     setMessage("O's turn")
-              
-            // } else {
-            //     setPlayer("X")
-            //     setMessage("X's turn")
-            // }     
-        }, [cells]);
+        setPlayer(prevPlayer => (prevPlayer === playerX ? playerO : playerX)); // Use a callback function to update player
+        setMessage(player === playerX ? playerO + "'s turn" : playerX + "'s turn"); // Update the message based on the current player
+        
+           
+        //const nextPlayer = player === playerX ? playerO : playerX;
+       
+    }, [cells, playerO, playerX]);
 
     const checkWin = () => {
         winningPatterns.forEach((currentPattern) =>{
@@ -54,10 +53,9 @@ function GameBoard() {
             });
 
             if (foundWinningPattern){
-                setWinningPlayer(player);
-                // console.log(player)
+               // setWinningPlayer(player);
+              //  console.log(winningPlayer)
                 setFinalMessage(player + " wins!")
-
             }
 
         })
@@ -72,11 +70,14 @@ function GameBoard() {
         })
 
         if (filled) {
-            // setResult({winner: "nobody", state: "tie"});
-            // console.log("tie!")
-            setFinalMessage("it's a tie!")
+
+            if(!checkWin()) {
+                setFinalMessage("it's a tie!")            
+            }
         }
     }
+
+    
     
     const chooseSquare = (index) => {
       
@@ -86,12 +87,13 @@ function GameBoard() {
             
         setCells(cells.map((val, id) => {         
             if (id===index && val ===""){
-                // console.log(cells)
-                // console.log(player)
                 return player;     
             }
             return val;
         })) 
+
+      
+
 }
 
 const newGame = () => {
@@ -104,7 +106,7 @@ const newGame = () => {
         <div className='gameboard'>
             {cells.map((cell, index)=> 
             <div key={index} onClick={()=>chooseSquare(index)}>
-                <Square val={cells[index]}/>
+                <Square val={cell}/>
             </div> 
             )}
         </div> <br />
