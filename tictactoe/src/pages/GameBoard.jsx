@@ -1,15 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Square from '../components/Square'
 import { CurrentPlayersContext } from '../store/CurrentPlayersContext';
+import { AllGamesContext } from '../store/AllGamesContext';
 
 
 function GameBoard() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
     const { playerO, playerX } = useContext(CurrentPlayersContext);
+    const {allGames, setAllGames} = useContext(AllGamesContext)
     // const [winningPlayer, setWinningPlayer] = useState(playerO);
     const [player, setPlayer] = useState(playerO);
     const [finalMessage, setFinalMessage] = useState("");
     const [message, setMessage] = useState("");
+   
  
     const winningPatterns = [
         [0, 1, 2],
@@ -56,6 +59,12 @@ function GameBoard() {
                // setWinningPlayer(player);
               //  console.log(winningPlayer)
                 setFinalMessage(player + " wins!")
+                allGames.push({
+                    "player1": playerX,
+                    "player2": playerO,
+                    "winner": player
+                })
+                console.log(allGames)
             }
 
         })
@@ -99,6 +108,7 @@ function GameBoard() {
 const newGame = () => {
     setCells(["","","","","","","","",""]);
     setFinalMessage("");
+    setPlayer(player)
 }
 
   return (
