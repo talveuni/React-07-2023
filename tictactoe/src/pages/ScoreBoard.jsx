@@ -1,19 +1,20 @@
 import React, { useContext } from 'react'
 import { AllGamesContext } from '../store/AllGamesContext'
+import { Table } from 'react-bootstrap'
 
 
 function ScoreBoard() {
-  const {allGames, setAllGames} = useContext(AllGamesContext)
+  const {allGames} = useContext(AllGamesContext)
 
   return (
     <div>
       <h3>Previous games</h3>
-     <table>
+      <Table striped>
         <thead>
         <tr>
-          <th>Game (X)</th>
-          <th>Player 1 (X)</th>
-          <th>Player 2 (O)</th>
+          <th>Game</th>
+          <th>Player 1</th>
+          <th>Player 2</th>
           <th>Winner</th>
         </tr>
         </thead>
@@ -27,7 +28,7 @@ function ScoreBoard() {
          </tr> 
           )}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }
