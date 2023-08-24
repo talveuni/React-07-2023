@@ -26,14 +26,12 @@ img {
 
 .twn_img {
     display: block;
-    /* padding-bottom: 50%; */
     position: relative;
     border-radius: 0.375rem;
     transform: translate(0);
 } 
 
 .image_title {
-    /* position: absolute; */
     bottom: 0;
     left: 0;
     width: 100%;
@@ -43,22 +41,6 @@ img {
     background: rgba(0,0,0,.5);
 }
 
-/* .image__fade {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  transition: transform .2s;
-  background: center center no-repeat;
-}
-
-.img__fade__img {
-  background-image: url("https://midaiganes.irw.ee/api/imgs/large/a3dac073.jpg")
-  
-} */
-
 .tag {
     background: var(--twn-secondaryColor);
     display: inline-block;
@@ -66,4 +48,19 @@ img {
     border-radius: 2rem;
     font-size: 14px;
     font-weight: 700;
+}
+
+.arrow {
+  height: 15px;
+  width: 15px;
+}
+
+.table {
+    width: 900px;
+    margin-left: auto;
+    margin-right: auto;    
+}
+
+thead {
+  text-align: left;
 }

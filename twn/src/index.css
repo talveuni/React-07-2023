@@ -101,37 +101,36 @@ body {
   font-size: var(--twn-rootFontSize)
 }
 
-* {
-  box-sizing: border-box
-}
+/* * {
+  box-sizing:border-box;
+} */
 
 .inline {
-  max-width: var(--twnMaxWidth);
+  max-width:1000px;
   min-height: 100%;
   margin: 0 auto
 }
 
 .inline,.page {
-  position: relative
+  align-content: center;
+
 }
 
 .page {
   background-image: url(/assets/imgs/bg-deco-left.svg),url(/assets/imgs/bg-deco-right.svg);
   background-repeat: no-repeat;
-  background-position: var(--twn-menuWidth) bottom,100% 0;
+  background-position: 150px 0;
   background-size: 150px,250px;
   background-attachment: fixed;
-  display: block;
-  margin-left: var(--twn-menuWidth);
-  height: 100vh;
-  overflow: auto;
-  padding: 5rem 2.5rem
+  width: 960px;
+  overflow:hidden;
+  padding-left: 15%;
 }
 
 @media screen and (max-width: 960px) {
   .page {
       margin-left:0;
-      background-position: 0 bottom,100% 0;
+      /* background-position: 0 bottom,100% 0; */
       padding-left: 1.5rem;
       padding-right: 1.5rem;
       padding-top: 7.5rem
