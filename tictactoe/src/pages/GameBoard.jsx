@@ -7,10 +7,11 @@ import { Button } from 'react-bootstrap';
 function GameBoard() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
     const { playerO, playerX } = useContext(CurrentPlayersContext);
-    const {allGames} = useContext(AllGamesContext)
+    const {allGames, setAllGames} = useContext(AllGamesContext);
+    const { gameHistory, setGameHistory } = useContext(AllGamesContext);
     const [player, setPlayer] = useState(playerX);
     const [finalMessage, setFinalMessage] = useState("");
-    //const [message, setMessage] = useState("");
+    const [hasWon, setHasWon] = useState(false);
     const winningPatterns = [
         [0, 1, 2],
         [3, 4, 5],
@@ -22,14 +23,13 @@ function GameBoard() {
         [2, 4, 6],
     ];
 
-     useEffect(() => {
-        checkWin();
+        useEffect(() => {
         checkTie();
-        setPlayer(prevPlayer => (prevPlayer === playerX ? playerO : playerX)); // Use a callback function to update player
-
-        // setMessage(player === playerX ? playerO + "'s turn" : playerX + "'s turn"); // Update the message based on the current player
-       
+        checkWin();
+        setPlayer(prevPlayer => (prevPlayer === playerX ? playerO : playerX));       
     }, [cells, playerO, playerX]);
+
+   
 
     const checkWin = () => {
         winningPatterns.forEach((currentPattern) =>{
@@ -47,54 +47,63 @@ function GameBoard() {
             });
 
             if (foundWinningPattern){
-                setFinalMessage(player + " wins!")
-                allGames.push({
+                const newGameEntry = {
                     "player1": playerX,
                     "player2": playerO,
                     "winner": player
-                })
+                };
+                setAllGames([...allGames, newGameEntry]);
+                setGameHistory([...gameHistory, newGameEntry]);
+                setFinalMessage(player + " wins!");
+                setHasWon(true);
             }
         })
     }
     
 
     const checkTie = () => {
-        let filled = true;
-        cells.forEach((cell)=> {
-            if (cell ==="") {
-                filled = false
-            }
-        })
+        if (!hasWon) {
+            let filled = true;
+            cells.forEach((cell)=> {
+                if (cell ==="") {
+                    filled = false
+                }
+            }) 
 
-        if (filled) {
-            checkWin();         
-            setFinalMessage("it's a tie!")
-            allGames.push({
+            if (filled && !hasWon) {
+                const newGameEntry = {
                 "player1": playerX,
                 "player2": playerO,
                 "winner": "-"
-            })
-        }
+            };
+            setAllGames([...allGames, newGameEntry]);
+            setGameHistory([...gameHistory, newGameEntry]);
+            setFinalMessage("it's a tie!");
+            }
+        }    
     }
 
         
     const chooseSquare = (index) => {
-        if (finalMessage !== "") {
+        if (hasWon) {
             return
         }
-            
-        setCells(cells.map((val, id) => {         
-            if (id===index && val ===""){
-                return player;     
-            }
+        const clickedCell = cells[index];
+        if (clickedCell === "") {
+            setCells(cells.map((val, id) => {         
+                if (id===index && val ===""){
+                    return player;     
+                }
             return val;
-        })) 
-}
+            })) 
+        }
+    }
 
 const newGame = () => {
     setCells(["","","","","","","","",""]);
     setFinalMessage("");
-    setPlayer(player)
+    setPlayer(player);
+    setHasWon(false);
 }
 
   return (
@@ -106,7 +115,6 @@ const newGame = () => {
             </div> 
             )}
         </div> <br />
-        {/* <h3>{finalMessage || message}</h3> */}
         <h3>{finalMessage}</h3>
         <Button onClick={newGame}>Play again!</Button>
     </div>
