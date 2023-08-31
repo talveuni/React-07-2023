@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Square from '../components/Square'
 import { CurrentPlayersContext } from '../store/CurrentPlayersContext';
 import { AllGamesContext } from '../store/AllGamesContext';
@@ -23,67 +23,79 @@ function GameBoard() {
         [2, 4, 6],
     ];
 
-        useEffect(() => {
-        checkTie();
-        checkWin();
-        setPlayer(prevPlayer => (prevPlayer === playerX ? playerO : playerX));       
-    }, [cells, playerO, playerX]);
-
-   
-
-    const checkWin = () => {
-        winningPatterns.forEach((currentPattern) =>{
-            const currentCell = cells[currentPattern[0]];
-
-            if (currentCell === "") {
-                return;
-            }
-
-            let foundWinningPattern = true;
-            currentPattern.forEach((index)=>{
-                if (cells[index]!== currentCell) {
-                    foundWinningPattern = false;
-                }
-            });
-
-            if (foundWinningPattern){
-                const newGameEntry = {
-                    "player1": playerX,
-                    "player2": playerO,
-                    "winner": player
-                };
-                setAllGames([...allGames, newGameEntry]);
-                setGameHistory([...gameHistory, newGameEntry]);
-                setFinalMessage(player + " wins!");
-                setHasWon(true);
-            }
-        })
-    }
-
-    const checkTie = () => {
-        if (!hasWon && cells.every(cell => cell !== "")) {
-            const newGameEntry = {
-                "player1": playerX,
-                "player2": playerO,
-                "winner": "-"
-            };
-            setAllGames([...allGames, newGameEntry]);
-            setGameHistory([...gameHistory, newGameEntry]);
-            setFinalMessage("it's a tie!");
-            setHasWon(true);
-        }
-    }
-
     const chooseSquare = (index) => {
         if (hasWon) {
             return;
         }
         const clickedCell = cells[index];
         if (clickedCell === "") {
-            setCells(cells.map((val, id) => (id === index && val === "") ? player : val));
+            const updatedCells = [...cells];
+            updatedCells[index] = player;
+    
+            const winningPlayer = checkWin(updatedCells);
+            if (winningPlayer) {
+                const newGameEntry = {
+                    "player1": playerX,
+                    "player2": playerO,
+                    "winner": winningPlayer,
+                };
+                setAllGames([...allGames, newGameEntry]);
+                setGameHistory([...gameHistory, newGameEntry]);
+                setFinalMessage(winningPlayer + " wins!");
+                setHasWon(true);
+                setCells(updatedCells); 
+                return;
+            }
+    
+            if (!checkTie(updatedCells)) {
+                setCells(updatedCells); 
+                setPlayer(prevPlayer => (prevPlayer === playerX ? playerO : playerX)); 
+            }
         }
-    }
-        
+    };
+
+    const checkWin = (updatedCells) => {
+        for (const currentPattern of winningPatterns) {
+            const currentCell = updatedCells[currentPattern[0]];
+    
+            if (currentCell === "") {
+                continue;
+            }
+    
+            let foundWinningPattern = true;
+            for (const index of currentPattern) {
+                if (updatedCells[index] !== currentCell) {
+                    foundWinningPattern = false;
+                    break;
+                }
+            }
+    
+            if (foundWinningPattern) {
+                return currentCell;
+            }
+        }
+    
+        return null;
+    };
+
+    const checkTie = (updatedCells) => {
+        if (updatedCells.every(cell => cell !== "")) {
+            const newGameEntry = {
+                "player1": playerX,
+                "player2": playerO,
+                "winner": "-",
+            };
+            setAllGames([...allGames, newGameEntry]);
+            setGameHistory([...gameHistory, newGameEntry]);
+            setFinalMessage("it's a tie!");
+            setHasWon(true);
+            setCells(updatedCells);
+            return true;
+        }
+        return false;
+    };
+
+
     const newGame = () => {
         setCells(["","","","","","","","",""]);
         setFinalMessage("");
