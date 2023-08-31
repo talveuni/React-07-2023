@@ -8,7 +8,7 @@ function GameBoard() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
     const {playerO, playerX} = useContext(CurrentPlayersContext);
     const {allGames, setAllGames} = useContext(AllGamesContext);
-    const {gameHistory, setGameHistory} = useContext(AllGamesContext);
+    //const {gameHistory, setGameHistory} = useContext(AllGamesContext);
     const [player, setPlayer] = useState(playerX);
     const [message, setMessage] = useState("");
     const [hasWon, setHasWon] = useState(false);
@@ -42,10 +42,12 @@ function GameBoard() {
                     "winner": winningPlayer,
                 };
                 setAllGames([...allGames, newGameEntry]);
-                setGameHistory([...gameHistory, newGameEntry]);
+                //setGameHistory([...gameHistory, newGameEntry]);
                 setMessage(winningPlayer + " wins!");
                 setHasWon(true);
                 setCells(updatedCells); 
+                //console.log(gameHistory)
+                console.log(allGames)
                 return;
             }
     
@@ -88,7 +90,7 @@ function GameBoard() {
                 "winner": "-",
             };
             setAllGames([...allGames, newGameEntry]);
-            setGameHistory([...gameHistory, newGameEntry]);
+            // setGameHistory([...gameHistory, newGameEntry]);
             setMessage("it's a tie!");
             setHasWon(true);
             setCells(updatedCells);
