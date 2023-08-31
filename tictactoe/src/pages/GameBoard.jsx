@@ -59,19 +59,10 @@ function GameBoard() {
             }
         })
     }
-    
 
     const checkTie = () => {
-        if (!hasWon) {
-            let filled = true;
-            cells.forEach((cell)=> {
-                if (cell ==="") {
-                    filled = false
-                }
-            }) 
-
-            if (filled && !hasWon) {
-                const newGameEntry = {
+        if (!hasWon && cells.every(cell => cell !== "")) {
+            const newGameEntry = {
                 "player1": playerX,
                 "player2": playerO,
                 "winner": "-"
@@ -79,32 +70,26 @@ function GameBoard() {
             setAllGames([...allGames, newGameEntry]);
             setGameHistory([...gameHistory, newGameEntry]);
             setFinalMessage("it's a tie!");
-            }
-        }    
+            setHasWon(true);
+        }
     }
 
-        
     const chooseSquare = (index) => {
         if (hasWon) {
-            return
+            return;
         }
         const clickedCell = cells[index];
         if (clickedCell === "") {
-            setCells(cells.map((val, id) => {         
-                if (id===index && val ===""){
-                    return player;     
-                }
-            return val;
-            })) 
+            setCells(cells.map((val, id) => (id === index && val === "") ? player : val));
         }
     }
-
-const newGame = () => {
-    setCells(["","","","","","","","",""]);
-    setFinalMessage("");
-    setPlayer(player);
-    setHasWon(false);
-}
+        
+    const newGame = () => {
+        setCells(["","","","","","","","",""]);
+        setFinalMessage("");
+        setPlayer(player);
+        setHasWon(false);
+    }
 
   return (
     <div>

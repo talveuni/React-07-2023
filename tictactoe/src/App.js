@@ -8,7 +8,7 @@ import { Button } from 'react-bootstrap';
 function App() {
   return (
     <div className="App">
-      <h1>Tic tac toe game</h1>
+      <h1>Tic-tac-toe game</h1>
       <div>
       <Button as= {Link} to="/scores" variant="outline-dark">Scoreboard</Button>
       <Button as={Link} to="/" variant="outline-dark" >New game</Button>

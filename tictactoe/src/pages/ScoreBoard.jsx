@@ -8,6 +8,7 @@ function ScoreBoard() {
 
   return (
     <div>
+      <br />
       <h3>Previous games</h3>
       <Table striped>
         <thead>
@@ -21,8 +22,8 @@ function ScoreBoard() {
         <tbody>
           {allGames.map((game, index) => 
           <tr key={index}>
-            <td > {index + 1} </td>
-            <td > {game.player1} </td>
+            <td> {index + 1} </td>
+            <td> {game.player1} </td>
             <td> {game.player2} </td>
             <td> {game.winner} </td>      
          </tr> 
