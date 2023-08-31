@@ -5,8 +5,8 @@ import { Button } from 'react-bootstrap';
 
 
 function HomePage() {
-    const playerXNameRef = useRef("");
-    const playerONameRef = useRef("");
+    const playerXNameRef = useRef();
+    const playerONameRef = useRef();
     const navigate = useNavigate();
     const {playerO, playerX, setPlayerO, setPlayerX } = useContext(CurrentPlayersContext);
     

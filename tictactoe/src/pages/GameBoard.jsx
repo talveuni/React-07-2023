@@ -8,9 +8,8 @@ function GameBoard() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
     const {playerO, playerX} = useContext(CurrentPlayersContext);
     const {allGames, setAllGames} = useContext(AllGamesContext);
-    //const {gameHistory, setGameHistory} = useContext(AllGamesContext);
     const [player, setPlayer] = useState(playerX);
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState(player + "'s turn");
     const [hasWon, setHasWon] = useState(false);
     const winningPatterns = [
         [0, 1, 2],
@@ -22,18 +21,24 @@ function GameBoard() {
         [0, 4, 8],
         [2, 4, 6],
     ];
+    //const updatedCells = [...cells];
 
     const chooseSquare = (index) => {
         if (hasWon) {
             return;
         }
 
+        setMessage((player === playerX ? playerO : playerX) + "'s turn");    
         const clickedCell = cells[index];
         if (clickedCell === "") {
-            const updatedCells = [...cells];
-            updatedCells[index] = player;
+            cells[index] = player;
+            checkTie();
+            checkWin();          
+        }
+    };
 
-            const winningPlayer = checkWin(updatedCells);
+    const checkWin = () => {
+        const winningPlayer = checkWinningPatterns(cells);
 
             if (winningPlayer) {
                 const newGameEntry = {
@@ -41,27 +46,18 @@ function GameBoard() {
                     "player2": playerO,
                     "winner": winningPlayer,
                 };
+
                 setAllGames([...allGames, newGameEntry]);
-                //setGameHistory([...gameHistory, newGameEntry]);
                 setMessage(winningPlayer + " wins!");
                 setHasWon(true);
-                setCells(updatedCells); 
-                //console.log(gameHistory)
-                console.log(allGames)
+                setCells(cells); 
                 return;
             }
-    
-            if (!checkTie(updatedCells)) {
-                setCells(updatedCells); 
-                setPlayer(player === playerX ? playerO : playerX); 
-                console.log(player)
-            }
-        }
-    };
+    }
 
-    const checkWin = (updatedCells) => {
+    const checkWinningPatterns = () => {
         for (const currentPattern of winningPatterns) {
-            const currentCell = updatedCells[currentPattern[0]];
+            const currentCell = cells[currentPattern[0]];
     
             if (currentCell === "") {
                 continue;
@@ -69,7 +65,7 @@ function GameBoard() {
     
             let foundWinningPattern = true;
             for (const index of currentPattern) {
-                if (updatedCells[index] !== currentCell) {
+                if (cells[index] !== currentCell) {
                     foundWinningPattern = false;
                     break;
                 }
@@ -82,28 +78,31 @@ function GameBoard() {
         return null;
     };
 
-    const checkTie = (updatedCells) => {
-        if (updatedCells.every(cell => cell !== "")) {
+    const checkTie = () => {
+        if (cells.every(cell => cell !== "")) {
             const newGameEntry = {
                 "player1": playerX,
                 "player2": playerO,
                 "winner": "-",
             };
             setAllGames([...allGames, newGameEntry]);
-            // setGameHistory([...gameHistory, newGameEntry]);
             setMessage("it's a tie!");
             setHasWon(true);
-            setCells(updatedCells);
-            return true;
+            // setCells(cells);
+            // return true;
+        } else {
+            setPlayer(player === playerX ? playerO : playerX);
         }
-        return false;
+        
+        setCells(cells); 
+        // return false;
     };
 
 
     const newGame = () => {
         setCells(["","","","","","","","",""]);
-        setMessage("");
         setPlayer(player);
+        setMessage(player + "'s turn");
         setHasWon(false);
     }
 
