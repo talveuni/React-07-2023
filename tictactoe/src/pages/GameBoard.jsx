@@ -6,11 +6,11 @@ import { Button } from 'react-bootstrap';
 
 function GameBoard() {
     const [cells, setCells] = useState(["","","","","","","","",""]);
-    const { playerO, playerX } = useContext(CurrentPlayersContext);
+    const {playerO, playerX} = useContext(CurrentPlayersContext);
     const {allGames, setAllGames} = useContext(AllGamesContext);
-    const { gameHistory, setGameHistory } = useContext(AllGamesContext);
+    const {gameHistory, setGameHistory} = useContext(AllGamesContext);
     const [player, setPlayer] = useState(playerX);
-    const [finalMessage, setFinalMessage] = useState("");
+    const [message, setMessage] = useState("");
     const [hasWon, setHasWon] = useState(false);
     const winningPatterns = [
         [0, 1, 2],
@@ -27,12 +27,14 @@ function GameBoard() {
         if (hasWon) {
             return;
         }
+
         const clickedCell = cells[index];
         if (clickedCell === "") {
             const updatedCells = [...cells];
             updatedCells[index] = player;
-    
+
             const winningPlayer = checkWin(updatedCells);
+
             if (winningPlayer) {
                 const newGameEntry = {
                     "player1": playerX,
@@ -41,7 +43,7 @@ function GameBoard() {
                 };
                 setAllGames([...allGames, newGameEntry]);
                 setGameHistory([...gameHistory, newGameEntry]);
-                setFinalMessage(winningPlayer + " wins!");
+                setMessage(winningPlayer + " wins!");
                 setHasWon(true);
                 setCells(updatedCells); 
                 return;
@@ -49,7 +51,8 @@ function GameBoard() {
     
             if (!checkTie(updatedCells)) {
                 setCells(updatedCells); 
-                setPlayer(prevPlayer => (prevPlayer === playerX ? playerO : playerX)); 
+                setPlayer(player === playerX ? playerO : playerX); 
+                console.log(player)
             }
         }
     };
@@ -74,7 +77,6 @@ function GameBoard() {
                 return currentCell;
             }
         }
-    
         return null;
     };
 
@@ -87,7 +89,7 @@ function GameBoard() {
             };
             setAllGames([...allGames, newGameEntry]);
             setGameHistory([...gameHistory, newGameEntry]);
-            setFinalMessage("it's a tie!");
+            setMessage("it's a tie!");
             setHasWon(true);
             setCells(updatedCells);
             return true;
@@ -98,7 +100,7 @@ function GameBoard() {
 
     const newGame = () => {
         setCells(["","","","","","","","",""]);
-        setFinalMessage("");
+        setMessage("");
         setPlayer(player);
         setHasWon(false);
     }
@@ -112,7 +114,7 @@ function GameBoard() {
             </div> 
             )}
         </div> <br />
-        <h3>{finalMessage}</h3>
+        <h3>{message}</h3>
         <Button onClick={newGame}>Play again!</Button>
     </div>
   )
