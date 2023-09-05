@@ -21,7 +21,6 @@ function GameBoard() {
         [0, 4, 8],
         [2, 4, 6],
     ];
-    //const updatedCells = [...cells];
 
     const chooseSquare = (index) => {
         if (hasWon) {
@@ -29,8 +28,8 @@ function GameBoard() {
         }
 
         setMessage((player === playerX ? playerO : playerX) + "'s turn");    
-        const clickedCell = cells[index];
-        if (clickedCell === "") {
+
+        if (cells[index] === "") {
             cells[index] = player;
             checkTie();
             checkWin();          
@@ -88,22 +87,50 @@ function GameBoard() {
             setAllGames([...allGames, newGameEntry]);
             setMessage("it's a tie!");
             setHasWon(true);
-            // setCells(cells);
-            // return true;
+           
         } else {
             setPlayer(player === playerX ? playerO : playerX);
         }
         
         setCells(cells); 
-        // return false;
     };
-
 
     const newGame = () => {
         setCells(["","","","","","","","",""]);
         setPlayer(player);
         setMessage(player + "'s turn");
         setHasWon(false);
+    }
+
+    const checkPlayers = () => {
+
+        for (let index = allGames.length; index > 0; index--) {
+            const prevGame = allGames[index];
+            console.log(prevGame)
+
+            // if (prevGame.player1 === playerX & prevGame.player2 === playerO || prevGame.player1 === playerO & prevGame.player2 === playerX) {
+
+            //     console.log("varasem võitja: " + player)
+ 
+            //     return prevGame.winner
+
+            // } 
+            
+        }
+
+
+        // allGames.forEach(prevGame => {
+        //     console.log(prevGame.player1)
+        //     console.log(prevGame.player2)
+
+
+            
+            // setPlayer(player);
+            // console.log(prevGame)
+            // console.log(player)
+          
+            
+        // });
     }
 
   return (
@@ -117,6 +144,7 @@ function GameBoard() {
         </div> <br />
         <h3>{message}</h3>
         <Button onClick={newGame}>Play again!</Button>
+        <button onClick={checkPlayers}>check</button>
     </div>
   )
 }
