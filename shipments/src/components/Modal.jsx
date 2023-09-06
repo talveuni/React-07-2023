@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 function Modal(props) {
     const orderNoRef = useRef();
@@ -11,18 +11,19 @@ function Modal(props) {
     console.log(props.shipment)
 
     const saveShipmentDetails = () => {
-        props.shipments[props.shipment.index] = ({
+       const updatedShipment = {
           orderNo : orderNoRef.current.value,
           date : deliveryDateRef.current.value,
           customer : customerRef.current.value,
           trackingNo : trackingNoRef.current.value,
           status : statusRef.current.value,
           consignee : consigneeRef.current.value
-        })
+        }
+
+        props.updateSelectedShipment(updatedShipment);
+        props.setModalOpen(false);
         console.log(props.shipment)
 
-        props.setShipments(props.shipments.slice());
-        props.setModalOpen(false);
       }
     
   return (
@@ -53,7 +54,7 @@ function Modal(props) {
           <label>status</label> <br />
           <input  ref={statusRef} defaultValue= {props.shipment.status} type="text" />
           <br /> <br />
-          <button onClick={saveShipmentDetails}>save</button>
+          <button onClick={saveShipmentDetails}>Update</button>
         </div>
       </div>
     </div>

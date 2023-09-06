@@ -8,13 +8,7 @@ function App() {
   const [selectedShipment, setSelectedShipment] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
-  // useEffect(() => {
-  //   fetch("https://my.api.mockaroo.com/shipments.json?key=5e0b62d0")
-  //     .then(res=>res.json())
-  //     .then(json => setShipments(json) || [])
-  // }, []);
-
-  useEffect(() => {
+useEffect(() => {
     fetch("https://my.api.mockaroo.com/shipments.json?key=5e0b62d0")
       .then((res) => {
         if (!res.ok) {
@@ -37,14 +31,30 @@ function App() {
     setModalOpen(true);
   }
 
+  const updateSelectedShipment = (updatedShipment) => {
+    const updatedShipments = shipments.map((shipment) => {
+      if (shipment.orderNo === updatedShipment.orderNo) {
+        return updatedShipment;
+      }
+      return shipment;
+    });
+    setShipments(updatedShipments);
+  }
+
+  const deleteShipment = (shipment) => {
+    shipments.splice(shipment.index, 1)
+    setShipments(shipments.slice());
+  }
+
   return (
     <div>
 
  {modalOpen && <Modal 
   shipment={selectedShipment}
-  setShipments = {setShipments}
   setShipment={setSelectedShipment}
   shipments = {shipments}
+  setShipments = {setShipments}
+  updateSelectedShipment ={updateSelectedShipment}
   setModalOpen={setModalOpen}
   closeModal={() => setModalOpen(false)}
   />}
@@ -62,14 +72,20 @@ function App() {
         </thead>
         <tbody>
           {shipments.map((shipment, index) => 
-          <tr key={index} onClick={()=> openShipmentDetails(shipment)}>
+          <tr key={index}>
             <td>{shipment.orderNo}</td>
             <td>{shipment.date}</td>
             <td>{shipment.customer}</td>
             <td>{shipment.trackingNo}</td>
             <td>{shipment.status}</td>   
             <td>{shipment.consignee}</td>
-            <td></td>                   
+            <td>
+              <span>
+                <button onClick={()=> openShipmentDetails(shipment)}>Details</button>
+                <button  onClick={()=> deleteShipment(shipment)}>X</button>
+              </span>
+           
+            </td>                   
          </tr> 
           )}        
         </tbody>
