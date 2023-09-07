@@ -8,6 +8,7 @@ function Modal(props) {
     const statusRef = useRef();
     const consigneeRef = useRef();
     
+    
     const saveShipmentDetails = () => {
        const updatedShipment = {
           orderNo : orderNoRef.current.value,
@@ -27,7 +28,7 @@ function Modal(props) {
       className="modal_container"
       onClick={(e) => {
         if (e.target.className === "modal_container") {
-          props.closeModal();
+          props.setModalOpen(false);
         }
       }}
     >
@@ -43,7 +44,7 @@ function Modal(props) {
             </div>
             <div>
               <label>date</label> <br />
-              <input ref={deliveryDateRef} defaultValue= {props.shipment.date} type="text" />
+              <input ref={deliveryDateRef} defaultValue= {props.shipment.date} type="date" />
             </div>
             <div>
               <label>customer</label> <br />
@@ -57,7 +58,14 @@ function Modal(props) {
               <input ref={consigneeRef} defaultValue= {props.shipment.consignee} type="text" /> </div>
             <div>
               <label>status</label> <br />
-              <input  ref={statusRef} defaultValue= {props.shipment.status} type="text" /></div>           
+              <div className="status">
+              <select ref={statusRef} defaultValue= {props.shipment.status}>
+                <option value="'Delivered'">'Delivered'</option>
+                <option value="'In Transit'">'In Transit'</option>
+                <option value="'Shipped'">'Shipped'</option>
+              </select>
+              </div>
+            </div>           
           </div>
           <div className="btn_center">
             <button onClick={saveShipmentDetails}>Update</button>

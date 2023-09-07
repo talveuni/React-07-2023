@@ -36,13 +36,17 @@ label {
   color: rgb(112, 112, 112);
 }
 
-input{
-  width: 90%;
+input, select {
+  width: 80%;
   background-color: rgb(230, 227, 227);
   border-radius: 5px;
   border-style: none;
   padding: 10px;
   margin: 5px 0 10px 0;
+}
+
+select {
+  width: 86%;
 }
 
 table {

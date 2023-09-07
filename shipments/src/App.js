@@ -52,12 +52,12 @@ useEffect(() => {
 
     {modalOpen && <Modal 
       shipment={selectedShipment}
-      setSelectedShipment={setSelectedShipment}
-      shipments = {shipments}
-      setShipments = {setShipments}
+      //setSelectedShipment={setSelectedShipment}
+      //shipments = {shipments}
+      //setShipments = {setShipments}
       updateSelectedShipment ={updateSelectedShipment}
       setModalOpen={setModalOpen}
-      closeModal={() => setModalOpen(false)}
+     // closeModal={() => setModalOpen(false)}
       />}
 
       <table>
