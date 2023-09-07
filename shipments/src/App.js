@@ -4,10 +4,10 @@ import Modal from './components/Modal';
 import shipmentsData from '../src/data/Shipments.json'
 import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
 
-
 function App() {
   const [shipments, setShipments] = useState([]);
   const [selectedShipment, setSelectedShipment] = useState(null);
+  const [shipmentIndex, setShipmentIndex] = useState();
   const [modalOpen, setModalOpen] = useState(false);
 
 useEffect(() => {
@@ -26,14 +26,15 @@ useEffect(() => {
       });
   }, []);
 
-  const openShipmentDetails = (shipment) => {
+  const openShipmentDetails = (shipment, index) => {
     setSelectedShipment(shipment);
+    setShipmentIndex(index);
     setModalOpen(true);
   }
 
   const updateSelectedShipment = (updatedShipment) => {
-    const updatedShipments = shipments.map((shipment) => {
-      if (shipment.orderNo === updatedShipment.orderNo) {
+    const updatedShipments = shipments.map((shipment, index) => {
+      if (index === shipmentIndex) {
         return updatedShipment;
       }
       return shipment;
@@ -41,8 +42,8 @@ useEffect(() => {
     setShipments(updatedShipments);
   }
 
-  const deleteShipment = (shipment) => {
-    shipments.splice(shipment.index, 1)
+  const deleteShipment = (index) => {
+    shipments.splice(index, 1)
     setShipments(shipments.slice());
   }
 
@@ -51,13 +52,14 @@ useEffect(() => {
 
     {modalOpen && <Modal 
       shipment={selectedShipment}
-      setShipment={setSelectedShipment}
+      setSelectedShipment={setSelectedShipment}
       shipments = {shipments}
       setShipments = {setShipments}
       updateSelectedShipment ={updateSelectedShipment}
       setModalOpen={setModalOpen}
       closeModal={() => setModalOpen(false)}
       />}
+
       <table>
         <thead>
         <tr>
@@ -80,8 +82,8 @@ useEffect(() => {
             <td>{shipment.status}</td>   
             <td>{shipment.consignee}</td>
             <td className='td_size'>
-              <span className='details' onClick={()=> openShipmentDetails(shipment)}><FaEdit/></span>
-              <span className='delete'onClick={()=> deleteShipment(shipment)}><FaRegTrashAlt/></span>
+              <span className='details' onClick={()=> openShipmentDetails(shipment, index)}><FaEdit/></span>
+              <span className='delete'onClick={()=> deleteShipment(index)}><FaRegTrashAlt/></span>
             </td>                   
          </tr> 
           )}        

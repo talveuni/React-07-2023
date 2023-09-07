@@ -17,10 +17,9 @@ function Modal(props) {
           status : statusRef.current.value,
           consignee : consigneeRef.current.value
         }
-
         props.updateSelectedShipment(updatedShipment);
         props.setModalOpen(false);
-        console.log(props.shipment)
+        console.log(updatedShipment)
       }
     
   return (
@@ -51,7 +50,7 @@ function Modal(props) {
               <input ref={customerRef} defaultValue= {props.shipment.customer} type="text" /> 
             </div>
             <div>
-              <label>trackingNO</label> <br />
+              <label>trackingNo</label> <br />
               <input ref={trackingNoRef} defaultValue= {props.shipment.trackingNo} type="text" /></div>
             <div>
               <label>consignee</label> <br />
