@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Modal from './components/Modal';
 import shipmentsData from '../src/data/Shipments.json'
+import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
+
 
 function App() {
   const [shipments, setShipments] = useState([]);
@@ -14,15 +16,13 @@ useEffect(() => {
         if (!res.ok) {
           throw new Error("Network response was not ok");
         }
-        return res.json();
+        return res.json(); 
       })
-      .then((json) => setShipments(json) || [])
+      .then((json) => setShipments(json) || []) // data from the API if possible
       .catch((error) => {
         console.error("Error fetching data from the API:", error);
-        console.log("Fetching data from local file...");
-
-        // If the API request fails, use local data
-        setShipments(shipmentsData);
+        console.log("Fetching data from local file: Shipments.json");
+        setShipments(shipmentsData); // using local data Shipments.json
       });
   }, []);
 
@@ -49,15 +49,15 @@ useEffect(() => {
   return (
     <div>
 
- {modalOpen && <Modal 
-  shipment={selectedShipment}
-  setShipment={setSelectedShipment}
-  shipments = {shipments}
-  setShipments = {setShipments}
-  updateSelectedShipment ={updateSelectedShipment}
-  setModalOpen={setModalOpen}
-  closeModal={() => setModalOpen(false)}
-  />}
+    {modalOpen && <Modal 
+      shipment={selectedShipment}
+      setShipment={setSelectedShipment}
+      shipments = {shipments}
+      setShipments = {setShipments}
+      updateSelectedShipment ={updateSelectedShipment}
+      setModalOpen={setModalOpen}
+      closeModal={() => setModalOpen(false)}
+      />}
       <table>
         <thead>
         <tr>
@@ -79,19 +79,14 @@ useEffect(() => {
             <td>{shipment.trackingNo}</td>
             <td>{shipment.status}</td>   
             <td>{shipment.consignee}</td>
-            <td>
-              <span>
-                <button onClick={()=> openShipmentDetails(shipment)}>Details</button>
-                <button  onClick={()=> deleteShipment(shipment)}>X</button>
-              </span>
-           
+            <td className='td_size'>
+              <span className='details' onClick={()=> openShipmentDetails(shipment)}><FaEdit/></span>
+              <span className='delete'onClick={()=> deleteShipment(shipment)}><FaRegTrashAlt/></span>
             </td>                   
          </tr> 
           )}        
         </tbody>
-</table>
-
-      
+      </table>   
     </div>
   );
 }
