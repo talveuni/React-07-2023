@@ -9,84 +9,58 @@ import {
   Label,
 } from "reactstrap";
 
-
-
 function TModal(props) {
-    const orderNoRef = useRef();
-    const deliveryDateRef = useRef();
-    const customerRef = useRef();
-    const trackingNoRef = useRef();
-    const statusRef = useRef();
-    const consigneeRef = useRef();
-    
-    
-    const saveShipmentDetails = () => {
-       const updatedShipment = {
-          orderNo : orderNoRef.current.value,
-          date : deliveryDateRef.current.value,
-          customer : customerRef.current.value,
-          trackingNo : trackingNoRef.current.value,
-          status : statusRef.current.value,
-          consignee : consigneeRef.current.value
-        }
-        props.updateSelectedShipment(updatedShipment);
-        props.setModalOpen(false);
-        console.log(updatedShipment)
-      }
-    
+  const orderNoRef = useRef();
+  const deliveryDateRef = useRef();
+  const customerRef = useRef();
+  const trackingNoRef = useRef();
+  const statusRef = useRef();
+  const consigneeRef = useRef();
+
+  const saveShipmentDetails = () => {
+    const updatedShipment = {
+      orderNo: orderNoRef.current.value,
+      date: formatDateForTable(deliveryDateRef.current.value),
+      customer: customerRef.current.value,
+      trackingNo: trackingNoRef.current.value,
+      status: statusRef.current.value,
+      consignee: consigneeRef.current.value,
+    };
+    props.updateSelectedShipment(updatedShipment);
+    props.setModalOpen(false);
+    console.log(updatedShipment);
+  };
+
+  // Function to format the date for the input field
+  function formatDateForInput(dateString) {
+    const date = new Date(dateString);
+    if (!isNaN(date)) {
+      // Check if the date is valid
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0"); // Month is zero-based
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+    return ""; // Return an empty string if the date is not valid
+  }
+
+  function formatDateForTable(dateString) {
+    const date = new Date(dateString);
+    if (!isNaN(date)) {
+      // Check if the date is valid
+      const month = date.getMonth() + 1;
+      const day = date.getDate();
+      const year = date.getFullYear();
+      return `${month}/${day}/${year}`;
+    }
+    return ""; // Return an empty string if the date is not valid
+  }
+
   return (
-  //   <div
-  //     className="modal_container"
-  //     onClick={(e) => {
-  //       if (e.target.className === "modal_container") {
-  //         props.setModalOpen(false);
-  //       }
-  //     }}
-  //   >
-  //     <div className="modal">
-  //       <div className="modal_border">
-  //         <div className="heading">
-  //           Shipment details
-  //         </div>
-  //         <div className="modal_elements">
-  //           <div>
-  //             <label>orderNO</label> <br />
-  //             <input ref={orderNoRef} defaultValue= {props.shipment.orderNo} type="text" /> 
-  //           </div>
-  //           <div>
-  //             <label>date</label> <br />
-  //             <input ref={deliveryDateRef} defaultValue= {props.shipment.date} type="date" />
-  //           </div>
-  //           <div>
-  //             <label>customer</label> <br />
-  //             <input ref={customerRef} defaultValue= {props.shipment.customer} type="text" /> 
-  //           </div>
-  //           <div>
-  //             <label>trackingNo</label> <br />
-  //             <input ref={trackingNoRef} defaultValue= {props.shipment.trackingNo} type="text" /></div>
-  //           <div>
-  //             <label>consignee</label> <br />
-  //             <input ref={consigneeRef} defaultValue= {props.shipment.consignee} type="text" /> </div>
-  //           <div>
-  //             <label>status</label> <br />
-  //             <div className="status">
-  //             <select ref={statusRef} defaultValue= {props.shipment.status}>
-  //               <option value="'Delivered'">'Delivered'</option>
-  //               <option value="'In Transit'">'In Transit'</option>
-  //               <option value="'Shipped'">'Shipped'</option>
-  //             </select>
-  //             </div>
-  //           </div>           
-  //         </div>
-  //         <div className="btn_center">
-  //           <button onClick={saveShipmentDetails}>Update</button>
-  //         </div>
-  //        </div>
-  //     </div>
-  //   </div>
-
-
-  <Modal isOpen={props.isOpen} toggle={() => props.setModalOpen(!props.isOpen)}>
+    <Modal
+      isOpen={props.isOpen}
+      toggle={() => props.setModalOpen(!props.isOpen)}
+    >
       <div className="modal_border">
         <ModalHeader toggle={() => props.setModalOpen(!props.isOpen)}>
           Shipment details
@@ -107,7 +81,7 @@ function TModal(props) {
               <Input
                 id="deliveryDate"
                 innerRef={deliveryDateRef}
-                defaultValue={props.shipment.date}
+                defaultValue={formatDateForInput(props.shipment.date)} // Format the date here
                 type="date"
               />
             </div>
@@ -163,8 +137,7 @@ function TModal(props) {
         </ModalFooter>
       </div>
     </Modal>
-   );
-
+  );
 }
 
 export default TModal;
