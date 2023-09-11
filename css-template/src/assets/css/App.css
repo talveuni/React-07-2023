@@ -1,4 +1,4 @@
-.modal_container {
+/* .modal_container {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -9,26 +9,26 @@
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
-}
+}  */
 
-.modal {
+/* .modal {
   border-radius: 5px;
   background-color: white;
   width: 70%; 
-}
+} */
 
 .modal_elements {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin: 10px 20px;
-}
+} 
 
-.modal_border {
+/* .modal_border {
   border-bottom: 1px solid #ddd;
   border-top:  1px solid #ddd;
   padding: 20px ;
   margin: 20px 5px;
-}
+} */
 
 label {
   font-size: small;
@@ -45,11 +45,11 @@ input, select {
   margin: 5px 0 10px 0;
 }
 
-select {
+/* select {
   width: 86%;
-}
+} */
 
-table {
+.table {
   font-size: small;
   border-collapse: collapse;
   width: 100%;
@@ -105,7 +105,7 @@ tr:hover {
   background-color: rgb(221, 86, 86);
 }
 
-button {
+/* button {
   border-style: none;
   padding: 10px 20px;
   background-color: rgb(206, 221, 153);
@@ -113,11 +113,11 @@ button {
 
 button:hover {
   background-color: rgb(193, 206, 141);
-}
+} */
 
-.btn_center{
+/* .btn_center{
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 

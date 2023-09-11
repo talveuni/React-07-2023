@@ -9,9 +9,8 @@ import {
   InputGroup,
   Container,
   Row,
-  Modal,
-  ModalBody,
-  Col
+  Col,
+  Table
 } from "reactstrap";
 
 // core components
@@ -28,7 +27,6 @@ import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
 function LandingPage() {
   const [firstFocus, setFirstFocus] = React.useState(false);
   const [lastFocus, setLastFocus] = React.useState(false);
-  const [modal1, setModal1] = React.useState(false);
 
   //from shipments project:
   const [shipments, setShipments] = useState([]);
@@ -55,6 +53,7 @@ function LandingPage() {
     setSelectedShipment(shipment);
     setShipmentIndex(index);
     setModalOpen(true);
+    
   }
 
   const updateSelectedShipment = (updatedShipment) => {
@@ -98,9 +97,10 @@ function LandingPage() {
                 shipment={selectedShipment}
                 updateSelectedShipment ={updateSelectedShipment}
                 setModalOpen={setModalOpen}
+                isOpen={modalOpen} 
                 />}
                 
-                <table>
+                <Table>
                   <thead>
                   <tr>
                     <th>ORDERNO</th>
@@ -128,53 +128,8 @@ function LandingPage() {
                   </tr> 
                     )}        
                   </tbody>
-                </table> 
-                <Button
-                color="primary"
-                className="mr-1"
-                onClick={() => setModal1(true)}
-              >
-                Launch Modal
-              </Button>
-              <Modal isOpen={modal1} toggle={() => setModal1(false)}>
-                <div className="modal-header justify-content-center">
-                  <button
-                    className="close"
-                    type="button"
-                    onClick={() => setModal1(false)}
-                  >
-                    <i className="now-ui-icons ui-1_simple-remove"></i>
-                  </button>
-                  <h4 className="title title-up">Modal title</h4>
-                </div>
-                <ModalBody>
-                  <p>
-                    Far far away, behind the word mountains, far from the
-                    countries Vokalia and Consonantia, there live the blind
-                    texts. Separated they live in Bookmarksgrove right at the
-                    coast of the Semantics, a large language ocean. A small
-                    river named Duden flows by their place and supplies it with
-                    the necessary regelialia. It is a paradisematic country, in
-                    which roasted parts of sentences fly into your mouth.
-                  </p>
-                </ModalBody>
-                <div className="modal-footer">
-                  <Button color="default" type="button">
-                    Nice Button
-                  </Button>
-                  <Button
-                    color="danger"
-                    type="button"
-                    onClick={() => setModal1(false)}
-                  >
-                    Close
-                  </Button>
-                </div>
-              </Modal>
-
-              
-
-
+                </Table> 
+               
                 <h5 className="description">
                   According to the National Oceanic and Atmospheric
                   Administration, Ted, Scambos, NSIDClead scentist, puts the
