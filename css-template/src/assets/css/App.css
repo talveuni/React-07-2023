@@ -1,15 +1,6 @@
-/* .modal_container {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.4);
-}  */
+.modal_container {
+  padding: 20px;
+} 
 
 /* .modal {
   border-radius: 5px;
@@ -17,11 +8,11 @@
   width: 70%; 
 } */
 
-.modal_elements {
+/* .modal_elements {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   margin: 10px 20px;
-} 
+}  */
 
 /* .modal_border {
   border-bottom: 1px solid #ddd;
@@ -34,16 +25,17 @@ label {
   font-size: small;
   font-weight: 600;
   color: rgb(112, 112, 112);
+  padding-top: 10px;
 }
 
-input, select {
+/* input, select {
   width: 80%;
   background-color: rgb(230, 227, 227);
   border-radius: 5px;
   border-style: none;
   padding: 10px;
   margin: 5px 0 10px 0;
-}
+} */
 
 /* select {
   width: 86%;
@@ -52,14 +44,13 @@ input, select {
 .table {
   font-size: small;
   border-collapse: collapse;
-  width: 100%;
 }
 
-th, td {
+/* th, td {
   padding: 15px 15px 15px 30px;
   text-align: left;
   border-bottom: 1px solid #ddd;
-}
+} */
 
 th {
   background-color: rgb(232, 241, 245);
@@ -68,13 +59,13 @@ th {
 }
 
 tr:hover {
-  background-color: lightgray;
+  background-color: rgb(241, 241, 241);
 }
 
 .td_size {    
-  width:120px; 
-  max-width:120px;
-  min-width:120px; 
+  width:145px; 
+  max-width:145px;
+  min-width:145px; 
 }
 
 .heading {
@@ -120,4 +111,10 @@ button:hover {
   justify-content: center;
   align-items: center;
 } */
+
+.center {
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
 

@@ -7,6 +7,7 @@ import {
   Button,
   Input,
   Label,
+  Container,
 } from "reactstrap";
 
 function TModal(props) {
@@ -57,11 +58,12 @@ function TModal(props) {
   }
 
   return (
+    
     <Modal
       isOpen={props.isOpen}
       toggle={() => props.setModalOpen(!props.isOpen)}
     >
-      <div className="modal_border">
+      <Container className="modal_container">      
         <ModalHeader toggle={() => props.setModalOpen(!props.isOpen)}>
           Shipment details
         </ModalHeader>
@@ -120,22 +122,20 @@ function TModal(props) {
                 defaultValue={props.shipment.status}
                 type="select"
               >
-                <option value="Delivered">Delivered</option>
-                <option value="In Transit">In Transit</option>
-                <option value="Shipped">Shipped</option>
+                <option value="'Delivered'">Delivered</option>
+                <option value="'In Transit'">In Transit</option>
+                <option value="'Shipped'">Shipped</option>
               </Input>
             </div>
           </div>
         </ModalBody>
-        <ModalFooter className="btn_center">
-          <Button color="primary" onClick={saveShipmentDetails}>
+        <ModalFooter>
+          <Button className="center" color="info" onClick={saveShipmentDetails}>
             Update
           </Button>
-          <Button color="secondary" onClick={() => props.setModalOpen(false)}>
-            Cancel
-          </Button>
         </ModalFooter>
-      </div>
+        </Container>
+     
     </Modal>
   );
 }

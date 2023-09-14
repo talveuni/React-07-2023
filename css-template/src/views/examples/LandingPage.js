@@ -19,10 +19,10 @@ import LandingPageHeader from "components/Headers/LandingPageHeader.js";
 import DefaultFooter from "components/Footers/DefaultFooter.js";
 
 import { useEffect, useState } from 'react';
-import '../../assets/css/App.css'
 import TModal from '../../components/TModal';
 import shipmentsData from '../../../src/data/Shipments.json'
 import { FaEdit, FaRegTrashAlt } from 'react-icons/fa';
+
 
 function LandingPage() {
   const [firstFocus, setFirstFocus] = React.useState(false);
@@ -88,19 +88,14 @@ function LandingPage() {
       <ExamplesNavbar />
       <div className="wrapper">
         <LandingPageHeader />
-        <div className="section section-about-us">
-          <Container>
-            <Row>
-              <Col className="ml-auto mr-auto text-center" md="8">
-                <h2 className="title">Shipments table in this template</h2>
-                {modalOpen && <TModal 
+        {modalOpen && <TModal 
                 shipment={selectedShipment}
                 updateSelectedShipment ={updateSelectedShipment}
                 setModalOpen={setModalOpen}
                 isOpen={modalOpen} 
                 />}
-                
-                <Table>
+        <div className="container">
+        <Table responsive className="table">
                   <thead>
                   <tr>
                     <th>ORDERNO</th>
@@ -128,8 +123,15 @@ function LandingPage() {
                   </tr> 
                     )}        
                   </tbody>
-                </Table> 
-               
+                </Table>
+
+        </div>
+        
+        <div className="section section-about-us">
+          <Container>         
+            <Row>
+              <Col className="ml-auto mr-auto text-center" md="8">
+                <h2 className="title">Shipments table in this template</h2>
                 <h5 className="description">
                   According to the National Oceanic and Atmospheric
                   Administration, Ted, Scambos, NSIDClead scentist, puts the

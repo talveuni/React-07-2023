@@ -4985,9 +4985,9 @@ img {
   padding-right: 24px;
   padding-bottom: 16px;
   padding-left: 24px;
-  -webkit-justify-content: space-between;
+  -webkit-justify-content: center;
   /* Safari 6.1+ */
-  justify-content: space-between;
+  justify-content: center;
 }
 .modal-content .modal-footer button {
   margin: 0;
