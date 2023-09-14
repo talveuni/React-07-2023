@@ -1,12 +1,33 @@
 import React, { useEffect, useState } from 'react'
+import { Pagination, Table } from 'react-bootstrap';
+//import tableData from '../data/table.json'
 
-function Table() {
+function List() {
     const [list, setList] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10; // Number of rows to display per page
+
     useEffect(() => {
         fetch("https://midaiganes.irw.ee/api/list?limit=500")
           .then((response) => response.json())
           .then((data) => setList(data.list) || []);
       }, []);
+
+    // useEffect(() => {
+    //     fetch("https://midaiganes.irw.ee/api/list?limit=500")
+    //       .then((res) => {
+    //         if (!res.ok) {
+    //           throw new Error("Network response was not ok");
+    //         }
+    //         return res.json(); 
+    //       })
+    //       .then((json) => setList(json) || []) // data from the API if possible
+    //       .catch((error) => {
+    //         console.error("Error fetching data from the API:", error);
+    //         console.log("Fetching data from local file: table.json");
+    //         setList(tableData); // using local data table.json
+    //       });
+    //   }, []);
 
     const calcBirthday = (personalCode) => {
         personalCode = personalCode.toString(); // Convert to string
@@ -66,12 +87,32 @@ function Table() {
          }
      });
          setList(list.slice());
+        
      }
 
+    const totalPages = Math.ceil(list.length / itemsPerPage);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+
+    const handlePrevPage = () => {
+        if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+        }
+    };
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+        }
+    };
+        
+
   return (
-    <div>
+    <div className='page'>
         <h1>Nimekiri</h1>
-        <table className='table'>
+        <Table striped className='table'>
             <thead>
                 <tr>
                     <th>
@@ -102,7 +143,7 @@ function Table() {
                 </tr>
             </thead>
             <tbody>
-                {list.map((person, index)=> 
+                {list.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((person, index)=> 
                          <tr key={index}>
                         {<td>{person.firstname}</td>}
                         <td>{person.surname}</td>
@@ -113,10 +154,23 @@ function Table() {
                   )}
             </tbody>
             
-        </table>
+        </Table>
+        <Pagination>
+        <Pagination.Prev onClick={handlePrevPage} disabled={currentPage === 1} />
+        {Array.from({ length: totalPages }, (_, index) => (
+          <Pagination.Item
+            key={index}
+            active={index + 1 === currentPage}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </Pagination.Item>
+        ))}
+        <Pagination.Next onClick={handleNextPage} disabled={currentPage === totalPages} />
+      </Pagination>
         
     </div>
   )
 }
 
-export default Table
+export default List

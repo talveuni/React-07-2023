@@ -1,18 +1,22 @@
 import { Link, Route, Routes } from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Article from "./pages/Article";
-import Table from "./pages/Table";
+import List from "./pages/List";
 
 function App() {
   return (
     <div className="App">
       
-        <Link to ="/article"> <button>Artikkel</button></Link> <span></span>
-        <Link to ="/table"> <button>Tabel</button></Link>
       
-      <Routes>
+
+      <div className="sidebar">
+        <Link to ="/article"> <button>Artikkel</button></Link> <span></span>
+        <Link to ="/list"> <button>Tabel</button></Link>
+      </div>
+            <Routes>
         <Route path="/article" element = {<Article/>}></Route>
-        <Route path="/table" element = {<Table/>}></Route>
+        <Route path="/list" element = {<List/>}></Route>
       </Routes>
     </div>
   );

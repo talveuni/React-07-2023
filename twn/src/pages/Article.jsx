@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import articleData from '../data/article.json'
 
 function Article() {
   const [article, setArticle] = useState({
@@ -15,8 +16,18 @@ function Article() {
 
   useEffect(() => {
     fetch("https://midaiganes.irw.ee/api/list/972d2b8a")
-      .then((response) => response.json())
-      .then((data) => setArticle(data) || []);
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json(); 
+      })
+      .then((json) => setArticle(json) || []) // data from the API if possible
+      .catch((error) => {
+        console.error("Error fetching data from the API:", error);
+        console.log("Fetching data from local file: article.json");
+        setArticle(articleData); // using local data article.json
+      });
   }, []);
 
   const renderParagraphs = (htmlString) => {
