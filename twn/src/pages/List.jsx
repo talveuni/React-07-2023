@@ -6,6 +6,7 @@ function List() {
     const [list, setList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // Number of rows to display per page
+    const [openRow, setOpenRow] = useState(null); // Track the open row
 
     useEffect(() => {
         fetch("https://midaiganes.irw.ee/api/list?limit=500")
@@ -107,6 +108,20 @@ function List() {
         setCurrentPage(currentPage + 1);
         }
     };
+
+    const renderParagraphs = (htmlString) => {
+        const paragraphs = htmlString.split("\n").map((paragraph, index) => (
+            <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
+          ));
+        return paragraphs;
+      };
+
+      const toggleDetailRow = (index) => {
+        // Toggle the open/closed state of the row with the given index
+        setOpenRow((prevOpenRow) => (prevOpenRow === index ? null : index));
+      };
+
+      
         
 
   return (
@@ -141,16 +156,35 @@ function List() {
                         <img className='arrow' src='/up.png' onClick={()=>sortAsc('phone')} alt=''/>
                     </th>
                 </tr>
+                
             </thead>
             <tbody>
                 {list.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((person, index)=> 
-                         <tr key={index}>
+                    <>
+                        <tr key={index} className={openRow === index ? 'open_tab' : 'closed_tab'} onClick={() => toggleDetailRow(index)}>
                         {<td>{person.firstname}</td>}
                         <td>{person.surname}</td>
                         {person.sex === "f"?<td>Naine</td>:<td>Mees</td>}
                         <td>{calcBirthday(person.personal_code)}</td>
                         <td>{person.phone}</td>
-                    </tr>
+                        
+                        </tr>
+                        {openRow === index && (
+                            <tr className='open_tab'>
+                            <td colSpan="5">
+                            <div>
+                                <img className='image' src={person.image.small} alt={person.image.alt} />
+                                <div className='tab_text'>
+                                    <div>{renderParagraphs(person.intro)}</div>
+                                    <button className='tab_text_btn'>Loe rohkem</button>
+                                </div>
+                            </div>
+                            </td>
+                        </tr>
+
+                        )}
+                        
+                    </>                   
                   )}
             </tbody>
             

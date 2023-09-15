@@ -31,9 +31,7 @@ function Article() {
   }, []);
 
   const renderParagraphs = (htmlString) => {
-    const paragraphs = htmlString
-      .split("\n")
-      .map((paragraph, index) => (
+    const paragraphs = htmlString.split("\n").map((paragraph, index) => (
         <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
       ));
     return paragraphs;
