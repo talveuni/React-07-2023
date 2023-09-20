@@ -282,7 +282,7 @@ body {
     background-size: 180px,280px;
     background-attachment: fixed;
     margin-left: 150px;
-    padding: 5rem 5rem 5rem 12rem; 
+    padding: 4rem 4rem 4rem 8rem; 
     width: 90%;
     overflow: hidden;
 }
@@ -290,7 +290,7 @@ body {
 @media screen and (max-width: 960px) {
   .page {
     margin: 0;
-    padding: 5% 10%; 
+    padding: 10%; 
     background-position: 0 bottom, 100% 0;
   }
 }
@@ -335,4 +335,24 @@ body {
   .article {
     width: 100%;
   }
+}
+
+.upper_menu_bar {
+  height: 60px;
+  background-color: #fff;
+  display: flex;
+  align-content: center;
+  position: fixed;
+  width: 100%;
+  z-index: 500;
+}
+
+@media (min-width: 961px) {
+  .upper_menu_bar {
+    display: none;
+  }
+}
+
+.menu_btn {
+  margin: 10px;
 }
