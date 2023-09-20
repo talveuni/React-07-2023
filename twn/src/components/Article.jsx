@@ -6,7 +6,7 @@ function Article({article}) {
     const paragraphs = htmlString
       .split("\n")
       .map((paragraph, index) => (
-        <p key={article.id} dangerouslySetInnerHTML={{ __html: paragraph }} />
+        <p key={index} dangerouslySetInnerHTML={{ __html: paragraph }} />
       ));
     return paragraphs;
   };
@@ -15,7 +15,7 @@ function Article({article}) {
     <div>
       <h1>{article.title}</h1>
       <div className="intro">
-          <p>{renderParagraphs(article.intro)}</p>
+          {renderParagraphs(article.intro)}
       </div>
       <div className="twn_img">
         <div className="image_title">{article.image.title}</div>

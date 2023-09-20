@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination, Table } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-//import tableData from '../data/table.json'
 
 function List() {
     const [list, setList] = useState([]);   
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10; // Number of rows to display per page
-    const [openRow, setOpenRow] = useState(null); // Track the open row
+    const itemsPerPage = 10; 
+    const [openRow, setOpenRow] = useState(null); 
     const navigate = useNavigate();
     const [article, setArticle] = useState({
         id: "",
@@ -30,7 +29,7 @@ function List() {
 
 
     const calcBirthday = (personalCode) => {
-        personalCode = personalCode.toString(); // Convert to string
+        personalCode = personalCode.toString(); 
 
         const birthYearPrefix = parseInt(personalCode.charAt(0));
 
@@ -116,18 +115,13 @@ function List() {
       };
 
       const toggleDetailRow = (index) => {
-        // Toggle the open/closed state of the row with the given index
         setOpenRow((prevOpenRow) => (prevOpenRow === index ? null : index));
       };
 
       const showArticle = (person) => {
         setArticle(person)
-        console.log(person)
-        navigate("/article/" + person.id); 
-        
-      }
-      
-        
+        navigate("/article/" + person.id);  
+      };
 
   return (
     <div className='page'>
@@ -165,8 +159,8 @@ function List() {
             </thead>
             <tbody>
                 {list.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage).map((person, index)=> 
-                    <>
-                        <tr key={index} className={openRow === index ? 'open_tab' : 'closed_tab'} onClick={() => toggleDetailRow(index)}>
+                    <React.Fragment key={index} >
+                        <tr className={openRow === index ? 'open_tab' : 'closed_tab'} onClick={() => toggleDetailRow(index)}>
                         {<td>{person.firstname}</td>}
                         <td>{person.surname}</td>
                         {person.sex === "f"?<td>Naine</td>:<td>Mees</td>}
@@ -189,7 +183,7 @@ function List() {
 
                         )}
                         
-                    </>                   
+                    </React.Fragment>                   
                   )}
             </tbody>
             
