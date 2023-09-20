@@ -54,7 +54,9 @@ function ArticlePage() {
   return (
     <div>
       <div className='page'>
-        <Article article={article} />
+        <div className='article'>
+          <Article article={article} />
+        </div>
       </div>
     </div>
   );

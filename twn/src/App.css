@@ -1,9 +1,5 @@
 @import url(https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;900&display=swap);
 
-.App {
-  padding: 20px;
-}
-
 h1 {
   text-align: center;
   text-transform: uppercase;
@@ -39,8 +35,8 @@ h1 {
 
 }
 img {
-  width: 90%;
-  height: 90%;
+  width: 100%;
+  height: 100%;
   display: block;
   margin: auto;
 }
@@ -82,6 +78,7 @@ img {
 .arrow {
   height: 15px;
   width: 15px;
+  display: inline;
 }
 
 .table {
@@ -124,7 +121,6 @@ thead {
 }
 
 .tab_text_btn {
- 
     display: inline-block;
     margin: 0 0 16px;
     padding: 0.85em 2.5em;
@@ -152,6 +148,15 @@ thead {
 
 .tab_text_btn:hover{
   background-color: #44ee9f;
+}
+
+.pagination {
+  margin: auto;
+}
+
+.pagination_item {
+  margin: 10px;
+  padding: 5px;
 }
 
 
@@ -271,25 +276,28 @@ body {
 } */
 
 .page {
-  background-image: url(/assets/imgs/bg-deco-left.svg),
-    url(/assets/imgs/bg-deco-right.svg);
-  background-repeat: no-repeat;
-  background-position: var(--twn-menuWidth) bottom, 100% 0;
-  background-size: 150px, 300px;
-  background-attachment: fixed;
-  display: block;
-  margin-left: var(--twn-menuWidth);
-  overflow: none;
-  padding: 5rem 2.5rem;
+  background-image: url(/assets/imgs/bg-deco-left.svg),url(/assets/imgs/bg-deco-right.svg);
+    background-repeat: no-repeat;
+    background-position: 150px bottom, 100% 0;
+    background-size: 180px,280px;
+    background-attachment: fixed;
+    margin-left: 150px;
+    padding: 5rem 5rem 5rem 12rem; 
+    width: 90%;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 960px) {
   .page {
-    margin-left: 0;
+    margin: 0;
+    padding: 5% 10%; 
     background-position: 0 bottom, 100% 0;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    padding-top: 7.5rem;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .sidebar {
+  display: none;
   }
 }
 
@@ -298,8 +306,8 @@ body {
   background: #fff;
   top: 0;
   left: 0;
-  width: var(--twn-menuWidth);
-  padding: 1.5625rem;
+  width: 150px;
+  padding: 1.6rem;
   height: 100vh;
   z-index: 900;
   overflow: auto;
@@ -316,4 +324,15 @@ body {
   background-size: cover;
   margin: 0.375rem;
   background-color: #f1f1f1;
+}
+
+.article {
+  width: 80%;
+  margin: auto;
+}
+
+@media screen and (max-width: 960px) {
+  .article {
+    width: 100%;
+  }
 }

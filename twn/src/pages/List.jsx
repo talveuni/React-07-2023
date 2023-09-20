@@ -8,18 +8,6 @@ function List() {
     const itemsPerPage = 10; 
     const [openRow, setOpenRow] = useState(null); 
     const navigate = useNavigate();
-    const [article, setArticle] = useState({
-        id: "",
-        tags: [],
-        title: "",
-        intro: "",
-        image: {
-          large: "",
-          alt: "",
-          title: "",
-        },
-        body: "",
-      });
 
     useEffect(() => {
         fetch("https://midaiganes.irw.ee/api/list?limit=500")
@@ -119,14 +107,13 @@ function List() {
       };
 
       const showArticle = (person) => {
-        setArticle(person)
         navigate("/article/" + person.id);  
       };
 
   return (
     <div className='page'>
         <h1>Nimekiri</h1>
-        <Table striped className='table'>
+        <Table responsive striped className='table'>
             <thead>
                 <tr>
                     <th>
@@ -186,21 +173,28 @@ function List() {
                     </React.Fragment>                   
                   )}
             </tbody>
+
             
         </Table>
-        <Pagination>
-        <Pagination.Prev onClick={handlePrevPage} disabled={currentPage === 1} />
-        {Array.from({ length: totalPages }, (_, index) => (
-          <Pagination.Item
-            key={index}
-            active={index + 1 === currentPage}
-            onClick={() => handlePageChange(index + 1)}
-          >
-            {index + 1}
-          </Pagination.Item>
-        ))}
-        <Pagination.Next onClick={handleNextPage} disabled={currentPage === totalPages} />
-      </Pagination>
+
+        <div className='pagination'>
+            <Pagination>
+                <Pagination.Prev className='pagination_item' onClick={handlePrevPage} disabled={currentPage === 1} />
+                {Array.from({ length: totalPages }, (_, index) => (
+                <Pagination.Item
+                    className='pagination_item'
+                    key={index}
+                    active={index + 1 === currentPage}
+                    onClick={() => handlePageChange(index + 1)}
+                >
+                    {index + 1}
+                </Pagination.Item>
+                ))}
+                <Pagination.Next className='pagination_item' onClick={handleNextPage} disabled={currentPage === totalPages} />
+            </Pagination>   
+        </div>
+        
+        
         
     </div>
   )
