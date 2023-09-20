@@ -8,7 +8,7 @@ function ArticlePage() {
 
   const [article, setArticle] = useState({
     id: "",
-    tags: "",
+    tags: [],
     title: "",
     intro: "",
     image: {

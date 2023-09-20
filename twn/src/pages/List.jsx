@@ -11,7 +11,7 @@ function List() {
     const navigate = useNavigate();
     const [article, setArticle] = useState({
         id: "",
-        tags: "",
+        tags: [],
         title: "",
         intro: "",
         image: {

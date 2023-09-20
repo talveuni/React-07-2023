@@ -28,7 +28,13 @@ function Article({article}) {
         </div>
       </div>
       {renderParagraphs(article.body)}
-      <div className="tag">{article.tags}</div>
+      <div className="tags">
+        {article.tags.map((tag, index) => (
+          <span key={index} className="tag">
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }
