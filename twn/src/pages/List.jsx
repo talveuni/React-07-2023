@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Pagination, Table } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 //import tableData from '../data/table.json'
 
 function List() {
-    const [list, setList] = useState([]);
+    const [list, setList] = useState([]);   
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10; // Number of rows to display per page
     const [openRow, setOpenRow] = useState(null); // Track the open row
+    const navigate = useNavigate();
+    const [article, setArticle] = useState({
+        id: "",
+        tags: "",
+        title: "",
+        intro: "",
+        image: {
+          large: "",
+          alt: "",
+          title: "",
+        },
+        body: "",
+      });
 
     useEffect(() => {
         fetch("https://midaiganes.irw.ee/api/list?limit=500")
@@ -14,21 +28,6 @@ function List() {
           .then((data) => setList(data.list) || []);
       }, []);
 
-    // useEffect(() => {
-    //     fetch("https://midaiganes.irw.ee/api/list?limit=500")
-    //       .then((res) => {
-    //         if (!res.ok) {
-    //           throw new Error("Network response was not ok");
-    //         }
-    //         return res.json(); 
-    //       })
-    //       .then((json) => setList(json) || []) // data from the API if possible
-    //       .catch((error) => {
-    //         console.error("Error fetching data from the API:", error);
-    //         console.log("Fetching data from local file: table.json");
-    //         setList(tableData); // using local data table.json
-    //       });
-    //   }, []);
 
     const calcBirthday = (personalCode) => {
         personalCode = personalCode.toString(); // Convert to string
@@ -121,6 +120,12 @@ function List() {
         setOpenRow((prevOpenRow) => (prevOpenRow === index ? null : index));
       };
 
+      const showArticle = (person) => {
+        setArticle(person)
+        console.log(person)
+        navigate("/article/" + person.id); 
+        
+      }
       
         
 
@@ -176,7 +181,7 @@ function List() {
                                 <img className='image' src={person.image.small} alt={person.image.alt} />
                                 <div className='tab_text'>
                                     <div>{renderParagraphs(person.intro)}</div>
-                                    <button className='tab_text_btn'>Loe rohkem</button>
+                                    <button className='tab_text_btn' onClick={() => showArticle(person)}>Loe rohkem</button>
                                 </div>
                             </div>
                             </td>
