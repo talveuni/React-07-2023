@@ -48,7 +48,6 @@ img {
   position: relative; 
   width: 75%;
   margin: auto;
-  filter: blur(0rem);
   z-index: 2; 
   transition: transform .5s ease;
 }
@@ -153,9 +152,6 @@ thead {
 
 .tab_text_btn:hover{
   background-color: #44ee9f;
-}
-
-.tab_body_text {
 }
 
 .pagination {

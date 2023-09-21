@@ -5,7 +5,10 @@ import TablePagination from "../components/TablePagination";
 
 function List() {
   const [list, setList] = useState([]);
+  const [defaultList, setDefaultList] = useState([]);
   const [openRow, setOpenRow] = useState(null);
+  const [firstnameSorted, setFirstNameSorted] = useState("default")
+  //const [sortedState, setSortedState] = useState("default");
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
@@ -13,7 +16,10 @@ function List() {
   useEffect(() => {
     fetch("https://midaiganes.irw.ee/api/list?limit=500")
       .then((response) => response.json())
-      .then((data) => setList(data.list) || []);
+      .then((data) => {
+        setList(data.list);
+        setDefaultList(data.list); 
+      });
   }, []);
 
   const calcBirthday = (personalCode) => { 
@@ -74,8 +80,24 @@ function List() {
     setList(list.slice());
   };
 
- 
+  const resetToDefault = () => {
+    setList(defaultList.slice());
+  };
 
+  const toggleFirstNameSorting = () => {
+    if (firstnameSorted === "default" ) {
+        setFirstNameSorted("asc")
+        sortAsc("firstname");
+    } else if (firstnameSorted === "asc") {
+        setFirstNameSorted("desc") 
+        sortDesc("firstname");
+    } else if (firstnameSorted === "desc") {
+        resetToDefault();  
+        setFirstNameSorted("default");
+        
+    }
+  }
+  
   const renderParagraphs = (htmlString) => {
     const paragraphs = htmlString.split("\n");
     return paragraphs.map((paragraph, index) => (
@@ -109,7 +131,7 @@ function List() {
         <thead>
           <tr>
             <th>
-              Eesnimi
+              <span onClick={toggleFirstNameSorting}>Eesnimi</span>
               <img className="arrow" src="/down.png" onClick={() => sortDesc("firstname")} alt=""/>
               <img className="arrow" src="/up.png" onClick={() => sortAsc("firstname")} alt=""/>
             </th>
