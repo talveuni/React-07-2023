@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import articleData from '../data/article.json';
-import Article from '../components/Article';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import articleData from "../data/article.json";
+import Article from "../components/Article";
+import { useParams } from "react-router-dom";
 
 function ArticlePage() {
-  const { articleID } = useParams(); 
+  const { articleID } = useParams();
 
   const [article, setArticle] = useState({
     id: "",
@@ -28,7 +28,7 @@ function ArticlePage() {
           if (!res.ok) {
             throw new Error("Network response was not ok");
           }
-          return res.json(); 
+          return res.json();
         })
         .then((json) => setArticle(json))
         .catch((error) => {
@@ -40,21 +40,21 @@ function ArticlePage() {
           if (!res.ok) {
             throw new Error("Network response was not ok");
           }
-          return res.json(); 
+          return res.json();
         })
         .then((json) => setArticle(json))
         .catch((error) => {
           console.error("Error fetching data from the API:", error);
           console.log("Fetching data from local file: article.json");
-          setArticle(articleData); 
+          setArticle(articleData);
         });
     }
   }, [articleID]);
 
   return (
     <div>
-      <div className='page'>
-        <div className='article'>
+      <div className="page">
+        <div className="article">
           <Article article={article} />
         </div>
       </div>

@@ -18,6 +18,13 @@ function Article({article}) {
           {renderParagraphs(article.intro)}
       </div>
       <div className="twn_img">
+        <div className="article_img_background">
+        <img
+            src={article.image.large}
+            alt={article.image.alt}
+            title={article.image.title}
+          />
+        </div>
         <div className="image_title">{article.image.title}</div>
         <div className="article_img">
           <img
