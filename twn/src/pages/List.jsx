@@ -5,8 +5,7 @@ import TablePagination from "../components/TablePagination";
 import { FaSort } from "react-icons/fa";
 import { FaSortUp } from "react-icons/fa";
 import { FaSortDown } from "react-icons/fa";
-
-
+import listData from "../data/table.json"
 
 function List() {
   const [list, setList] = useState([]);
@@ -17,18 +16,27 @@ function List() {
   const [sexSorted, setSexSorted] = useState("default")
   const [birthdaySorted, setBirthdaySorted] = useState("default")
 
-
-  //const [sortedState, setSortedState] = useState("default");
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
 
   useEffect(() => {
     fetch("https://midaiganes.irw.ee/api/list?limit=500")
-      .then((response) => response.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return res.json(); 
+      })
       .then((data) => {
-        setList(data.list);
-        setDefaultList([...data.list]); 
+        setList((data.list) || []);
+        setDefaultList(([...data.list]) || []); // data from the API if possible
+      }) 
+      .catch((error) => {
+        console.error("Error fetching data from the API:", error);
+        console.log("Fetching data from local file: table.json");
+        setList((listData) || []);
+        setDefaultList(([...listData]) || []); // using local data table.json
       });
   }, []);
 
@@ -88,15 +96,14 @@ function List() {
       }
     });
     setList(list.slice());
-    console.log(list)
   };
 
   const resetToDefault = () => {
     setList([...defaultList]);
-    console.log(defaultList)
   };
 
   const toggleFirstNameSorting = () => {
+    toggleDetailRow(null);
 
     if (firstNameSorted === "default" ) {
         setFirstNameSorted("asc")
@@ -111,11 +118,10 @@ function List() {
     setLastNameSorted("default");
     setSexSorted("default");
     setBirthdaySorted("default");
-
-
   }
 
   const toggleLastNameSorting = () => {
+    toggleDetailRow(null);
 
     if (lastNameSorted === "default" ) {
         setLastNameSorted("asc")
@@ -130,11 +136,11 @@ function List() {
     setFirstNameSorted("default");
     setSexSorted("default");
     setBirthdaySorted("default");
-
-
   }
 
   const toggleSexSorting = () => {
+    toggleDetailRow(null);
+
     if (sexSorted === "default" ) {
         setSexSorted("asc")
         sortAsc("sex");
@@ -152,12 +158,14 @@ function List() {
   }
 
   const toggleBirthdaySorting = () => {
+    toggleDetailRow(null);
+
     if (birthdaySorted === "default" ) {
         setBirthdaySorted("asc")
         sortAsc("personal_code");
     } else if (birthdaySorted === "asc") {
         setBirthdaySorted("desc") 
-        sortDesc("Personal_code");
+        sortDesc("personal_code");
     } else if (birthdaySorted === "desc") {
         resetToDefault();  
         setBirthdaySorted("default");
