@@ -2,12 +2,22 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import TablePagination from "../components/TablePagination";
+import { FaSort } from "react-icons/fa";
+import { FaSortUp } from "react-icons/fa";
+import { FaSortDown } from "react-icons/fa";
+
+
 
 function List() {
   const [list, setList] = useState([]);
   const [defaultList, setDefaultList] = useState([]);
   const [openRow, setOpenRow] = useState(null);
-  const [firstnameSorted, setFirstNameSorted] = useState("default")
+  const [firstNameSorted, setFirstNameSorted] = useState("default")
+  const [lastNameSorted, setLastNameSorted] = useState("default")
+  const [sexSorted, setSexSorted] = useState("default")
+  const [birthdaySorted, setBirthdaySorted] = useState("default")
+
+
   //const [sortedState, setSortedState] = useState("default");
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -18,7 +28,7 @@ function List() {
       .then((response) => response.json())
       .then((data) => {
         setList(data.list);
-        setDefaultList(data.list); 
+        setDefaultList([...data.list]); 
       });
   }, []);
 
@@ -34,7 +44,7 @@ function List() {
     return `${birthDay}.${birthMonth}.${birthYear}`;
   };
 
-  const sortAsc = (key) => {
+  const sortDesc = (key) => {
     list.sort((a, b) => {
       if (key === "personal_code") {
         const datePartsA = calcBirthday(a[key]).split(".");
@@ -57,7 +67,7 @@ function List() {
     setList(list.slice());
   };
 
-  const sortDesc = (key) => {
+  const sortAsc = (key) => {
     list.sort((a, b) => {
       if (key === "personal_code") {
         const datePartsA = calcBirthday(a[key]).split(".");
@@ -78,25 +88,85 @@ function List() {
       }
     });
     setList(list.slice());
+    console.log(list)
   };
 
   const resetToDefault = () => {
-    setList(defaultList.slice());
+    setList([...defaultList]);
+    console.log(defaultList)
   };
 
   const toggleFirstNameSorting = () => {
-    if (firstnameSorted === "default" ) {
+
+    if (firstNameSorted === "default" ) {
         setFirstNameSorted("asc")
         sortAsc("firstname");
-    } else if (firstnameSorted === "asc") {
+    } else if (firstNameSorted === "asc") {
         setFirstNameSorted("desc") 
         sortDesc("firstname");
-    } else if (firstnameSorted === "desc") {
+    } else if (firstNameSorted === "desc") {
         resetToDefault();  
         setFirstNameSorted("default");
-        
     }
+    setLastNameSorted("default");
+    setSexSorted("default");
+    setBirthdaySorted("default");
+
+
   }
+
+  const toggleLastNameSorting = () => {
+
+    if (lastNameSorted === "default" ) {
+        setLastNameSorted("asc")
+        sortAsc("surname");
+    } else if (lastNameSorted === "asc") {
+        setLastNameSorted("desc") 
+        sortDesc("surname");
+    } else if (lastNameSorted === "desc") {
+        resetToDefault();  
+        setLastNameSorted("default");
+    }
+    setFirstNameSorted("default");
+    setSexSorted("default");
+    setBirthdaySorted("default");
+
+
+  }
+
+  const toggleSexSorting = () => {
+    if (sexSorted === "default" ) {
+        setSexSorted("asc")
+        sortAsc("sex");
+    } else if (sexSorted === "asc") {
+        setSexSorted("desc") 
+        sortDesc("sex");
+    } else if (sexSorted === "desc") {
+        resetToDefault();  
+        setSexSorted("default");
+    }
+    setFirstNameSorted("default");
+    setLastNameSorted("default")
+    setBirthdaySorted("default");
+
+  }
+
+  const toggleBirthdaySorting = () => {
+    if (birthdaySorted === "default" ) {
+        setBirthdaySorted("asc")
+        sortAsc("personal_code");
+    } else if (birthdaySorted === "asc") {
+        setBirthdaySorted("desc") 
+        sortDesc("Personal_code");
+    } else if (birthdaySorted === "desc") {
+        resetToDefault();  
+        setBirthdaySorted("default");
+    }
+    setFirstNameSorted("default");
+    setLastNameSorted("default");
+    setSexSorted("default");
+  }
+
   
   const renderParagraphs = (htmlString) => {
     const paragraphs = htmlString.split("\n");
@@ -124,31 +194,45 @@ function List() {
     navigate("/article/" + person.id);
   };
 
+  const personGender = (gender) => {
+    if (gender === "m") {
+      return "Mees"
+    } else if (gender === "f"){
+      return "Naine"
+    } else {
+      return "Määramata"
+    }
+  }
+
   return (
     <div className="page">
       <h1>Nimekiri</h1>
       <Table responsive striped className="table">
         <thead>
           <tr>
-            <th>
-              <span onClick={toggleFirstNameSorting}>Eesnimi</span>
-              <img className="arrow" src="/down.png" onClick={() => sortDesc("firstname")} alt=""/>
-              <img className="arrow" src="/up.png" onClick={() => sortAsc("firstname")} alt=""/>
+            <th onClick={toggleFirstNameSorting}>
+              Eesnimi
+              {firstNameSorted==="default" && <FaSort/>}               
+              {firstNameSorted==="asc" && <FaSortDown/>}               
+              {firstNameSorted==="desc" && <FaSortUp/>}               
             </th>
-            <th>
+            <th onClick={toggleLastNameSorting}>
               Perekonnanimi
-              <img className="arrow" src="/down.png" onClick={() => sortDesc("surname")} alt=""/>
-              <img className="arrow" src="/up.png" onClick={() => sortAsc("surname")} alt=""/>
+              {lastNameSorted==="default" && <FaSort/>}               
+              {lastNameSorted==="asc" && <FaSortDown/>}               
+              {lastNameSorted==="desc" && <FaSortUp/>}     
             </th>
-            <th>
+            <th onClick={toggleSexSorting}>
               Sugu
-              <img className="arrow" src="/down.png" onClick={() => sortDesc("sex")} alt=""/>
-              <img className="arrow" src="/up.png" onClick={() => sortAsc("sex")} alt=""/>
+              {sexSorted==="default" && <FaSort/>}               
+              {sexSorted==="asc" && <FaSortDown/>}               
+              {sexSorted==="desc" && <FaSortUp/>}     
             </th>
-            <th>
+            <th onClick={toggleBirthdaySorting}>
               Sünnikuupäev
-              <img className="arrow" src="/down.png" onClick={() => sortDesc("personal_code")} alt=""/>
-              <img className="arrow" src="/up.png" onClick={() => sortAsc("personal_code")} alt=""/>
+              {birthdaySorted==="default" && <FaSort/>}               
+              {birthdaySorted==="asc" && <FaSortDown/>}               
+              {birthdaySorted==="desc" && <FaSortUp/>}     
             </th>
             <th>
               Telefon
@@ -162,7 +246,7 @@ function List() {
                 <tr className={openRow === index ? "open_tab" : "closed_tab"} onClick={() => toggleDetailRow(index)}>
                   <td>{person.firstname}</td>
                   <td>{person.surname}</td>
-                  {person.sex === "f" ? <td>Naine</td> : <td>Mees</td>}
+                  <td>{personGender(person.sex)}</td>
                   <td>{calcBirthday(person.personal_code)}</td>
                   <td>{person.phone}</td>
                 </tr>
