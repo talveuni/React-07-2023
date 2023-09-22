@@ -13,7 +13,7 @@ function List() {
   const [openRow, setOpenRow] = useState(null);
   const [firstNameSorted, setFirstNameSorted] = useState("default")
   const [lastNameSorted, setLastNameSorted] = useState("default")
-  const [sexSorted, setSexSorted] = useState("default")
+  const [genderSorted, setGenderSorted] = useState("default")
   const [birthdaySorted, setBirthdaySorted] = useState("default")
 
   const navigate = useNavigate();
@@ -116,7 +116,7 @@ function List() {
         setFirstNameSorted("default");
     }
     setLastNameSorted("default");
-    setSexSorted("default");
+    setGenderSorted("default");
     setBirthdaySorted("default");
   }
 
@@ -134,22 +134,22 @@ function List() {
         setLastNameSorted("default");
     }
     setFirstNameSorted("default");
-    setSexSorted("default");
+    setGenderSorted("default");
     setBirthdaySorted("default");
   }
 
-  const toggleSexSorting = () => {
+  const toggleGenderSorting = () => {
     toggleDetailRow(null);
 
-    if (sexSorted === "default" ) {
-        setSexSorted("asc")
+    if (genderSorted === "default" ) {
+        setGenderSorted("asc")
         sortAsc("sex");
-    } else if (sexSorted === "asc") {
-        setSexSorted("desc") 
+    } else if (genderSorted === "asc") {
+      setGenderSorted("desc") 
         sortDesc("sex");
-    } else if (sexSorted === "desc") {
+    } else if (genderSorted === "desc") {
         resetToDefault();  
-        setSexSorted("default");
+        setGenderSorted("default");
     }
     setFirstNameSorted("default");
     setLastNameSorted("default")
@@ -172,7 +172,7 @@ function List() {
     }
     setFirstNameSorted("default");
     setLastNameSorted("default");
-    setSexSorted("default");
+    setGenderSorted("default");
   }
 
   
@@ -230,11 +230,11 @@ function List() {
               {lastNameSorted==="asc" && <FaSortDown/>}               
               {lastNameSorted==="desc" && <FaSortUp/>}     
             </th>
-            <th onClick={toggleSexSorting}>
+            <th onClick={toggleGenderSorting}>
               Sugu
-              {sexSorted==="default" && <FaSort/>}               
-              {sexSorted==="asc" && <FaSortDown/>}               
-              {sexSorted==="desc" && <FaSortUp/>}     
+              {genderSorted==="default" && <FaSort/>}               
+              {genderSorted==="asc" && <FaSortDown/>}               
+              {genderSorted==="desc" && <FaSortUp/>}     
             </th>
             <th onClick={toggleBirthdaySorting}>
               Sünnikuupäev
