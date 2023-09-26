@@ -18,7 +18,7 @@ h1 {
 }
 
 .intro {
-    font-weight: 900;
+  font-weight: 900;
 }
 
 .twn_img {
@@ -37,7 +37,7 @@ img {
   position: absolute;
   top: 0;
   left: 0;
-  z-index: 1; 
+  z-index: 1;
   filter: blur(0.625rem);
   width: 98%;
   height: 98%;
@@ -45,18 +45,17 @@ img {
 }
 
 .article_img {
-  position: relative; 
+  position: relative;
   width: 75%;
   margin: auto;
-  z-index: 2; 
-  transition: transform .5s ease;
+  z-index: 2;
+  transition: transform 0.5s ease;
 }
 
 .article_img :hover {
-  transform: scale(1.05); 
-  transition: transform .3s;
- }
-
+  transform: scale(1.05);
+  transition: transform 0.3s;
+}
 
 .image_title {
   position: absolute;
@@ -66,43 +65,46 @@ img {
   padding: 0.625rem 1.5rem;
   font-size: 1rem;
   z-index: 6;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .tag {
-    background: var(--twn-secondaryColor);
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    border-radius: 2rem;
-    font-size: 14px;
-    font-weight: 700;
-    margin: 5px;
-}
-
-.arrow {
-  height: 15px;
-  width: 15px;
-  display: inline;
+  background: var(--twn-secondaryColor);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 14px;
+  font-weight: 700;
+  margin: 5px;
 }
 
 .table {
-    width: 80%;
-    margin: auto;
-    background-color:transparent;
+  width: 80%;
+  margin: auto;
+  background-color: transparent;
 }
 
-.closed_tab th, td {
-  background-color:transparent !important;
-  color: aliceblue !important;    
+.closed_tab th,
+td {
+  background-color: transparent !important;
+  color: aliceblue !important;
 }
 
 thead {
   text-align: left;
 }
 
+.th {
+  white-space: nowrap;
+}
+
+.th :hover {
+  cursor: pointer;
+}
+
 .open_tab {
   background-color: #fff;
-  width:100%;
+  width: 100%;
 }
 
 .open_tab td {
@@ -125,32 +127,32 @@ thead {
 }
 
 .tab_text_btn {
-    display: inline-block;
-    margin: 0 0 16px;
-    padding: 0.85em 2.5em;
-    transition: background-color .25s ease-out;
-    font-family: var(--twn-font);
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    cursor: pointer;
-    background-color: #14cc76;
-    color: #3a3d57;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    border: none;
-    text-decoration: none;
-    border-bottom: 0.25rem solid #37945C;
-    text-transform: uppercase;
-    font-size: .75rem;
-    padding: 0.85em 1.7em;
-    width: 150px;
-    margin-top: 20px;
+  display: inline-block;
+  margin: 0 0 16px;
+  padding: 0.85em 2.5em;
+  transition: background-color 0.25s ease-out;
+  font-family: var(--twn-font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  background-color: #14cc76;
+  color: #3a3d57;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  text-decoration: none;
+  border-bottom: 0.25rem solid #37945c;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0.85em 1.7em;
+  width: 150px;
+  margin-top: 20px;
 }
 
-.tab_text_btn:hover{
+.tab_text_btn:hover {
   background-color: #44ee9f;
 }
 
@@ -169,12 +171,13 @@ html {
   margin: 0;
   color: var(--twn-alternateTextColor);
   font-family: var(--twn-textFont);
-  width:98%;
+  width: 98%;
 }
 
 @media screen and (max-width: 960px) {
-  body, html {
-    width:100%;
+  body,
+  html {
+    width: 100%;
   }
 }
 
@@ -183,29 +186,29 @@ body {
 }
 
 .page {
-  background-image: url(/assets/imgs/bg-deco-left.svg),url(/assets/imgs/bg-deco-right.svg);
-    background-repeat: no-repeat;
-    background-position: 160px bottom, 100% 0;
-    background-size: 180px,320px;
-    background-attachment: fixed;
-    margin-left: 160px;
-    padding: 10% 2% 2% 5%; 
-    width: 90%;
-    overflow: hidden;
+  background-image: url(/assets/imgs/bg-deco-left.svg),
+    url(/assets/imgs/bg-deco-right.svg);
+  background-repeat: no-repeat;
+  background-position: 160px bottom, 100% 0;
+  background-size: 180px, 320px;
+  background-attachment: fixed;
+  margin-left: 160px;
+  padding: 10% 2% 2% 5%;
+  width: 90%;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 960px) {
   .page {
     margin: 0;
-    padding: 20% 5% 5% 5%; 
+    padding: 20% 5% 5% 5%;
     background-position: 0 bottom, 100% 0;
-
   }
 }
 
 @media screen and (max-width: 960px) {
   .sidebar {
-  display: none;
+    display: none;
   }
 }
 
@@ -215,7 +218,7 @@ body {
   top: 0;
   left: 0;
   width: 160px;
-  padding: 1.6rem;
+  padding: 1.6rem 0;
   height: 100vh;
   z-index: 900;
   overflow: auto;
@@ -225,7 +228,7 @@ body {
   width: 12.5rem;
   height: 12.5rem;
   object-fit: cover;
-  object-position: 25% 25%; 
+  object-position: 25% 25%;
   flex-shrink: 0;
   flex-grow: 0;
   background: center center no-repeat;
@@ -248,9 +251,6 @@ body {
 .upper_menu_bar {
   height: 60px;
   background-color: #fff;
-  display: flex;
-  align-content: center;
-  position: fixed;
   width: 100%;
   z-index: 500;
 }
@@ -261,11 +261,45 @@ body {
   }
 }
 
-.menu_btn {
-  margin: 10px;
+@media (min-width: 961px) {
+  .menu_btn_container {
+    margin-top: 100px;
+  }
 }
 
+.menu_btn_container {
+  float: right;
+  margin-left: 30px;
+}
 
+.menu_btn {
+  margin: 10px;
+  width: max-content;
+  float: right;
+}
+
+.menu_btn_container :hover {
+  color: green;
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.logo {
+  width: 160px;
+  padding: 5px;
+  position: absolute;
+  left: 0;
+}
+.logo img {
+  max-width: 130px;
+}
+
+@media screen and (max-width: 960px) {
+  .logo {
+    width: 140px;
+    margin: 5px 20px;
+  }
+}
 
 /* copy-paste from TWN page */
 @font-face {

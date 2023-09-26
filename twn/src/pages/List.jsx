@@ -2,9 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import TablePagination from "../components/TablePagination";
-import { FaSort } from "react-icons/fa";
-import { FaSortUp } from "react-icons/fa";
-import { FaSortDown } from "react-icons/fa";
+import { FaSort, FaSortUp, FaSortDown } from "react-icons/fa";
 import listData from "../data/table.json"
 
 function List() {
@@ -102,6 +100,7 @@ function List() {
     setList([...defaultList]);
   };
 
+ 
   const toggleFirstNameSorting = () => {
     toggleDetailRow(null);
 
@@ -154,7 +153,6 @@ function List() {
     setFirstNameSorted("default");
     setLastNameSorted("default")
     setBirthdaySorted("default");
-
   }
 
   const toggleBirthdaySorting = () => {
@@ -174,7 +172,6 @@ function List() {
     setLastNameSorted("default");
     setGenderSorted("default");
   }
-
   
   const renderParagraphs = (htmlString) => {
     const paragraphs = htmlString.split("\n");
@@ -218,32 +215,32 @@ function List() {
       <Table responsive striped className="table">
         <thead>
           <tr>
-            <th onClick={toggleFirstNameSorting}>
-              Eesnimi
+            <th className="th" onClick={toggleFirstNameSorting}>
+              <span className="th">Eesnimi</span>
               {firstNameSorted==="default" && <FaSort/>}               
               {firstNameSorted==="asc" && <FaSortDown/>}               
-              {firstNameSorted==="desc" && <FaSortUp/>}               
+              {firstNameSorted==="desc" && <FaSortUp/>} 
             </th>
-            <th onClick={toggleLastNameSorting}>
-              Perekonnanimi
+            <th className="th" onClick={toggleLastNameSorting}>
+            <span className="th">Perekonnanimi</span>
               {lastNameSorted==="default" && <FaSort/>}               
               {lastNameSorted==="asc" && <FaSortDown/>}               
               {lastNameSorted==="desc" && <FaSortUp/>}     
             </th>
-            <th onClick={toggleGenderSorting}>
-              Sugu
+            <th className="th" onClick={toggleGenderSorting}>
+            <span className="th">Sugu</span>
               {genderSorted==="default" && <FaSort/>}               
               {genderSorted==="asc" && <FaSortDown/>}               
               {genderSorted==="desc" && <FaSortUp/>}     
             </th>
-            <th onClick={toggleBirthdaySorting}>
-              Sünnikuupäev
-              {birthdaySorted==="default" && <FaSort/>}               
+            <th className="th" onClick={toggleBirthdaySorting}>
+            <span className="th">Sünnikuupäev</span>
+              {birthdaySorted==="default" && <FaSort />}               
               {birthdaySorted==="asc" && <FaSortDown/>}               
               {birthdaySorted==="desc" && <FaSortUp/>}     
             </th>
             <th>
-              Telefon
+              <span>Telefon</span>
             </th>
           </tr>
         </thead>
