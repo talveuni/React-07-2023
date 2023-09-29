@@ -152,8 +152,7 @@ thead {
   margin-top: 20px;
 }
 
-.tab_text_btn:hover {
-  background-color: #44ee9f;
+.tab_text_btn:hover {  background-color: #44ee9f;
 }
 
 .pagination {
