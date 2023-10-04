@@ -1,7 +1,46 @@
 .App {
     text-align: center;
+    margin: auto;
+    max-width: 500px;
+    padding: 20px;
 }
 
 Button {
     margin: 5px;
 }
+
+.choice_container {
+    display: flex;
+    align-content:space-between;
+    max-width: 500px;
+    float: left
+}
+
+.choice, .risk {
+    border: solid;
+    height: 50px;
+    width: 50px;
+    padding: 10px;
+    margin: 5px;
+    background-color: beige;
+}
+
+.risk:hover, .choice:hover {
+    background-color: greenyellow;
+    cursor: pointer;
+    font-size: large;
+}
+
+.red {
+    color: rgb(185, 0, 0);
+}
+
+.risk {
+    width: 120px;
+}
+
+h4 {
+    margin: auto;
+   
+}
+
