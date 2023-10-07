@@ -235,7 +235,7 @@ function List() {
             </th>
             <th className="th" onClick={toggleBirthdaySorting}>
             <span className="th">Sünnikuupäev</span>
-              {birthdaySorted==="default" && <FaSort />}               
+              {birthdaySorted==="default" && <FaSort/>}               
               {birthdaySorted==="asc" && <FaSortDown/>}               
               {birthdaySorted==="desc" && <FaSortUp/>}     
             </th>

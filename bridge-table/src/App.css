@@ -10,25 +10,24 @@ Button {
 }
 
 .choice_container {
-    display: flex;
-    align-content:space-between;
     max-width: 500px;
-    float: left
+    display: inline-flex;
+    
 }
-
+ 
 .choice, .risk {
-    border: solid;
-    height: 50px;
-    width: 50px;
+    height: 80px;
+    width: 80px;
     padding: 10px;
-    margin: 5px;
-    background-color: beige;
+    margin: 20px;
+    display: inline;
+    text-align: center;
+    font-size: x-large;
 }
 
-.risk:hover, .choice:hover {
+.risk:hover, .choice:hover, .trump:hover {
     background-color: greenyellow;
     cursor: pointer;
-    font-size: large;
 }
 
 .red {
@@ -36,11 +35,17 @@ Button {
 }
 
 .risk {
-    width: 120px;
+    width: 150px;
 }
 
 h4 {
     margin: auto;
    
 }
+
+.trump {
+    visibility: hidden;
+    float: left;
+}
+
 
