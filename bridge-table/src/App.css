@@ -23,7 +23,7 @@ Button {
     font-size: large;
 }
 
-.risk:hover, .choice:hover, .trump:hover {
+.risk:hover, .choice:hover, .trump:hover, .trick:hover {
     background-color: greenyellow;
     cursor: pointer;
 }

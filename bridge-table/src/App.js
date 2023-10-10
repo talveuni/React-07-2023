@@ -1,18 +1,46 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BsSuitClubFill, BsSuitDiamondFill, BsSuitHeartFill, BsSuitSpadeFill} from "react-icons/bs";
+import { BsSuitClubFill, BsSuitDiamondFill, BsSuitHeartFill, BsSuitSpadeFill } from "react-icons/bs";
 import { useState } from 'react';
 import { Table } from 'react-bootstrap';
 
 function App() {
-const [level, setLevel] = useState();
-const [trump, setTrump] = useState();
-const [risk, setRisk] = useState();
+const [level, setLevel] = useState(1);
+const [trump, setTrump] = useState("");
+const [risk, setRisk] = useState("");
+const [tricks, setTricks] = useState([])
+
+const generateTricks = (level) => {
+
+  const tricksRange = [];
+  const totalPlusTrics = 7-level
+  const totalMinusTrics = -level-6
+  
+  for (let i = totalMinusTrics; i <= totalPlusTrics; i++) {
+    if (i === 0) {
+      tricksRange.push("=");
+    } else {
+      tricksRange.push(i);
+    }
+  }
+
+
+
+  
+return tricksRange
+}
+
+// Set the tricks state once when the component mounts
+useState(() => {
+  setTricks(generateTricks(level));
+}, [level]);
+
 
   return (
     <div className='App'>
         <div>
-
+          <h2>Bridge compensation score calculator</h2>
+          <br />
         <Table>
           <thead>
             <tr>
@@ -178,11 +206,23 @@ const [risk, setRisk] = useState();
                 <div className='risk'>Redouble</div>
               </td>
             </tr>
+            <tr>
+              <td>Tricks: </td>
+              <td className='choice_container'>
+                {generateTricks(level).map((trick, index) => (
+                  <div key={index} className='choice'>
+                    {trick}
+                  </div>             
+                  ))}
+              </td>
+            </tr>
+
           </tbody>
         </Table>
         <p>Level: {level}</p>
         <p>Trump: {trump}</p>
         <p>Risk: {risk}</p>
+        <p>Trics: </p>
       </div>     
     </div>
   );
