@@ -1,11 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import {
-  BsSuitClubFill,
-  BsSuitDiamondFill,
-  BsSuitHeartFill,
-  BsSuitSpadeFill,
-} from "react-icons/bs";
+import { BsSuitClubFill, BsSuitDiamondFill, BsSuitHeartFill, BsSuitSpadeFill } from "react-icons/bs";
 import { useState } from "react";
 import { Button, Table } from "react-bootstrap";
 
@@ -54,10 +49,8 @@ function App() {
 
   return (
     <div className="App">
-      <div>
-        <h2>Bridge compensation score calculator</h2>
-        <br />
-        <Table>
+      <h2>Bridge compensation score calculator</h2>          
+        {/* <Table responsive>
           <thead>
             <tr>
               <th></th>
@@ -159,12 +152,98 @@ function App() {
                 {message} </td>
             </tr>
           </tbody>
-        </Table>
+        </Table> */}
+  
+      
+              <h5>Level: </h5>
+              <div className="choice_container">
+                {levels.map((value) => (
+                  <label className={level === value ? "selected_choice" : "choice"} key={value}>
+                    <input
+                      className="level"
+                      type="radio"
+                      name="level"
+                       value={value.toString()}
+                      checked={level === value}
+                      onChange={() => chooseLevel(value)}
+                    />
+                    <span>{value}</span>
+                    
+                  </label>
+                ))}
+              </div>
+
+              <h5>Trump: </h5>
+              <div className="choice_container">
+                {trumps.map((value) => (
+                  <label className={trump === value ? "selected_choice" : "choice"} key={value}>
+                    <input
+                      className="trump"
+                      type="radio"
+                      name="trump"
+                      value={value}
+                      checked={trump === value}
+                      onChange={() => setTrump(value)}
+                    />
+                    {value==="clubs"&& <BsSuitClubFill /> }
+                    {value==="diamonds"&& <BsSuitDiamondFill className="red"/> }
+                    {value==="hearts"&& <BsSuitHeartFill className="red"/> }
+                    {value==="spades"&& <BsSuitSpadeFill /> }
+                    {value==="NT"&& <span>NT</span> }
+                
+                  </label>
+                ))}
+              </div>
+           
+              <h5>Risk: </h5>
+              <div className="choice_container">
+                {risks.map((value) => (
+                  <label className={risk === value ? "selected_choice" : "choice"} key={value}>
+                    <input
+                      className="risk"
+                      type="radio"
+                      name="risk"
+                      value={value}
+                      checked={risk === value}
+                      onChange={() => setRisk(value)}
+                    />
+                    <span>{value}</span>
+                    
+                  </label>
+                ))}
+              </div>
+            
+           
+            { <div>
+                <h5>Tricks: </h5>
+                <div className="choice_container">
+                  {generateTricks(level).map((value, index) => (
+                    <label className={value === trick ? "selected_choice" : "choice"} key={index}>
+                      <input
+                        className="trick"
+                        type="radio"
+                        name="trick"
+                        value={value.toString()}
+                        onChange={() => setTrick(value)}
+                      />
+                      {value}
+                    </label>
+                  ))}
+                </div>
+                </div> 
+              }
+              <div className="calc_btn"><Button onClick={calculateScore} variant="outline-secondary">Arvuta</Button></div>
+              
+              <h5>Score: </h5>
+              <div> {message} </div>
+
+
         <p>Level: {level}</p>
         <p>Trump: {trump}</p>
         <p>Risk: {risk}</p>
         <p>Trics: {trick}</p>
-      </div>
+   
+
     </div>
   );
 }

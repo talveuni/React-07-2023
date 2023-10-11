@@ -1,8 +1,9 @@
 .App {
     
     margin: auto;
-    max-width: 800px;
     padding: 20px;
+    max-width: 60%;
+
 }
 
 Button {
@@ -10,30 +11,61 @@ Button {
 }
 
 .choice_container {
-    max-width: 600px;
-    display: inline-flex;
-    
+    max-width: 80%;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content:space-between;    
 }
  
 .choice {
-    height: 50px;
-    width: 200px;
-    padding: 10px 0;
-    text-align: center;
+    min-width: 50px;
     font-size: large;
+    margin: auto;
+    height: 40px;
+    display: flex;
+    align-items: center;
 }
 
 .selected_choice {
-    height: 50px;
-    width: 200px;
-    padding: 10px 0;
-    text-align: center;
+    min-width: 50px;
     font-size: large;
     background-color: lightgoldenrodyellow;
     font-weight: 700;
+    margin: auto;
+    height: 40px;
+    display: flex;
+    align-items: center;
 }
 
-.risk:hover, .choice:hover, .trump:hover, .trick:hover {
+.risk {
+    min-width: 80px;
+    margin: auto;
+}
+
+@media screen and (max-width: 960px) {
+    .App {
+        max-width: 100%;
+      }
+
+    .choice_container {
+        max-width: 100%;
+    }
+
+    .choice {
+        padding: 0;
+        margin: auto;
+    }
+
+    .selected_choice {
+      min-width: 50;
+      font-size: large;
+      background-color: lightgoldenrodyellow;
+      font-weight: 700;
+      margin: auto;
+    }
+}
+
+.choice:hover {
     background-color: greenyellow;
     cursor: pointer;
 }
@@ -42,8 +74,8 @@ Button {
     color: rgb(185, 0, 0);
 }
 
-h4 {
-    margin: auto;
+h5 {
+    margin-top: 30px;
    
 }
 
