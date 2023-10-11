@@ -23,6 +23,16 @@ Button {
     font-size: large;
 }
 
+.selected_choice {
+    height: 50px;
+    width: 200px;
+    padding: 10px 0;
+    text-align: center;
+    font-size: large;
+    background-color: lightgoldenrodyellow;
+    font-weight: 700;
+}
+
 .risk:hover, .choice:hover, .trump:hover, .trick:hover {
     background-color: greenyellow;
     cursor: pointer;
@@ -32,18 +42,18 @@ Button {
     color: rgb(185, 0, 0);
 }
 
-.risk {
-    width: 250px;
-}
-
 h4 {
     margin: auto;
    
 }
 
-.trump, .level, .risk {
+.trump, .level, .risk, .trick {
     visibility: hidden;
     display: inline-flex;
 }
 
+.calc_btn {
+    width: 150px;
+    margin: auto;
+}
 
