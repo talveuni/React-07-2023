@@ -2,7 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { BsSuitClubFill, BsSuitDiamondFill, BsSuitHeartFill, BsSuitSpadeFill } from "react-icons/bs";
 import { useState } from "react";
-import { Button, Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 
 function App() {
   const [level, setLevel] = useState("");
@@ -11,36 +11,36 @@ function App() {
   const trumps = ["clubs", "diamonds", "hearts", "spades", "NT"];
   const [risk, setRisk] = useState("");
   const risks = ["No double", "Double", "Redouble"];
-  const [tricks, setTricks] = useState([]);
+  const tricks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
   const [trick, setTrick] = useState("");
   const [message, setMessage] = useState("")
 
-  const chooseLevel = (level) => {
-    setTrick("");
-    generateTricks(level);
-    setLevel(level);
-  };
+  // const chooseLevel = (level) => {
+  //   setTrick("");
+  //   generateTricks(level);
+  //   setLevel(level);
+  // };
 
-  const generateTricks = (level) => {
-    const tricksRange = [];
-    const totalPlusTrics = 7 - level;
-    const totalMinusTrics = -level - 6;
+  // const generateTricks = (level) => {
+  //   const tricksRange = [];
+  //   const totalPlusTrics = 7 - level;
+  //   const totalMinusTrics = -level - 6;
 
-    for (let i = totalMinusTrics; i <= totalPlusTrics; i++) {
-      if (i === 0) {
-        tricksRange.push("=");
-      } else {
-        tricksRange.push(i);
-      }
-    }
+  //   for (let i = totalMinusTrics; i <= totalPlusTrics; i++) {
+  //     if (i === 0) {
+  //       tricksRange.push("=");
+  //     } else {
+  //       tricksRange.push(i);
+  //     }
+  //   }
 
-    return tricksRange;
-  };
+  //   return tricksRange;
+  // };
 
   // Set the tricks state once when the component mounts
-  useState(() => {
-    setTricks(generateTricks(level));
-  }, [level]);
+  // useState(() => {
+  //   setTricks(generateTricks(level));
+  // }, [level]);
 
   const calculateScore = () => {
     setMessage("Mingi tähtis arvutus on toimunud")
@@ -163,9 +163,9 @@ function App() {
                       className="level"
                       type="radio"
                       name="level"
-                       value={value.toString()}
+                      value={value.toString()}
                       checked={level === value}
-                      onChange={() => chooseLevel(value)}
+                      onChange={() => setLevel(value)}
                     />
                     <span>{value}</span>
                     
@@ -215,9 +215,9 @@ function App() {
             
            
             { <div>
-                <h5>Tricks: </h5>
+                <h5>Total tricks: </h5>
                 <div className="choice_container">
-                  {generateTricks(level).map((value, index) => (
+                  {tricks.map((value, index) => (
                     <label className={value === trick ? "selected_choice" : "choice"} key={index}>
                       <input
                         className="trick"
@@ -229,6 +229,20 @@ function App() {
                       {value}
                     </label>
                   ))}
+
+
+                  {/* {generateTricks(level).map((value, index) => (
+                    <label className={value === trick ? "selected_choice" : "choice"} key={index}>
+                      <input
+                        className="trick"
+                        type="radio"
+                        name="trick"
+                        value={value.toString()}
+                        onChange={() => setTrick(value)}
+                      />
+                      {value}
+                    </label>
+                  ))} */}
                 </div>
                 </div> 
               }
