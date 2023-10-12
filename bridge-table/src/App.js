@@ -9,121 +9,150 @@ function App() {
   const [trump, setTrump] = useState("");
   const [risk, setRisk] = useState("");
   const [tricks, setTricks] = useState("");
-  const [score, setScore] = useState(0);
-  const [vulnerable, setVulnerable] = useState(false);
+  const [vulnerable, setVulnerable] = useState("");
+  const [score, setScore] = useState("");
   const levels = [1, 2, 3, 4, 5, 6, 7];
   const trumps = ["C", "D", "H", "S", "NT"];
   const risks = ["-", "X", "XX"];
   const possibleTricks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  const  doubledNotVulnerable = [
+    0,      -100,   -300,   -500,
+    -800,  -1100,  -1400,  -1700,
+    -2000, -2300,  -2600,  -2900,
+    -3200, -3500
+];
+
+const doubledVulnerable = [
+    0,      -200,  -500,  -800,
+    -1100, -1400, -1700, -2000,
+    -2300, -2600, -2900, -3200,
+    -3500, -3800
+];
+
+  const contractPresented = () => {
+    if (level === "" || trump === "" || risk === "" || tricks === ""  || vulnerable === ""  ) {
+      return false;
+    }
+    return true;
+  }
 
   const calculateScore = () => {
+    let calculatedScore = 0;
     const tricksMade = tricks - 6;
     const overTricks = tricksMade - level;
-    console.log(tricks);
-    console.log(tricksMade);
-    console.log(overTricks);
 
-    // Undertricks?
-    if (tricksMade < 0) {
+    setScore(calculatedScore);
+    console.log("score calc start score: " + calculatedScore)
+    console.log("Ticks total: " + tricks);
+    console.log("Trics +-: " + tricksMade);
+    console.log("Overtricks: " + overTricks);
+
+    // Undertricks:
+    if (overTricks < 0) {
       if (risk === "-") {
         if (vulnerable) {
-          return setScore(tricksMade * 100);
+          return setScore(overTricks * 100);
         }
-        return setScore(tricksMade * 50);
+        return setScore(overTricks * 50);
       }
-
-      // var penalty = vulnerable ? doubledVulnerable[-made] : doubledNotVulnerable[-made];
-      // if (redoubled)
-      //     penalty *= 2;
-      // return penalty;
+      
+      if (risk === "X") {
+        if (vulnerable) {
+          return setScore(doubledVulnerable[-overTricks]);
+        }
+        return setScore(doubledNotVulnerable[-overTricks]);
+      } 
+      
+      if (risk === "XX") {
+        if (vulnerable) {
+          return setScore(doubledVulnerable[-overTricks] * 2);
+        }
+        return setScore(doubledNotVulnerable[-overTricks] * 2);
+      }
     }
 
-    setScore(0);
-
-    // Contract Points
-
+    // Contract Points:
     if (trump === "S" || trump === "H") {
-      setScore(level * 30);
+      calculatedScore = level * 30
+      console.log("kallismast " + calculatedScore)
     }
 
     if (trump === "C" || trump === "D") {
-      setScore(level * 20);
+      calculatedScore = level * 20;
+      console.log("odavmast " + calculatedScore)
     }
 
     if (trump === "NT") {
-      setScore(level * 30 + 10);
+      calculatedScore = level * 30 + 10 
+      console.log("trumbita " + calculatedScore)
     }
 
     if (risk === "X") {
-      setScore(score * 2);
+      calculatedScore = calculatedScore * 2 + 50 // with insult bonus
+      console.log("kontra " + calculatedScore)
     }
 
     if (risk === "XX") {
-      setScore(score * 4);
+      calculatedScore = calculatedScore * 4 + 100 // with insult bonus
+      console.log("rekontra " + calculatedScore)
     }
 
-    // Level Bonus
-    if (score < 100) {
-      // Part score?
-      setScore(score + 50);
-      console.log("part score: " + score);
-    } else if (vulnerable) {
-      setScore(score + 500);
+    // Level Bonus:
+    if (calculateScore < 100) { // part score
+      calculatedScore += 50; 
+      console.log("part score: " + calculatedScore);
+
+    } else if (vulnerable) { // game bonus
+      calculatedScore += 500;
     } else {
-      setScore(score + 300);
+      console.log(calculatedScore)
+      calculatedScore += 300;
+      console.log(calculatedScore)
+
     }
 
-    if (level === 7) {
-      //grand slam?
+    if (level === 7) { // grand slam
       if (vulnerable) {
-        setScore(score + 1500);
-      }
-      setScore(score + 1000);
+        calculatedScore += 1500;
+      } else {
+        calculatedScore += 1000;
+      } 
+    }
 
-      if (level === 6) {
-        //small slam?
-        if (vulnerable) {
-          setScore(score + 750);
-        }
-        setScore(score + 500);
+    if (level === 6) {  // small slam
+      if (vulnerable) {
+        calculatedScore += 750;
+      } else {
+        calculatedScore += 500;
       }
+    }
 
-      // Insult bonus?
-      if (risk === "X") {
-        setScore(score + 50);
-      }
-
-      if (risk === "XX") {
-        setScore(score + 100);
-      }
-
-      // Overtrick bonus
+      // Overtrick bonus:
       if (overTricks > 0) {
         if (risk === "X") {
           if (vulnerable) {
-            setScore(score + overTricks * 200);
+            calculatedScore += overTricks * 200; 
           }
-          setScore(score + overTricks * 100);
+          calculatedScore += overTricks * 100; 
         }
 
         if (risk === "XX") {
           if (vulnerable) {
-            setScore(score + overTricks * 400);
+            calculatedScore += overTricks * 400; 
           }
-          setScore(score + overTricks * 200);
+          calculatedScore += overTricks * 200; 
         }
 
         if (trump === "S" || trump === "H" || trump === "NT") {
-          setScore(score + overTricks * 30);
+          calculatedScore += overTricks * 30; 
         }
 
         if (trump === "C" || trump === "D") {
-          setScore(score + overTricks * 20);
+          calculatedScore += overTricks * 20; 
         }
       }
-
-      return score;
-    }
+      setScore(calculatedScore);
+      console.log(score)
   };
 
   return (
@@ -196,9 +225,33 @@ function App() {
       </div>
       <h5>Vulnerable?</h5>
       <div className="choice_container">
-        <span>Yes</span>
-        <span>No</span>
-      </div>
+
+      <label
+                className={vulnerable === false ? "selected_choice" : "choice"}
+              >
+                <input
+                  className="vulnerable"
+                  type="radio"
+                  name="vulnerable"
+                  value = {false}
+                  onChange={() => setVulnerable(false)}
+                />
+              <span>No</span>
+              </label>
+
+              <label
+                className={vulnerable === true ? "selected_choice" : "choice"}
+              >
+                <input
+                  className="vulnerable"
+                  type="radio"
+                  name="vulnerable"
+                  value = {true}
+                  onChange={() => setVulnerable(true)}
+                />
+                 <span>Yes</span>
+              </label>
+              </div>    
 
       {
         <div>
@@ -213,7 +266,7 @@ function App() {
                   className="trick"
                   type="radio"
                   name="trick"
-                  value={value.toString()}
+                  value={value}
                   onChange={() => setTricks(value)}
                 />
                 {value}
@@ -223,19 +276,35 @@ function App() {
         </div>
       }
       <div className="calc_btn">
-        <Button onClick={calculateScore} variant="outline-secondary">
-          Arvuta
+        <Button 
+          disabled={!contractPresented()} 
+          onClick={calculateScore} 
+          variant="outline-success"> 
+        Calculate 
         </Button>
       </div>
       <div>
-        <h5>Score: </h5>
-        {score}
+        <h5>Score: {score} </h5>
       </div>
-
-      <p>Level: {level}</p>
-      <p>Trump: {trump}</p>
-      <p>Risk: {risk}</p>
-      <p>Trics: {tricks}</p>
+      
+      <div>
+        <h5>Contract: </h5>
+        <div> {level + " "} 
+            {trump === "C" && <BsSuitClubFill /> }
+            {trump === "D" && <BsSuitDiamondFill className="red" />}
+            {trump === "H" && <BsSuitHeartFill className="red" />}
+            {trump === "S" && <BsSuitSpadeFill />}
+            {trump === "NT" && <span> NT</span>}
+            {risk === "-" && <span> No double</span>}
+            {risk === "X" && <span> Double</span>}
+            {risk === "XX" && <span> Redouble</span>}
+        </div>
+        <div>Trics: {tricks}</div>
+        <div>Vulnerable: 
+          {vulnerable === true && <span> Yes </span>}
+          {vulnerable === false && <span> No </span>}
+        </div>
+      </div>     
     </div>
   );
 }

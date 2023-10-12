@@ -1,9 +1,6 @@
 .App {
-    
-    margin: auto;
-    padding: 20px;
+    padding: 2% 0 2% 5%;
     max-width: 60%;
-
 }
 
 Button {
@@ -11,11 +8,13 @@ Button {
 }
 
 .choice_container {
-    max-width: 400px;
+    max-width: 60%;
     display: flex;
     flex-wrap: wrap; 
-    justify-content:space-between;    
-}
+    justify-content:space-between;
+    border-bottom: 1px solid lightgray;
+    padding: 10px 0;    
+} 
  
 .choice {
     min-width: 50px;
@@ -36,15 +35,12 @@ Button {
     display: flex;
     align-items: center;
 }
-/* 
-.risk {
-    min-width: 80px;
-    margin: auto;
-} */
+
 
 @media screen and (max-width: 960px) {
     .App {
         max-width: 100%;
+        margin: 0;
       }
 
     .choice_container {
@@ -79,7 +75,7 @@ h5 {
    
 }
 
-.trump, .level, .risk, .trick {
+.trump, .level, .risk, .trick, .vulnerable {
     visibility: hidden;
     display: inline-flex;
 }
