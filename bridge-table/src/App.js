@@ -98,7 +98,7 @@ const doubledVulnerable = [
     }
 
     // Level Bonus:
-    if (calculateScore < 100) { // part score
+    if (calculatedScore < 100) { // part score
       calculatedScore += 50; 
       console.log("part score: " + calculatedScore);
 
@@ -217,9 +217,9 @@ const doubledVulnerable = [
               checked={risk === value}
               onChange={() => setRisk(value)}
             />
-            {value === "-" && <span>No double</span>}
-            {value === "X" && <span>Double</span>}
-            {value === "XX" && <span>Redouble</span>}
+            {value === "-" && <span className="risk_center">No double</span>}
+            {value === "X" && <span className="risk_center">Double</span>}
+            {value === "XX" && <span className="risk_center">Redouble</span>}
           </label>
         ))}
       </div>
@@ -299,7 +299,7 @@ const doubledVulnerable = [
             {risk === "X" && <span> Double</span>}
             {risk === "XX" && <span> Redouble</span>}
         </div>
-        <div>Trics: {tricks}</div>
+        <div>Tricks: {tricks}</div>
         <div>Vulnerable: 
           {vulnerable === true && <span> Yes </span>}
           {vulnerable === false && <span> No </span>}

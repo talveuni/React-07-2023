@@ -1,11 +1,16 @@
-.App {
-    padding: 2% 0 2% 5%;
-    max-width: 60%;
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
 }
 
-Button {
-    margin: 5px;
+.App {
+    padding: 2% 0 2% 5%;
 }
+
+
 
 .choice_container {
     max-width: 60%;
@@ -34,6 +39,11 @@ Button {
     height: 40px;
     display: flex;
     align-items: center;
+}
+
+.risk_center {
+    width: 110px;
+    text-align: center;
 }
 
 
