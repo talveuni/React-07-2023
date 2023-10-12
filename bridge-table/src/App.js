@@ -15,37 +15,27 @@ function App() {
   const trumps = ["C", "D", "H", "S", "NT"];
   const risks = ["-", "X", "XX"];
   const possibleTricks = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-  const  doubledNotVulnerable = [
-    0,      -100,   -300,   -500,
-    -800,  -1100,  -1400,  -1700,
-    -2000, -2300,  -2600,  -2900,
-    -3200, -3500
-];
-
-const doubledVulnerable = [
-    0,      -200,  -500,  -800,
-    -1100, -1400, -1700, -2000,
-    -2300, -2600, -2900, -3200,
-    -3500, -3800
-];
+  const doubledNotVulnerable = [
+    0, -100, -300, -500, -800, -1100, -1400, -1700, -2000, -2300, -2600, -2900,
+    -3200, -3500,
+  ];
+  const doubledVulnerable = [
+    0, -200, -500, -800, -1100, -1400, -1700, -2000, -2300, -2600, -2900, -3200,
+    -3500, -3800,
+  ];
 
   const contractPresented = () => {
-    if (level === "" || trump === "" || risk === "" || tricks === ""  || vulnerable === ""  ) {
+    if (level === "" || trump === "" || risk === "" || tricks === "" || vulnerable === "") {
       return false;
     }
     return true;
-  }
+  };
 
   const calculateScore = () => {
     let calculatedScore = 0;
     const tricksMade = tricks - 6;
     const overTricks = tricksMade - level;
-
     setScore(calculatedScore);
-    console.log("score calc start score: " + calculatedScore)
-    console.log("Ticks total: " + tricks);
-    console.log("Trics +-: " + tricksMade);
-    console.log("Overtricks: " + overTricks);
 
     // Undertricks:
     if (overTricks < 0) {
@@ -55,14 +45,14 @@ const doubledVulnerable = [
         }
         return setScore(overTricks * 50);
       }
-      
+
       if (risk === "X") {
         if (vulnerable) {
           return setScore(doubledVulnerable[-overTricks]);
         }
         return setScore(doubledNotVulnerable[-overTricks]);
-      } 
-      
+      }
+
       if (risk === "XX") {
         if (vulnerable) {
           return setScore(doubledVulnerable[-overTricks] * 2);
@@ -73,42 +63,32 @@ const doubledVulnerable = [
 
     // Contract Points:
     if (trump === "S" || trump === "H") {
-      calculatedScore = level * 30
-      console.log("kallismast " + calculatedScore)
+      calculatedScore = level * 30;
     }
 
     if (trump === "C" || trump === "D") {
       calculatedScore = level * 20;
-      console.log("odavmast " + calculatedScore)
     }
 
     if (trump === "NT") {
-      calculatedScore = level * 30 + 10 
-      console.log("trumbita " + calculatedScore)
+      calculatedScore = level * 30 + 10;
     }
 
     if (risk === "X") {
-      calculatedScore = calculatedScore * 2 + 50 // with insult bonus
-      console.log("kontra " + calculatedScore)
+      calculatedScore = calculatedScore * 2 + 50; // with insult bonus
     }
 
     if (risk === "XX") {
-      calculatedScore = calculatedScore * 4 + 100 // with insult bonus
-      console.log("rekontra " + calculatedScore)
+      calculatedScore = calculatedScore * 4 + 100; // with insult bonus
     }
 
     // Level Bonus:
     if (calculatedScore < 100) { // part score
-      calculatedScore += 50; 
-      console.log("part score: " + calculatedScore);
-
+      calculatedScore += 50;
     } else if (vulnerable) { // game bonus
       calculatedScore += 500;
     } else {
-      console.log(calculatedScore)
       calculatedScore += 300;
-      console.log(calculatedScore)
-
     }
 
     if (level === 7) { // grand slam
@@ -116,10 +96,10 @@ const doubledVulnerable = [
         calculatedScore += 1500;
       } else {
         calculatedScore += 1000;
-      } 
+      }
     }
 
-    if (level === 6) {  // small slam
+    if (level === 6) { // small slam
       if (vulnerable) {
         calculatedScore += 750;
       } else {
@@ -127,32 +107,31 @@ const doubledVulnerable = [
       }
     }
 
-      // Overtrick bonus:
-      if (overTricks > 0) {
-        if (risk === "X") {
-          if (vulnerable) {
-            calculatedScore += overTricks * 200; 
-          }
-          calculatedScore += overTricks * 100; 
+    // Overtrick bonus:
+    if (overTricks > 0) {
+      if (risk === "X") {
+        if (vulnerable) {
+          calculatedScore += overTricks * 200;
         }
-
-        if (risk === "XX") {
-          if (vulnerable) {
-            calculatedScore += overTricks * 400; 
-          }
-          calculatedScore += overTricks * 200; 
-        }
-
-        if (trump === "S" || trump === "H" || trump === "NT") {
-          calculatedScore += overTricks * 30; 
-        }
-
-        if (trump === "C" || trump === "D") {
-          calculatedScore += overTricks * 20; 
-        }
+        calculatedScore += overTricks * 100;
       }
-      setScore(calculatedScore);
-      console.log(score)
+
+      if (risk === "XX") {
+        if (vulnerable) {
+          calculatedScore += overTricks * 400;
+        }
+        calculatedScore += overTricks * 200;
+      }
+
+      if (trump === "S" || trump === "H" || trump === "NT") {
+        calculatedScore += overTricks * 30;
+      }
+
+      if (trump === "C" || trump === "D") {
+        calculatedScore += overTricks * 20;
+      }
+    }
+    setScore(calculatedScore);
   };
 
   return (
@@ -161,10 +140,7 @@ const doubledVulnerable = [
       <h5>Level: </h5>
       <div className="choice_container">
         {levels.map((value) => (
-          <label
-            className={level === value ? "selected_choice" : "choice"}
-            key={value}
-          >
+          <label className={level === value ? "selected_choice" : "choice"} key={value}>
             <input
               className="level"
               type="radio"
@@ -181,10 +157,7 @@ const doubledVulnerable = [
       <h5>Trump: </h5>
       <div className="choice_container">
         {trumps.map((value) => (
-          <label
-            className={trump === value ? "selected_choice" : "choice"}
-            key={value}
-          >
+          <label className={trump === value ? "selected_choice" : "choice"} key={value}>
             <input
               className="trump"
               type="radio"
@@ -205,10 +178,7 @@ const doubledVulnerable = [
       <h5>Risk: </h5>
       <div className="choice_container">
         {risks.map((value) => (
-          <label
-            className={risk === value ? "selected_choice" : "choice"}
-            key={value}
-          >
+          <label className={risk === value ? "selected_choice" : "choice"} key={value}>
             <input
               className="risk"
               type="radio"
@@ -225,43 +195,35 @@ const doubledVulnerable = [
       </div>
       <h5>Vulnerable?</h5>
       <div className="choice_container">
+        <label className={vulnerable === false ? "selected_choice" : "choice"}>
+          <input
+            className="vulnerable"
+            type="radio"
+            name="vulnerable"
+            value={false}
+            onChange={() => setVulnerable(false)}
+          />
+          <span>No</span>
+        </label>
 
-      <label
-                className={vulnerable === false ? "selected_choice" : "choice"}
-              >
-                <input
-                  className="vulnerable"
-                  type="radio"
-                  name="vulnerable"
-                  value = {false}
-                  onChange={() => setVulnerable(false)}
-                />
-              <span>No</span>
-              </label>
-
-              <label
-                className={vulnerable === true ? "selected_choice" : "choice"}
-              >
-                <input
-                  className="vulnerable"
-                  type="radio"
-                  name="vulnerable"
-                  value = {true}
-                  onChange={() => setVulnerable(true)}
-                />
-                 <span>Yes</span>
-              </label>
-              </div>    
+        <label className={vulnerable === true ? "selected_choice" : "choice"}>
+          <input
+            className="vulnerable"
+            type="radio"
+            name="vulnerable"
+            value={true}
+            onChange={() => setVulnerable(true)}
+          />
+          <span>Yes</span>
+        </label>
+      </div>
 
       {
         <div>
           <h5>Total tricks: </h5>
           <div className="choice_container">
             {possibleTricks.map((value, index) => (
-              <label
-                className={value === tricks ? "selected_choice" : "choice"}
-                key={index}
-              >
+              <label className={value === tricks ? "selected_choice" : "choice"} key={index}>
                 <input
                   className="trick"
                   type="radio"
@@ -276,35 +238,34 @@ const doubledVulnerable = [
         </div>
       }
       <div className="calc_btn">
-        <Button 
-          disabled={!contractPresented()} 
-          onClick={calculateScore} 
-          variant="outline-success"> 
-        Calculate 
+        <Button disabled={!contractPresented()} onClick={calculateScore} variant="outline-success">
+          Calculate
         </Button>
       </div>
       <div>
         <h5>Score: {score} </h5>
       </div>
-      
+
       <div>
         <h5>Contract: </h5>
-        <div> {level + " "} 
-            {trump === "C" && <BsSuitClubFill /> }
-            {trump === "D" && <BsSuitDiamondFill className="red" />}
-            {trump === "H" && <BsSuitHeartFill className="red" />}
-            {trump === "S" && <BsSuitSpadeFill />}
-            {trump === "NT" && <span> NT</span>}
-            {risk === "-" && <span> No double</span>}
-            {risk === "X" && <span> Double</span>}
-            {risk === "XX" && <span> Redouble</span>}
+        <div>
+          {level + " "}
+          {trump === "C" && <BsSuitClubFill />}
+          {trump === "D" && <BsSuitDiamondFill className="red" />}
+          {trump === "H" && <BsSuitHeartFill className="red" />}
+          {trump === "S" && <BsSuitSpadeFill />}
+          {trump === "NT" && <span> NT</span>}
+          {risk === "-" && <span> No double</span>}
+          {risk === "X" && <span> Double</span>}
+          {risk === "XX" && <span> Redouble</span>}
         </div>
         <div>Tricks: {tricks}</div>
-        <div>Vulnerable: 
+        <div>
+          Vulnerable:
           {vulnerable === true && <span> Yes </span>}
           {vulnerable === false && <span> No </span>}
         </div>
-      </div>     
+      </div>
     </div>
   );
 }

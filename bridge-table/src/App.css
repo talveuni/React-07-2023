@@ -1,97 +1,96 @@
 body {
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
 .App {
-    padding: 2% 0 2% 5%;
+  padding: 2% 0 2% 5%;
 }
 
-
-
 .choice_container {
-    max-width: 60%;
-    display: flex;
-    flex-wrap: wrap; 
-    justify-content:space-between;
-    border-bottom: 1px solid lightgray;
-    padding: 10px 0;    
-} 
- 
+  max-width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1px solid lightgray;
+  padding: 10px 0;
+}
+
 .choice {
-    min-width: 50px;
-    font-size: large;
-    margin: auto;
-    height: 40px;
-    display: flex;
-    align-items: center;
+  min-width: 50px;
+  font-size: large;
+  margin: auto;
+  height: 40px;
+  display: flex;
+  align-items: center;
 }
 
 .selected_choice {
-    min-width: 50px;
+  min-width: 50px;
+  font-size: large;
+  background-color: lightgoldenrodyellow;
+  font-weight: 700;
+  margin: auto;
+  height: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.risk_center {
+  width: 110px;
+  text-align: center;
+}
+
+@media screen and (max-width: 960px) {
+  .App {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .choice_container {
+    max-width: 100%;
+  }
+
+  .choice {
+    padding: 0;
+    margin: auto;
+  }
+
+  .selected_choice {
+    min-width: 50;
     font-size: large;
     background-color: lightgoldenrodyellow;
     font-weight: 700;
     margin: auto;
-    height: 40px;
-    display: flex;
-    align-items: center;
-}
-
-.risk_center {
-    width: 110px;
-    text-align: center;
-}
-
-
-@media screen and (max-width: 960px) {
-    .App {
-        max-width: 100%;
-        margin: 0;
-      }
-
-    .choice_container {
-        max-width: 100%;
-    }
-
-    .choice {
-        padding: 0;
-        margin: auto;
-    }
-
-    .selected_choice {
-      min-width: 50;
-      font-size: large;
-      background-color: lightgoldenrodyellow;
-      font-weight: 700;
-      margin: auto;
-    }
+  }
 }
 
 .choice:hover {
-    background-color: greenyellow;
-    cursor: pointer;
+  background-color: greenyellow;
+  cursor: pointer;
 }
 
 .red {
-    color: rgb(185, 0, 0);
+  color: rgb(185, 0, 0);
 }
 
 h5 {
-    margin-top: 30px;
-   
+  margin-top: 30px;
 }
 
-.trump, .level, .risk, .trick, .vulnerable {
-    visibility: hidden;
-    display: inline-flex;
+.trump,
+.level,
+.risk,
+.trick,
+.vulnerable {
+  visibility: hidden;
+  display: inline-flex;
 }
 
 .calc_btn {
-    width: 150px;
-    padding: 20px 0;
+  width: 150px;
+  padding: 20px 0;
 }
-
