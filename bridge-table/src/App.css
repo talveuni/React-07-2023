@@ -39,6 +39,12 @@ body {
   align-items: center;
 }
 
+/* .expected_trics {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  color: green;
+} */
+
 .risk_center {
   width: 110px;
   text-align: center;

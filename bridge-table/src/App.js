@@ -75,11 +75,13 @@ function App() {
     }
 
     if (risk === "X") {
-      calculatedScore = calculatedScore * 2 + 50; // with insult bonus
+      calculatedScore *= 2;
+      
     }
 
     if (risk === "XX") {
-      calculatedScore = calculatedScore * 4 + 100; // with insult bonus
+      calculatedScore *= 4;
+      
     }
 
     // Level Bonus:
@@ -105,6 +107,14 @@ function App() {
       } else {
         calculatedScore += 500;
       }
+    }
+
+    if (risk === "X") { // insult bonus
+      calculatedScore += 50; 
+    }
+
+    if (risk === "XX") { // insult bonus
+      calculatedScore += 100; 
     }
 
     // Overtrick bonus:
@@ -217,7 +227,7 @@ function App() {
           <span>Yes</span>
         </label>
       </div>
-
+ 
       {
         <div>
           <h5>Total tricks: </h5>
